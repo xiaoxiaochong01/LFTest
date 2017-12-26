@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">龙策</string>
+
+    <!-- 启动页 -->
+    <string name="string_version">版本号:</string>
+    <string name="string_find_new_version">发现新版本</string>
+    <string name="string_can_not_find_version_name">无法获取版本号信息</string>
+    <!-- 启动页 -->
+    <!-- 登录页 begin-->
+    <string name="string_login">登录</string>
+    <!-- 登录页 end-->
+
+
+</resources>

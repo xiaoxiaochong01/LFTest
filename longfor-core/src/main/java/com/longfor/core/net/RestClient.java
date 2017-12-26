@@ -1,6 +1,7 @@
 package com.longfor.core.net;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.longfor.core.net.callback.HttpMethod;
 import com.longfor.core.net.callback.IError;
@@ -13,6 +14,7 @@ import com.longfor.core.ui.loader.LoaderStyle;
 import com.longfor.core.ui.loader.LongforLoader;
 
 import java.io.File;
+import java.util.Map;
 import java.util.WeakHashMap;
 
 import okhttp3.MediaType;
@@ -98,6 +100,14 @@ public class RestClient {
                 final MultipartBody.Part body = MultipartBody.Part.createFormData("file", FILE.getName(), requestBody);
                 call = service.upload(URL, body);
                 break;
+            /** tzh-begin **/
+            case POST_RAW:
+                call = service.postRaw(URL, REQUESTBODY);
+                break;
+            case PUT_RAW:
+                call = service.putRaw(URL, REQUESTBODY);
+                break;
+            /** tzh-end **/
             default:
                 break;
         }
@@ -115,6 +125,13 @@ public class RestClient {
     }
 
     public final void post() {
+        Log.e("request1", this.URL);
+        Log.e("params1", "11");
+        StringBuilder param = new StringBuilder();
+        for(Map.Entry<String, Object> entry : PARAMS.entrySet()) {
+            param.append(entry.getKey()).append(":").append(entry.getValue()).append("  ");
+        }
+        Log.e("params", param.toString());
         if (REQUESTBODY == null) {
             request(HttpMethod.POST);
         } else {

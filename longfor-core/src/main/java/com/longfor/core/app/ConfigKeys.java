@@ -5,6 +5,7 @@ package com.longfor.core.app;
  */
 
 public enum ConfigKeys {
+    IS_JSON_NETWORK,
     API_HOST,
     APPLICATION_CONTEXT,
     CONFIG_READY,

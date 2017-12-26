@@ -9,6 +9,7 @@ import com.longfor.core.net.callback.ISuccess;
 import com.longfor.core.ui.loader.LoaderStyle;
 
 import java.io.File;
+import java.util.Map;
 import java.util.WeakHashMap;
 
 import okhttp3.MediaType;
@@ -81,7 +82,19 @@ public class RestClientBuilder {
         return this;
     }
 
-
+    public final RestClientBuilder raw(Map<String, String> params) {
+        StringBuffer sb = new StringBuffer();
+        sb.append("{");
+        if (params != null) {
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                sb.append("\"").append(entry.getKey()).append("\""+":"+"\"").append(entry.getValue()).append("\"").append(",");
+            }
+            sb.delete(sb.length()-1,sb.length());
+        }
+        sb.append("}");
+        raw(sb.toString());
+        return this;
+    }
 
     public final RestClientBuilder onRequest(IRequest iRequest) {
         this.mRequest = iRequest;

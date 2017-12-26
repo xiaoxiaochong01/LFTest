@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_group_all"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:id="@+id/ll_group_close"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="23dp"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="-20dp"
+            >
+            <ImageView
+                android:id="@+id/img_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/img_close"
+                />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                />
+
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/ll_group_upgrade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_group_close"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="@mipmap/bg_version_up"
+                />
+
+            <ScrollView
+                android:id="@+id/sv_update_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:scrollbars="none"
+                android:background="@mipmap/bg_version_down"
+                >
+                <TextView
+                    android:id="@+id/tv_update_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="20dp"
+                    android:text="丝钉解放螺丝钉解放了是的法律上的飞机了士大夫就类似的飞机螺丝钉附件里是附件里是的分类算法就是浪费精力塑料袋放进塑料袋飞机螺丝钉法律上的飞机了"
+                    />
+            </ScrollView>
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_upgrade"
+            android:layout_width="220dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/btn_version_check"
+            android:layout_below="@+id/ll_group_upgrade"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-20dp"
+            />
+    </RelativeLayout>
+
+
+</RelativeLayout>
