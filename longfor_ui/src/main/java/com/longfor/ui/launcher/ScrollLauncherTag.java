@@ -5,5 +5,5 @@ package com.longfor.ui.launcher;
  */
 
 public enum ScrollLauncherTag {
-    HAS_FIRST_LAUNCHER_APP
+    HAS_FIRST_LAUNCHER_APP, // 是否是第一次启动APP
 }

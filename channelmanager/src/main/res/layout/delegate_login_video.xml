@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <VideoView
+        android:id="@+id/vv_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_goto_login"
+        android:layout_width="@dimen/login_video_bt_width"
+        android:layout_height="@dimen/login_video_bt_height"
+        android:background="@mipmap/bg_video_login"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/login_video_bt_margin_bottom"
+        android:text="@string/string_login"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+</RelativeLayout>

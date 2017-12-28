@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!-- 公共颜色库 begin-->
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <!-- 公共颜色库 end-->
+    <!-- 启动模块 begin-->
+    <color name="gray_3">#333333</color>
+
+    <!-- 启动模块 end-->
+
+    <color name="alpha_0.8_black">#cc000000</color>
+    <color name="trans_gray_3">#80333333</color>
+    <color name="black_03">#030303</color>
+    <color name="gray_4a">#4a4a4a</color>
+    <color name="gray_6">#666666</color>
+    <color name="gray_74">#cc747474</color>
+    <color name="gray_9">#999999</color>
+    <color name="gray_9b">#9b9b9b</color>
+    <color name="gray_c">#cccccc</color>
+    <color name="gray_d8">#d8d8d8</color>
+    <color name="gray_e6">#e6e6e6</color>
+    <color name="gray_e">#eeeeee</color>
+    <color name="gray_f8">#f8f8f8</color>
+
+    <color name="white_alpha_3">#4cffffff</color>
+    <color name="orange">#ffcf64</color>
+    <color name="light_orange">#fff9ec</color>
+    <color name="trans_orange">#80ffcf64</color>
+    <color name="red">#ec615c</color>
+    <color name="blue">#8099CFFF</color>
+    <color name="gray_about_6">#666f78</color>
+    <color name="pink_light">#fffafb</color>
+    <color name="pink">#ffe9d9</color>
+    <color name="pink_3f">#fffaf0</color>
+    <color name="transparent">#00000000</color>
+
+
+</resources>
