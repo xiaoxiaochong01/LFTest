@@ -8,6 +8,8 @@ import android.view.View;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.longfor.channelmanager.R;
+import com.longfor.channelmanager.login.delegate.LoginVideoDelegate;
+import com.longfor.core.app.LongFor;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.core.utils.storage.LongForPreference;
 import com.longfor.ui.launcher.LauncherHolderCreator;
@@ -39,9 +41,9 @@ public class GuideDelegate extends LongForDelegate implements OnItemClickListene
      * 初始化启动引导页轮滑控件
      */
     private void initBanner() {
-        INTEGERS.add(R.mipmap.bg_guide_one);
-        INTEGERS.add(R.mipmap.bg_guide_two);
-        INTEGERS.add(R.mipmap.bg_guide_three);
+        INTEGERS.add(R.mipmap.guide_one_bg);
+        INTEGERS.add(R.mipmap.guide_two_bg);
+        INTEGERS.add(R.mipmap.guide_three_bg);
         mBanner.setPages(new LauncherHolderCreator(), INTEGERS)
 //                .setPageIndicator(new int[]{})
 //                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL)
@@ -53,6 +55,7 @@ public class GuideDelegate extends LongForDelegate implements OnItemClickListene
     public void onItemClick(int position) {
         if(position == INTEGERS.size() - 1) {
             LongForPreference.setAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name(), true);
+            getSupportDelegate().startWithPop(new LoginVideoDelegate());
         }
     }
 }

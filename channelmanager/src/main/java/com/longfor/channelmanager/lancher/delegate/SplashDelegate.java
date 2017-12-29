@@ -18,18 +18,16 @@ import com.longfor.channelmanager.lancher.bean.UpdateVersionBaen;
 import com.longfor.channelmanager.lancher.constants.Constant;
 import com.longfor.channelmanager.lancher.dialog.UpdateAppVersionDialog;
 import com.longfor.channelmanager.lancher.dialog.listener.OnUpdataVersionClickListener;
-import com.longfor.channelmanager.login.LoginVideoDelegate;
-import com.longfor.core.app.LongFor;
+import com.longfor.channelmanager.login.delegate.LoginVideoDelegate;
+import com.longfor.channelmanager.main.delegate.ChannelMainDelegate;
+import com.longfor.channelmanager.common.net.BaseSucessListener;
+import com.longfor.core.app.AccountManager;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.core.net.RestClient;
 import com.longfor.core.net.callback.IError;
-import com.longfor.core.net.callback.ISuccess;
-import com.longfor.core.utils.log.LogUtils;
 import com.longfor.core.utils.storage.LongForPreference;
 import com.longfor.core.utils.toast.ToastUtils;
-import com.longfor.ec.launcher.LauncherScrollDelegate;
 import com.longfor.ui.launcher.ScrollLauncherTag;
-import com.longfor.ui.login.LoginTag;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +39,7 @@ import butterknife.BindView;
  * @date: 2017/12/25
  * @function:
  */
-public class SplashDelegate extends LongForDelegate implements ISuccess, IError{
+public class SplashDelegate extends LongForDelegate implements IError{
     @BindView(R2.id.tv_version)
     TextView mTvAppVersion;
     private String mAppVersion;
@@ -71,9 +69,8 @@ public class SplashDelegate extends LongForDelegate implements ISuccess, IError{
         RestClient.builder()
                 .url(Constant.URL_VERSION_CHECK)
                 .raw(map)
-                .success(this)
+                .success(sucessListener)
                 .error(this)
-                .loader(getContext())
                 .build()
                 .post();
 
@@ -130,18 +127,19 @@ public class SplashDelegate extends LongForDelegate implements ISuccess, IError{
             return;
         }
 
-        if(LongForPreference.getAppFlag(LoginTag.IS_LOGIN.name())) {
-//            getSupportDelegate().startWithPop();
-            ToastUtils.showMessage(getContext(), "跳转首页");
+        if(AccountManager.isSignIn()) {
+            getSupportDelegate().start(new ChannelMainDelegate(), SINGLETASK);
         }
         else {
             if(LongForPreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
                 // 跳转登录页
                 getSupportDelegate().start(new LoginVideoDelegate(), SINGLETASK);
+//                getSupportDelegate().startWithPop(new LoginVideoDelegate());
             }
             else {
                 // 跳转引导页
                  getSupportDelegate().start(new GuideDelegate());
+//                getSupportDelegate().startWithPop(new GuideDelegate());
             }
         }
     }
@@ -159,39 +157,40 @@ public class SplashDelegate extends LongForDelegate implements ISuccess, IError{
      * 网络请求成功回调
      * @param response
      */
-    @Override
-    public void onSuccess(String response) {
-        LogUtils.e("版本信息接口", response);
-        UpdateVersionBaen entity = JSON.parseObject(response, UpdateVersionBaen.class);
-        if (entity != null && entity.getCode() == 0) {
-            versionInfo = entity.getData();
-            if (versionInfo != null && versionInfo.getUpgrade() != 0) {
-                appUpgrade = versionInfo.getUpgrade();
-                dialog = new UpdateAppVersionDialog(getContext(), versionInfo.getMessage(), versionInfo.getUpgrade(), R.style.custom_dialog_version, new OnUpdataVersionClickListener() {
-                    @Override
-                    public void updata() {
-                        downloadNewApp(versionInfo.getDownloadUrl());
-                    }
+    BaseSucessListener sucessListener = new BaseSucessListener() {
+        @Override
+        public void onSucessd(String response) {
+            UpdateVersionBaen entity = JSON.parseObject(response, UpdateVersionBaen.class);
+            if (entity != null && entity.getCode() == 0) {
+                versionInfo = entity.getData();
+                if (versionInfo != null && versionInfo.getUpgrade() != 0) {
+                    appUpgrade = versionInfo.getUpgrade();
+                    dialog = new UpdateAppVersionDialog(getContext(), versionInfo.getMessage(), versionInfo.getUpgrade(), R.style.custom_dialog_version, new OnUpdataVersionClickListener() {
+                        @Override
+                        public void updata() {
+                            downloadNewApp(versionInfo.getDownloadUrl());
+                        }
 
-                    @Override
-                    public void close() {
-                        dialog.dismiss();
-                        delayLoad(1000);
-                    }
+                        @Override
+                        public void close() {
+                            dialog.dismiss();
+                            delayLoad(1000);
+                        }
 
-                    @Override
-                    public void cancle() {
-                        delayLoad(0);
-                    }
-                }) ;
-                dialog.show();
+                        @Override
+                        public void cancle() {
+                            delayLoad(0);
+                        }
+                    }) ;
+                    dialog.show();
+                } else {
+                    delayLoad(2000);
+                }
             } else {
                 delayLoad(2000);
             }
-        } else {
-            delayLoad(2000);
         }
-    }
+    };
 
     /**
      * 网络请求失败回调
@@ -202,4 +201,5 @@ public class SplashDelegate extends LongForDelegate implements ISuccess, IError{
     public void onError(int code, String msg) {
         ToastUtils.showMessage(getContext(), msg);
     }
+
 }

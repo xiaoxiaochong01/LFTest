@@ -15,7 +15,7 @@ public class AccountManager {
         LongForPreference.setAppFlag(SingTag.SING_TAG.name(),state);
     }
 
-    private static boolean isSignIn(){
+    public static boolean isSignIn(){
         return LongForPreference.getAppFlag(SingTag.SING_TAG.name());
     }
 

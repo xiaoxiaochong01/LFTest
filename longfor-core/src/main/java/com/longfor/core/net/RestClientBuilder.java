@@ -1,12 +1,14 @@
 package com.longfor.core.net;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.longfor.core.net.callback.IError;
 import com.longfor.core.net.callback.IFailure;
 import com.longfor.core.net.callback.IRequest;
 import com.longfor.core.net.callback.ISuccess;
 import com.longfor.core.ui.loader.LoaderStyle;
+import com.longfor.core.utils.log.LogUtils;
 
 import java.io.File;
 import java.util.Map;
@@ -93,6 +95,7 @@ public class RestClientBuilder {
         }
         sb.append("}");
         raw(sb.toString());
+        LogUtils.e("RequestBody",sb.toString());
         return this;
     }
 

@@ -2,12 +2,14 @@ package com.longfor.core.net.callback;
 
 
 import android.os.Handler;
+import android.util.Log;
 
 import com.longfor.core.app.ConfigKeys;
 import com.longfor.core.app.LongFor;
 import com.longfor.core.net.RestCreator;
 import com.longfor.core.ui.loader.LoaderStyle;
 import com.longfor.core.ui.loader.LongforLoader;
+import com.longfor.core.utils.log.LogUtils;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -36,6 +38,8 @@ public final class RequestCallbacks implements Callback<String> {
 
     @Override
     public void onResponse(Call<String> call, Response<String> response) {
+        Log.e("ResponseBody", response.body().toString());
+        LogUtils.e("ResponseBody", response.body().toString());
         if(response.isSuccessful()){
             if(call.isExecuted()){
                 if(SUCCESS!=null){

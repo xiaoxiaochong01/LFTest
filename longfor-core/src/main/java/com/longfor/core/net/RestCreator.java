@@ -31,7 +31,7 @@ public final class RestCreator {
      * okhttp容器
      */
     private static final class OkHttpHolder{
-        private static final int TIME_OUT = 60;
+        private static final int TIME_OUT = 120;
         private static final OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
         private static final ArrayList<Interceptor> INTERCEPTORS = LongFor.getConfiguration(ConfigKeys.INTERCEPTOR);
         private static OkHttpClient.Builder addInterceptor(){
@@ -44,6 +44,8 @@ public final class RestCreator {
         }
         private static final OkHttpClient OK_HTTP_CLIENT = addInterceptor().
                 connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .build();
     }
     /**

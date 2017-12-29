@@ -79,11 +79,9 @@ public class ToastUtils {
                         synchronized (synObj) {
                             if (toast != null) {
                                 toast.cancel();
-                                toast.setText(msg);
-                                toast.setDuration(len);
-                            } else {
-                                toast = Toast.makeText(act, msg, len);
+                                toast = null;
                             }
+                            toast = Toast.makeText(act, msg, len);
                             toast.show();
                         }
                     }
@@ -111,11 +109,8 @@ public class ToastUtils {
                         synchronized (synObj) {
                             if (toast != null) {
                                 toast.cancel();
-                                toast.setText(msg);
-                                toast.setDuration(len);
-                            } else {
-                                toast = Toast.makeText(act, msg, len);
                             }
+                            toast = Toast.makeText(act, msg, len);
                             toast.show();
                         }
                     }

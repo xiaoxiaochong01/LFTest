@@ -1,14 +1,35 @@
 <resources>
     <string name="app_name">龙策</string>
-
+    <string name="data_parsing_error">数据解析错误</string>
+    <string name="net_connect_time_out">网络请求超时</string>
+    <string name="string_hint">提示</string>
+    <string name="ensure">确定</string>
+    <string name="cancel">确定</string>
     <!-- 启动页 -->
     <string name="string_version">版本号:</string>
     <string name="string_find_new_version">发现新版本</string>
     <string name="string_can_not_find_version_name">无法获取版本号信息</string>
     <!-- 启动页 -->
     <!-- 登录页 begin-->
-    <string name="string_login">登录</string>
+    <string name="login_string">登录</string>
+    <string name="logout_string">退出登录</string>
+    <string name="login_get_code">获取验证码</string>
+
+    <string name="login_input_oa_account_hint">请输入OA账号</string>
+    <!--<string name="login_input_code_hint">请输入OA密码</string>-->
+    <string name="login_input_code_hint">请输入验证码</string>
+    <string name="login_string_second">秒</string>
+
+    <string name="login_toast_oa_null">OA账号不能为空</string>
+    <string name="login_toast_code_null">验证码不能为空</string>
+    <string name="login_toast_code_error">请输入正确的验证码</string>
+
+    <string name="login_toast_user_error">用户信息异常</string>
     <!-- 登录页 end-->
-
-
+    <!-- 我的 begin-->
+    <string name="mine_about_us">关于我们</string>
+    <string name="mine_recommend">推荐</string>
+    <string name="mine_feed_back">意见反馈</string>
+    <string name="mine_setting">设置</string>
+    <!-- 我的 end-->
 </resources>

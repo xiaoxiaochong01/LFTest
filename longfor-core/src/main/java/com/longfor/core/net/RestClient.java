@@ -1,8 +1,12 @@
 package com.longfor.core.net;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
+import com.longfor.core.R;
+import com.longfor.core.app.LongFor;
 import com.longfor.core.net.callback.HttpMethod;
 import com.longfor.core.net.callback.IError;
 import com.longfor.core.net.callback.IFailure;
@@ -12,6 +16,8 @@ import com.longfor.core.net.callback.RequestCallbacks;
 import com.longfor.core.net.download.DownloadHandler;
 import com.longfor.core.ui.loader.LoaderStyle;
 import com.longfor.core.ui.loader.LongforLoader;
+import com.longfor.core.utils.log.LogUtils;
+import com.longfor.core.utils.toast.ToastUtils;
 
 import java.io.File;
 import java.util.Map;
@@ -74,6 +80,12 @@ public class RestClient {
     }
 
     private void request(HttpMethod method) {
+        //添加一个网络判断的方法
+        if(!isNetworkAvailable(LongFor.getApplicationContext())) {
+            ToastUtils.showMessage(LongFor.getApplicationContext(), R.string.net_connect_error);
+            LogUtils.e("net_unconnect", "网路连接失败");
+            return;
+        }
         final RestService service = RestCreator.getRestService();
         Call<String> call = null;
         if (REQUEST != null) {
@@ -125,13 +137,6 @@ public class RestClient {
     }
 
     public final void post() {
-        Log.e("request1", this.URL);
-        Log.e("params1", "11");
-        StringBuilder param = new StringBuilder();
-        for(Map.Entry<String, Object> entry : PARAMS.entrySet()) {
-            param.append(entry.getKey()).append(":").append(entry.getValue()).append("  ");
-        }
-        Log.e("params", param.toString());
         if (REQUESTBODY == null) {
             request(HttpMethod.POST);
         } else {
@@ -159,5 +164,25 @@ public class RestClient {
 
     public final void download() {
         new DownloadHandler(URL, REQUEST, SUCCESS, FAILURE, ERROR, DOWNLOAD_DIR, EXTENSION, NAME).handleDownload();
+    }
+
+    /**
+     * 判断当前网络是否连接
+     */
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm == null) {
+        } else {
+            NetworkInfo[] info = cm.getAllNetworkInfo();
+            if (info != null) {
+                for (int i = 0; i < info.length; i++) {
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
