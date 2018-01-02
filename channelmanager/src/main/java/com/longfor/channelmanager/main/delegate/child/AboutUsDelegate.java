@@ -50,8 +50,9 @@ public class AboutUsDelegate extends LongForDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        if (savedInstanceState != null) {
-            String leftText = savedInstanceState.getString(Constant.TITLE_LEFT_TEXT);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            String leftText = bundle.getString(Constant.TITLE_LEFT_TEXT);
             if (!TextUtils.isEmpty(leftText)) {
                 mHeadView.setLeftMsgVisiable(true);
                 mHeadView.setLeftMsg(leftText);

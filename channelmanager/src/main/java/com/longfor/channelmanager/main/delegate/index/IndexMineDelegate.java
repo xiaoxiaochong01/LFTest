@@ -15,6 +15,7 @@ import com.longfor.channelmanager.common.constants.Constant;
 import com.longfor.channelmanager.common.dialog.DialogWithYesOrNo;
 import com.longfor.channelmanager.main.delegate.child.AboutUsDelegate;
 import com.longfor.channelmanager.main.delegate.child.RecommendDelegate;
+import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.core.delegates.bottomreplace.BottomItemDelegate;
 
 import butterknife.BindView;
@@ -68,9 +69,9 @@ public class IndexMineDelegate extends BottomItemDelegate {
     void onAboutUsClick() {
         Bundle bundle = new Bundle();
         bundle.putString(Constant.TITLE_LEFT_TEXT, getResources().getString(R.string.mine_title));
-        ISupportFragment supportFragment = new AboutUsDelegate();
-        supportFragment.putNewBundle(bundle);
-        getSupportDelegate().start(supportFragment, SINGLETASK);
+        LongForDelegate supportFragment = new AboutUsDelegate();
+        supportFragment.setArguments(bundle);
+        getParentDelegate().start(supportFragment, SINGLETASK);
     }
     @OnClick(R2.id.rl_recommend_code)
     void onRecommendClick() {
