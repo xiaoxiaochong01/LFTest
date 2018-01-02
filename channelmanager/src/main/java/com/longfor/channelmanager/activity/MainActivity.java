@@ -25,4 +25,15 @@ public class MainActivity extends ProxyActivity implements BackHandledInterface{
     public void setSelectedFragment(BottomItemDelegate selectedFragment) {
         mPlaceholderFragment = selectedFragment;
     }
+
+    @Override
+    public void onBackPressed() {
+        if (mPlaceholderFragment == null|| mPlaceholderFragment.isVisible()||!mPlaceholderFragment.onBackPressed()) {
+            //处理
+
+        } else {
+            //处理
+            super.onBackPressed();
+        }
+    }
 }

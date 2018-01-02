@@ -5,5 +5,5 @@ package com.longfor.core.delegates.bottomreplace;
  */
 
 public interface BackHandledInterface {
-    public abstract void setSelectedFragment(BottomItemDelegate selectedFragment);
+    void setSelectedFragment(BottomItemDelegate selectedFragment);
 }
