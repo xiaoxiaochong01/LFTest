@@ -1,4 +1,4 @@
-package com.longfor.channelmanager.login;
+package com.longfor.channelmanager.main.delegate.child;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,10 +9,10 @@ import com.longfor.core.delegates.LongForDelegate;
 
 /**
  * @author: tongzhenhua
- * @date: 2017/12/26
+ * @date: 2018/1/2
  * @function:
  */
-public class LoginDelegate extends LongForDelegate {
+public class SettingDelegate extends LongForDelegate {
     @Override
     public Object setLayout() {
         return null;

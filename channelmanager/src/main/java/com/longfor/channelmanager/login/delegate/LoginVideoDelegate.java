@@ -1,16 +1,16 @@
-package com.longfor.channelmanager.login;
+package com.longfor.channelmanager.login.delegate;
 
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.VideoView;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
+import com.longfor.channelmanager.login.delegate.LoginDelegate;
 import com.longfor.core.delegates.LongForDelegate;
+import com.longfor.ui.login.view.ScreenMatchVideoView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -22,7 +22,7 @@ import butterknife.OnClick;
  */
 public class LoginVideoDelegate extends LongForDelegate {
     @BindView(R2.id.vv_video)
-    VideoView videoView;
+    ScreenMatchVideoView videoView;
     private Uri videoUri; // 播放视频的地址
 
     @Override
@@ -38,25 +38,7 @@ public class LoginVideoDelegate extends LongForDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         videoUri = Uri.parse("android.resource://" + getContext().getPackageName() + "/" + R.raw.video_login);
-        if(videoUri == null) {
-            throw new IllegalArgumentException("Uri can not be null");
-        }
-        // 设置视频播放路径
-        videoView.setVideoURI(videoUri);
-        videoView.start(); // 播放视频
-
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                mediaPlayer.setLooping(true); // 设置循环播放
-            }
-        });
-        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-            @Override
-            public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
-                return true;
-            }
-        });
+        videoView.playVideo(videoUri);
     }
 
     @Override
@@ -70,8 +52,8 @@ public class LoginVideoDelegate extends LongForDelegate {
     @Override
     public void onResume() {
         super.onResume();
-        if(videoView != null) {
-            videoView.start();
+        if(videoView != null && videoUri != null) {
+            videoView.playVideo(videoUri);
         }
     }
 

@@ -1,6 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@color/gray_f4"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_logo_login"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="80dp"
+        android:src="@mipmap/login_img_logo"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center_vertical">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_oa_number"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/login_icon_acount"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_oa_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/img_oa_number"
+            android:background="@null"
+            android:hint="@string/login_input_oa_account_hint"
+            android:padding="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/gray_3"
+            android:textColorHint="@color/color_c6"
+            android:textSize="16sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/common_dividing_line"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_oa_password"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/login_icon_password" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_oa_password_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/tv_get_verify"
+            android:layout_toRightOf="@+id/img_oa_password"
+            android:background="@null"
+            android:hint="@string/login_input_code_hint"
+            android:inputType="number"
+            android:maxLength="4"
+            android:padding="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/gray_3"
+            android:textColorHint="@color/color_c6"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_get_verify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/login_bt_get_code"
+            android:enabled="false"
+            android:padding="3dp"
+            android:text="@string/login_get_code"
+            android:textColor="@color/gray_9"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/common_dividing_line" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_login_ok"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@mipmap/login_btn_nomal"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="@string/login_string"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
 
 </android.support.v7.widget.LinearLayoutCompat>

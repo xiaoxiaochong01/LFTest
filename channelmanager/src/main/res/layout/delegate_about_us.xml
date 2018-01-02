@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_f4"
+    >
+    <com.longfor.channelmanager.common.view.commonheadview.CommonHeadView
+        android:id="@+id/about_us_head"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"/>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/about_us_head"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@mipmap/img_logo"
+        />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/string_version"
+        android:textColor="@color/gray_3"
+        android:textSize="15sp"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_function_introduction"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv_version"
+        android:layout_marginBottom="11dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:drawableRight="@mipmap/mine_more_icon"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/about_us_function_intro"
+        android:textColor="@color/gray_3"
+        android:textSize="16sp"
+        android:visibility="gone"
+        />
+
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="47dp"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_longfor_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_longfor"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_longfor_logo"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_longfor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="@string/about_us_copyright"
+            android:textColor="@color/gray_9"
+            />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</RelativeLayout>

@@ -13,6 +13,8 @@ import com.joanzapata.iconify.widget.IconTextView;
 import com.longfor.core.delegates.bottom.BottomItemDelegate;
 import com.longfor.ec.R;
 import com.longfor.ec.R2;
+import com.longfor.ec.main.ECBottomDelegate;
+import com.longfor.ui.refresh.RefreshHandler;
 
 import butterknife.BindView;
 
@@ -33,6 +35,8 @@ public class IndexDelegate extends BottomItemDelegate {
     @BindView(R2.id.et_search_view)
     AppCompatEditText mSearchView = null;
 
+    private RefreshHandler mRefreshHandler = null;
+
     @Override
     public Object setLayout() {
         return R.layout.delegate_index;
@@ -40,7 +44,7 @@ public class IndexDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-
+        mRefreshHandler = new RefreshHandler(mRefreshLayout);
     }
 
     @Override
@@ -54,5 +58,9 @@ public class IndexDelegate extends BottomItemDelegate {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
         mRefreshLayout.setProgressViewOffset(true,120,300);
+    }
+
+    public void test(){
+//       getParentDelegate().start(new ECBottomDelegate());
     }
 }

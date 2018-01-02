@@ -6,24 +6,37 @@
     <!-- 公共颜色库 begin-->
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    <!-- 公共颜色库 end-->
-    <!-- 启动模块 begin-->
-    <color name="gray_3">#333333</color>
 
+    <color name="common_dividing_line">#eeeeee</color>
+    <color name="common_head_view_bg">#fafafa</color>
+    <!-- 公共颜色库 end-->
+
+    <!-- 启动模块 begin-->
+    <color name="gray_3">#333333</color>  <!-- 登录获取验证码也用到了,我的意见反馈也用到了,关于我们页面也用到了-->
     <!-- 启动模块 end-->
 
+    <!-- 登录注册模块 begin-->
+    <color name="gray_f4">#f4f4f4</color><!--关于我们页面背景也用到了-->
+    <color name="color_c6">#c6c6c5</color>
+
+    <color name="gray_9">#999999</color><!--关于我们页面也用到了-->
+    <!-- 登录注册模块 end-->
+
+    <!--我的模块 begin-->
+
+    <!--我的模块 end-->
     <color name="alpha_0.8_black">#cc000000</color>
     <color name="trans_gray_3">#80333333</color>
     <color name="black_03">#030303</color>
     <color name="gray_4a">#4a4a4a</color>
     <color name="gray_6">#666666</color>
     <color name="gray_74">#cc747474</color>
-    <color name="gray_9">#999999</color>
+
     <color name="gray_9b">#9b9b9b</color>
     <color name="gray_c">#cccccc</color>
     <color name="gray_d8">#d8d8d8</color>
     <color name="gray_e6">#e6e6e6</color>
-    <color name="gray_e">#eeeeee</color>
+
     <color name="gray_f8">#f8f8f8</color>
 
     <color name="white_alpha_3">#4cffffff</color>

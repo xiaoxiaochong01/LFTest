@@ -3,6 +3,7 @@ package com.longfor.core.delegates;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,10 +30,20 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
     private final SupportFragmentDelegate DELEGATE = new SupportFragmentDelegate(this);
     protected FragmentActivity _mActivity = null;
     private Unbinder mUnbinder = null;
+    private View mRootView = null;
 
     public abstract Object setLayout();
 
     public abstract void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView);
+
+    public <T extends View> T $(@IdRes int viewId) {
+        if (mRootView != null) {
+            return mRootView.findViewById(viewId);
+        }
+        throw new NullPointerException("rootView is null");
+    }
+
+
 
     @Override
     public void onAttach(Context context) {
@@ -71,6 +82,7 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
             throw new ClassCastException("type of setLayout() must be int or View!");
         }
         mUnbinder = ButterKnife.bind(this, rootView);
+        mRootView = rootView;
         onBindView(savedInstanceState, rootView);
         return rootView;
     }
@@ -105,11 +117,19 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
 
     @Override
     public void onDestroyView() {
+        DELEGATE.onDestroyView();
         super.onDestroyView();
+
         if (mUnbinder != null) {
             mUnbinder.unbind();
         }
     }
+    @Override
+    public void onDestroy() {
+        DELEGATE.onDestroy();
+        super.onDestroy();
+    }
+
 
 
     @Override
@@ -190,5 +210,13 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
     @Override
     public boolean onBackPressedSupport() {
         return DELEGATE.onBackPressedSupport();
+    }
+
+    public void start(ISupportFragment toFragment) {
+        DELEGATE.start(toFragment);
+    }
+
+    public void start(final ISupportFragment toFragment, @LaunchMode int launchMode) {
+        DELEGATE.start(toFragment, launchMode);
     }
 }

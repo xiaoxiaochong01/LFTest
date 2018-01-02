@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">longfor-core</string>
+    <string name="net_connect_error">连接异常，请检查网络环境</string>
 </resources>
