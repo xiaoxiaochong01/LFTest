@@ -12,14 +12,14 @@
     <!-- 公共颜色库 end-->
 
     <!-- 启动模块 begin-->
-    <color name="gray_3">#333333</color>  //登录获取验证码也用到了,我的意见反馈也用到了
+    <color name="gray_3">#333333</color>  <!-- 登录获取验证码也用到了,我的意见反馈也用到了,关于我们页面也用到了-->
     <!-- 启动模块 end-->
 
     <!-- 登录注册模块 begin-->
-    <color name="gray_f4">#f4f4f4</color>
+    <color name="gray_f4">#f4f4f4</color><!--关于我们页面背景也用到了-->
     <color name="color_c6">#c6c6c5</color>
 
-    <color name="gray_9">#999999</color>
+    <color name="gray_9">#999999</color><!--关于我们页面也用到了-->
     <!-- 登录注册模块 end-->
 
     <!--我的模块 begin-->

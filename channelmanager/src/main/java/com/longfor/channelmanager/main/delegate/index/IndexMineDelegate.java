@@ -11,11 +11,15 @@ import android.widget.RelativeLayout;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
+import com.longfor.channelmanager.common.constants.Constant;
 import com.longfor.channelmanager.common.dialog.DialogWithYesOrNo;
+import com.longfor.channelmanager.main.delegate.child.AboutUsDelegate;
+import com.longfor.channelmanager.main.delegate.child.RecommendDelegate;
 import com.longfor.core.delegates.bottomreplace.BottomItemDelegate;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.yokeyword.fragmentation.ISupportFragment;
 
 /**
  * @author: tongzhenhua
@@ -62,10 +66,22 @@ public class IndexMineDelegate extends BottomItemDelegate {
     }
     @OnClick(R2.id.rl_about_us)
     void onAboutUsClick() {
-
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.TITLE_LEFT_TEXT, getResources().getString(R.string.mine_title));
+        ISupportFragment supportFragment = new AboutUsDelegate();
+        supportFragment.putNewBundle(bundle);
+        getSupportDelegate().start(supportFragment, SINGLETASK);
     }
     @OnClick(R2.id.rl_recommend_code)
     void onRecommendClick() {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.TITLE_LEFT_TEXT, getResources().getString(R.string.mine_title));
+        RecommendDelegate supportFragment = new RecommendDelegate();
+        supportFragment.onNewBundle(bundle);
+        supportFragment.putNewBundle(bundle);
+        supportFragment.setArguments(bundle);
+//        supportFragment.put
+        getSupportDelegate().start(supportFragment, SINGLETASK);
 
     }
     @OnClick(R2.id.rl_feed_back)
