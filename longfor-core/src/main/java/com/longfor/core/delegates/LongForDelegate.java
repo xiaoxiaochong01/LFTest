@@ -5,4 +5,5 @@ package com.longfor.core.delegates;
  */
 
 public abstract class LongForDelegate extends PermissionCheckerDelegate {
+
 }
