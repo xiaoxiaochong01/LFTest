@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
+import com.longfor.channelmanager.common.constants.Constant;
 import com.longfor.channelmanager.common.view.commonheadview.CommonHeadView;
 import com.longfor.channelmanager.statistics.delegate.QueryAttendanceDelegate;
 import com.longfor.core.delegates.bottomreplace.BottomItemDelegate;
@@ -46,6 +47,10 @@ public class IndexStatisticsDelegate extends BottomItemDelegate {
 
     @OnClick(R2.id.iv_statistics_query_attendance)
     void onQueryAttendanceClick() {
-        getParentDelegate().start(new QueryAttendanceDelegate(), SINGLETASK);
+        Bundle bundle=new Bundle();
+        bundle.putString(Constant.TITLE_LEFT_TEXT,getString(R.string.index_statistics_title));
+        QueryAttendanceDelegate delegate = new QueryAttendanceDelegate();
+        delegate.setArguments(bundle);
+        getParentDelegate().start(delegate);
     }
 }
