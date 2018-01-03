@@ -38,6 +38,8 @@
     <!--关于我们 begin-->
     <string name="about_us_function_intro">功能介绍</string>
     <string name="about_us_copyright">龙湖地产版权所有</string>
+    <string name="index_statistics_title">数+</string>
+    <string name="query_attendance">考勤查询</string>
     <!--关于我们 end-->
     <!-- 我的 end-->
 </resources>
