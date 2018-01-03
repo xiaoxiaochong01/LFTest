@@ -159,7 +159,7 @@ public class SplashDelegate extends LongForDelegate implements IError{
      */
     BaseSuccessListener sucessListener = new BaseSuccessListener() {
         @Override
-        public void onSuccessed(String response) {
+        public void success(String response) {
             UpdateVersionBaen entity = JSON.parseObject(response, UpdateVersionBaen.class);
             if (entity != null && entity.getCode() == 0) {
                 versionInfo = entity.getData();

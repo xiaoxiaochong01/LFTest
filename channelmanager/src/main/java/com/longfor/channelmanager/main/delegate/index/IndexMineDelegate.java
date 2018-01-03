@@ -211,12 +211,10 @@ public class IndexMineDelegate extends BottomItemDelegate {
                 .url(ConstantMain.URL_TRAINEE_GET_PROFILE)
                 .success(new BaseSuccessListener() {
                     @Override
-                    public void onSuccessed(String response) {
+                    public void success(String response) {
                         if(isAdded()) {
                             UserInfoBean userInfoBean = JSON.parseObject(response, UserInfoBean.class);
-                            if(userInfoBean == null) {
-                                ToastUtils.showMessage(getContext(), R.string.data_parsing_error);
-                            }
+                            UserInfoBean.DataBean dataBean = userInfoBean.getData();
                             tvUserName.setText(userInfoBean.getData().getEmployeeName());
                         }
                     }

@@ -67,7 +67,7 @@ public class LoginDelegate extends LongForDelegate{
                     .raw(map)
                     .success(new BaseSuccessListener() {
                         @Override
-                        public void onSuccessed(String response) {
+                        public void success(String response) {
                             LoginBean loginBean = JSON.parseObject(response, LoginBean.class);
                             if(loginBean != null) {
                                 if(loginBean.getData() != null) {
@@ -110,7 +110,7 @@ public class LoginDelegate extends LongForDelegate{
                 .raw(map)
                 .success(new BaseSuccessListener() {
                     @Override
-                    public void onSuccessed(String response) {
+                    public void success(String response) {
                         BaseResponse result = JSON.parseObject(response, BaseResponse.class);
                         if(result != null) {
                             if(ConstantLogin.CODE_0 == result.getCode() || ConstantLogin.CODE_2 == result.getCode()){
