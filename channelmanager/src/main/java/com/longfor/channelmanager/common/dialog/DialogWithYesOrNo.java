@@ -20,13 +20,6 @@ import com.longfor.channelmanager.common.dialog.listener.OnDialogConfimClickList
  */
 public class DialogWithYesOrNo {
     AlertDialog mAlertDialog;
-
-//    public DialogWithYesOrNo(Context context, String title, String des, final @NonNull OnDialogConfimClickListener confimClickListener) {
-//        String yes = context.getResources().getString(R.string.ensure);
-//        String no = context.getResources().getString(R.string.cancel);
-//        this(context, title, des, yes, no, confimClickListener);
-//    }
-
     public DialogWithYesOrNo(Context context, String title, String des, String yes, String no, final @NonNull OnDialogConfimClickListener confimClickListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_with_yes_or_no, null);

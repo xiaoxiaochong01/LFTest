@@ -4,10 +4,18 @@
     <string name="net_connect_time_out">网络请求超时</string>
     <string name="string_hint">提示</string>
     <string name="ensure">确定</string>
-    <string name="cancel">确定</string>
+    <string name="cancel">取消</string>
+    <string name="setting">设置</string>
+    <string name="hint_write_external_storage">允许本软件读取文件\n请在系统设置->隐私->存储\n允许本软件读取文件</string>
+    <string name="picture_illegal">未获取到图片，请检查并开启设置中应用的存储权限，且确保图片格式正确</string>
+    <string name="no_permission_to_save_file">获取存储权限失败，请在设置->应用/权限管理->本应用中打开存储权限以便应用读写</string>
 
     <string name="string_version">版本号:</string>
     <string name="string_can_not_find_version_name">无法获取版本号信息</string> <!--启动和关于我们页-->
+    <!--选择图片 begin-->
+    <string name="take_photo">拍照</string>
+    <string name="select_photo">从手机相册选择</string>
+    <!--选择图片 end-->
     <!-- 启动页 -->
 
     <string name="string_find_new_version">发现新版本</string>
@@ -39,5 +47,9 @@
     <string name="about_us_function_intro">功能介绍</string>
     <string name="about_us_copyright">龙湖地产版权所有</string>
     <!--关于我们 end-->
+    <!--反馈意见 begin-->
+    <string name="feed_back_title">反馈意见</string>
+    <string name="feed_back_list">反馈列表</string>
+    <!--反馈意见 end-->
     <!-- 我的 end-->
 </resources>

@@ -35,15 +35,32 @@ public class WebviewDelegate extends LongForDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        if(savedInstanceState != null) {
-            String leftText = savedInstanceState.getString(Constant.TITLE_LEFT_TEXT);
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            String leftText = bundle.getString(Constant.TITLE_LEFT_TEXT);
             if(!TextUtils.isEmpty(leftText)) {
                 mHeadView.setLeftTitleVisiable(true);
                 mHeadView.setLeftTitle(leftText);
             }
-            String title = savedInstanceState.getString(Constant.WEB_TITLE);
+            String title = bundle.getString(Constant.WEB_TITLE);
             mHeadView.setTitle(title);
-            mUrl = savedInstanceState.getString(Constant.WEB_URL);
+            mUrl = bundle.getString(Constant.WEB_URL);
+            if(getResources().getString(R.string.feed_back_title).equals(title)) {
+                mHeadView.setRightTextViewVisible(true);
+                mHeadView.setRightTextViewText(getResources().getString(R.string.feed_back_list));
+                mHeadView.setRightTextViewOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString(Constant.TITLE_LEFT_TEXT, getResources().getString(R.string.feed_back_title));
+                        bundle.putString(Constant.WEB_URL,"http://www.longfor.com");
+                        bundle.putString(Constant.WEB_TITLE, getResources().getString(R.string.feed_back_list));
+                        WebviewDelegate supportFragment = new WebviewDelegate();
+                        supportFragment.setArguments(bundle);
+                        getSupportDelegate().start(supportFragment);
+                    }
+                });
+            }
         }
         configWebView();
         if(mUrl != null) {

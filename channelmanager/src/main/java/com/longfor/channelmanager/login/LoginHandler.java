@@ -4,6 +4,7 @@ import com.longfor.channelmanager.database.DatabaseManager;
 import com.longfor.channelmanager.database.UserProfile;
 import com.longfor.channelmanager.login.bean.LoginBean;
 import com.longfor.core.app.AccountManager;
+import com.longfor.core.app.LongFor;
 import com.longfor.core.utils.log.LogUtils;
 
 import java.util.List;
@@ -30,11 +31,12 @@ public class LoginHandler {
             userProfile.setProjectId(dataBean.getProject().getProjectId());
             userProfile.setProjectName(dataBean.getProject().getProjectName());
         }
-        getInstance().getDao().update(userProfile);
+//        getInstance().getDao().update(userProfile);
+        getInstance().getDao().insert(userProfile);
         AccountManager.setSignState(true);
         List<UserProfile> userProfileList = DatabaseManager.getInstance().getDao().loadAll();
         for(UserProfile userProfile1 : userProfileList) {
-            userProfile.toString();
+            LogUtils.e("ddd", userProfile1.toString());
         }
     }
 

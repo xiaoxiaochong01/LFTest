@@ -7,6 +7,7 @@ import com.longfor.core.net.callback.IError;
 import com.longfor.core.net.callback.IFailure;
 import com.longfor.core.net.callback.IRequest;
 import com.longfor.core.net.callback.ISuccess;
+import com.longfor.core.net.request.RequestParams;
 import com.longfor.core.ui.loader.LoaderStyle;
 import com.longfor.core.utils.log.LogUtils;
 
@@ -14,7 +15,10 @@ import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import okhttp3.Headers;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.Request;
 import okhttp3.RequestBody;
 
 /**
@@ -85,20 +89,14 @@ public class RestClientBuilder {
     }
 
     public final RestClientBuilder raw(Map<String, String> params) {
-        StringBuffer sb = new StringBuffer();
-        sb.append("{");
-        if (params != null) {
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                sb.append("\"").append(entry.getKey()).append("\""+":"+"\"").append(entry.getValue()).append("\"").append(",");
-            }
-            sb.delete(sb.length()-1,sb.length());
-        }
-        sb.append("}");
-        raw(sb.toString());
-        LogUtils.e("RequestBody",sb.toString());
+        this.mRequestbody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), RestParamsUtils.paramsTransferJson(params));
         return this;
     }
 
+    public final RestClientBuilder raw(RequestParams params) {
+        this.mRequestbody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), RestParamsUtils.paramsTranferBody(params));
+        return this;
+    }
     public final RestClientBuilder onRequest(IRequest iRequest) {
         this.mRequest = iRequest;
         return this;

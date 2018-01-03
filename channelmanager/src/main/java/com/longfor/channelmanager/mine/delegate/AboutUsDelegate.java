@@ -1,4 +1,4 @@
-package com.longfor.channelmanager.main.delegate.child;
+package com.longfor.channelmanager.mine.delegate;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -43,9 +43,10 @@ public class AboutUsDelegate extends LongForDelegate {
         bundle.putString(Constant.TITLE_LEFT_TEXT, getResources().getString(R.string.mine_about_us));
         bundle.putString(Constant.WEB_URL,"http://www.longfor.com");
         bundle.putString(Constant.WEB_TITLE, getResources().getString(R.string.about_us_function_intro));
-        ISupportFragment supportFragment = new WebviewDelegate();
-        supportFragment.putNewBundle(bundle);
-        getSupportDelegate().start(supportFragment, SINGLETASK);
+        WebviewDelegate supportFragment = new WebviewDelegate();
+//        supportFragment.putNewBundle(bundle);
+        supportFragment.setArguments(bundle);
+        getSupportDelegate().start(supportFragment);
     }
 
     @Override

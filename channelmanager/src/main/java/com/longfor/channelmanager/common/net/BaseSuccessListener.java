@@ -12,7 +12,7 @@ import com.longfor.core.utils.toast.ToastUtils;
  * @date: 2017/12/27
  * @function:
  */
-public abstract class BaseSucessListener implements ISuccess {
+public abstract class BaseSuccessListener implements ISuccess {
     @Override
     public void onSuccess(String response) {
         BaseResponse baseResponse = JSON.parseObject(response, BaseResponse.class);
@@ -21,11 +21,11 @@ public abstract class BaseSucessListener implements ISuccess {
             return;
         }
         if(baseResponse.getCode() != 0) {
-            ToastUtils.showMessage(LongFor.getApplicationContext(), response);
+            ToastUtils.showMessage(LongFor.getApplicationContext(), baseResponse.getMessage());
             return;
         }
-        onSucessd(response);
+        success(response);
     }
 
-     public abstract void onSucessd(String response);
+     public abstract void success(String response);
 }

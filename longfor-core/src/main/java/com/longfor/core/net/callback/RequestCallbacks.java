@@ -38,8 +38,10 @@ public final class RequestCallbacks implements Callback<String> {
 
     @Override
     public void onResponse(Call<String> call, Response<String> response) {
-        Log.e("ResponseBody", response.body().toString());
-        LogUtils.e("ResponseBody", response.body().toString());
+        if(response.body()!= null) {
+            Log.e("ResponseBody", response.body().toString());
+            LogUtils.e("ResponseBody", response.body().toString());
+        }
         if(response.isSuccessful()){
             if(call.isExecuted()){
                 if(SUCCESS!=null){
