@@ -1,8 +1,6 @@
 package com.longfor.core.delegates.bottomreplace;
 
 import android.content.Context;
-import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Toast;
 
 import com.longfor.core.delegates.LongForDelegate;

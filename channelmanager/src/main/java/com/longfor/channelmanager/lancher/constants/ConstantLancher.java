@@ -5,7 +5,7 @@ package com.longfor.channelmanager.lancher.constants;
  * @date: 2017/12/25
  * @function:
  */
-public interface Constant {
+public interface ConstantLancher {
     /**-----------------------------启动页常量begin--------------------------------*/
     int CONSTANT_FORCE_UPDATE = 2; // 强制版本更新
     int CONSTANT_NO_FORCE_UPDATE = 0; // 非强制版本更新

@@ -10,4 +10,6 @@ public interface Constant {
     String TITLE_LEFT_TEXT ="title_left_text";
     String WEB_URL = "web_view_url";
     String WEB_TITLE = "web_view_title";
+
+    String EMPLOYEE_ID = "employeeId";
 }

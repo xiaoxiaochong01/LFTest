@@ -5,7 +5,7 @@ package com.longfor.channelmanager.login.contants;
  * @date: 2017/12/26
  * @function:
  */
-public interface Constant {
+public interface ConstantLogin {
     /**---------------------------------登录页常量 begin----------------------------------*/
     int CODE_0 = 0; // code返回值为0
     int CODE_2 = 2; // code返回值为2提示相应信息

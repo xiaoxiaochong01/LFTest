@@ -1,4 +1,4 @@
-package com.longfor.channelmanager.main.delegate.child;
+package com.longfor.channelmanager.mine.delegate;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

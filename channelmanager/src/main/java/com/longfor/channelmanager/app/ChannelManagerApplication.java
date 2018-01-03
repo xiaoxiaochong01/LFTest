@@ -4,9 +4,12 @@ import android.app.Application;
 
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.longfor.channelmanager.R;
+import com.longfor.channelmanager.common.view.glide.GlideImageLoader;
 import com.longfor.channelmanager.database.DatabaseManager;
 import com.longfor.core.app.LongFor;
 import com.longfor.core.net.interceptors.DebugInterceptor;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.view.CropImageView;
 
 /**
  * Created by lsb18 on 2017/9/19.
@@ -18,8 +21,12 @@ public class ChannelManagerApplication extends Application {
     public void onCreate() {
         super.onCreate();
         initConfig();
+        initImagePicker();
     }
 
+    /**
+     * 初始化配置
+     */
     private void initConfig() {
         LongFor.init(this)
                 .withIcon(new FontAwesomeModule())
@@ -34,6 +41,23 @@ public class ChannelManagerApplication extends Application {
 
         DatabaseManager.getInstance().init(this);
 
+    }
+
+    /**
+     * 初始化相册ImagePicker
+     */
+    private void initImagePicker() {
+        ImagePicker imagePicker = ImagePicker.getInstance();
+        imagePicker.setImageLoader(new GlideImageLoader());
+        imagePicker.setShowCamera(false);
+        imagePicker.setCrop(false);
+        imagePicker.setSaveRectangle(true);
+        imagePicker.setStyle(CropImageView.Style.CIRCLE);
+        imagePicker.setFocusWidth(800);
+        imagePicker.setFocusHeight(800);
+        imagePicker.setOutPutX(1000);
+        imagePicker.setOutPutY(1000);
+        imagePicker.setMultiMode(false);
     }
 
 }

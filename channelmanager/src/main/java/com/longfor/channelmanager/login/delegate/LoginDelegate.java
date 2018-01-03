@@ -14,9 +14,9 @@ import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.login.LoginHandler;
 import com.longfor.channelmanager.login.bean.LoginBean;
-import com.longfor.channelmanager.login.contants.Constant;
+import com.longfor.channelmanager.login.contants.ConstantLogin;
 import com.longfor.channelmanager.main.delegate.ChannelMainDelegate;
-import com.longfor.channelmanager.common.net.BaseSucessListener;
+import com.longfor.channelmanager.common.net.BaseSuccessListener;
 import com.longfor.core.bean.BaseResponse;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.core.net.RestClient;
@@ -61,19 +61,20 @@ public class LoginDelegate extends LongForDelegate{
     void onLoginClick() {
         if(checkOA_Code()) {
             Map<String, String> map = new HashMap<>();
-            map.put(Constant.LOGIN_NAME, strOA);
-            map.put(Constant.ENTRY_CODE, strCode);
-            RestClient.builder().url(Constant.URL_LOGIN)
+            map.put(ConstantLogin.LOGIN_NAME, strOA);
+            map.put(ConstantLogin.ENTRY_CODE, strCode);
+            RestClient.builder().url(ConstantLogin.URL_LOGIN)
                     .raw(map)
-                    .success(new BaseSucessListener() {
+                    .success(new BaseSuccessListener() {
                         @Override
-                        public void onSucessd(String response) {
+                        public void success(String response) {
                             LoginBean loginBean = JSON.parseObject(response, LoginBean.class);
                             if(loginBean != null) {
                                 if(loginBean.getData() != null) {
 //                                    // 存储用户信息
-                                    getSupportDelegate().start(new ChannelMainDelegate(), SINGLETASK);
                                     LoginHandler.loginSucess(loginBean.getData());
+                                    getSupportDelegate().start(new ChannelMainDelegate(), SINGLETASK);
+
                                 }
                                 else {
                                     ToastUtils.showMessage(getContext(), R.string.login_toast_user_error);
@@ -104,15 +105,15 @@ public class LoginDelegate extends LongForDelegate{
         }
         startCountDownTimer();
         Map<String, String> map = new HashMap<>();
-        map.put(Constant.LOGIN_NAME, strOA);
-        RestClient.builder().url(Constant.URL_SEND_CODE)
+        map.put(ConstantLogin.LOGIN_NAME, strOA);
+        RestClient.builder().url(ConstantLogin.URL_SEND_CODE)
                 .raw(map)
-                .success(new BaseSucessListener() {
+                .success(new BaseSuccessListener() {
                     @Override
-                    public void onSucessd(String response) {
+                    public void success(String response) {
                         BaseResponse result = JSON.parseObject(response, BaseResponse.class);
                         if(result != null) {
-                            if(Constant.CODE_0 == result.getCode() || Constant.CODE_2 == result.getCode()){
+                            if(ConstantLogin.CODE_0 == result.getCode() || ConstantLogin.CODE_2 == result.getCode()){
                                 DialogHint dialogHint = new DialogHint(getContext(), getString(R.string.string_hint), result.getMessage());
                                 dialogHint.show();
                             }

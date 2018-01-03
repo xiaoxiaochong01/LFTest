@@ -17,6 +17,7 @@ import com.longfor.core.net.download.DownloadHandler;
 import com.longfor.core.ui.loader.LoaderStyle;
 import com.longfor.core.ui.loader.LongforLoader;
 import com.longfor.core.utils.log.LogUtils;
+import com.longfor.core.utils.net.NetUtils;
 import com.longfor.core.utils.toast.ToastUtils;
 
 import java.io.File;
@@ -81,7 +82,7 @@ public class RestClient {
 
     private void request(HttpMethod method) {
         //添加一个网络判断的方法
-        if(!isNetworkAvailable(LongFor.getApplicationContext())) {
+        if(!NetUtils.isNetworkAvailable(LongFor.getApplicationContext())) {
             ToastUtils.showMessage(LongFor.getApplicationContext(), R.string.net_connect_error);
             LogUtils.e("net_unconnect", "网路连接失败");
             return;
@@ -161,28 +162,10 @@ public class RestClient {
     public final void delete() {
         request(HttpMethod.DELETE);
     }
-
+    public final void upload() {
+        request(HttpMethod.UPLOAD);
+    }
     public final void download() {
         new DownloadHandler(URL, REQUEST, SUCCESS, FAILURE, ERROR, DOWNLOAD_DIR, EXTENSION, NAME).handleDownload();
-    }
-
-    /**
-     * 判断当前网络是否连接
-     */
-    public static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm == null) {
-        } else {
-            NetworkInfo[] info = cm.getAllNetworkInfo();
-            if (info != null) {
-                for (int i = 0; i < info.length; i++) {
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 }

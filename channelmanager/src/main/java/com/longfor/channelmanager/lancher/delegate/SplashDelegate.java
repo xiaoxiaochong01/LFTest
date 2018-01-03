@@ -15,12 +15,12 @@ import com.alibaba.fastjson.JSON;
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.lancher.bean.UpdateVersionBaen;
-import com.longfor.channelmanager.lancher.constants.Constant;
+import com.longfor.channelmanager.lancher.constants.ConstantLancher;
 import com.longfor.channelmanager.lancher.dialog.UpdateAppVersionDialog;
 import com.longfor.channelmanager.lancher.dialog.listener.OnUpdataVersionClickListener;
 import com.longfor.channelmanager.login.delegate.LoginVideoDelegate;
 import com.longfor.channelmanager.main.delegate.ChannelMainDelegate;
-import com.longfor.channelmanager.common.net.BaseSucessListener;
+import com.longfor.channelmanager.common.net.BaseSuccessListener;
 import com.longfor.core.app.AccountManager;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.core.net.RestClient;
@@ -46,7 +46,7 @@ public class SplashDelegate extends LongForDelegate implements IError{
 
     private UpdateAppVersionDialog dialog;
     private UpdateVersionBaen.DataBean versionInfo;
-    private int appUpgrade = Constant.CONSTANT_NO_FORCE_UPDATE;
+    private int appUpgrade = ConstantLancher.CONSTANT_NO_FORCE_UPDATE;
 
 
     @Override
@@ -63,11 +63,11 @@ public class SplashDelegate extends LongForDelegate implements IError{
 
     protected void doBusiness() {
         Map<String, String> map = new HashMap<>();
-        map.put(Constant.APP_ID, getResources().getString(R.string.string_version));
-        map.put(Constant.VERSION, mAppVersion);
-        map.put(Constant.CLIENT, "0"); //(0：android、1：ios)
+        map.put(ConstantLancher.APP_ID, getResources().getString(R.string.string_version));
+        map.put(ConstantLancher.VERSION, mAppVersion);
+        map.put(ConstantLancher.CLIENT, "0"); //(0：android、1：ios)
         RestClient.builder()
-                .url(Constant.URL_VERSION_CHECK)
+                .url(ConstantLancher.URL_VERSION_CHECK)
                 .raw(map)
                 .success(sucessListener)
                 .error(this)
@@ -122,7 +122,7 @@ public class SplashDelegate extends LongForDelegate implements IError{
      */
     private void gotoNextPage() {
         //2 表示版本为强更，点击返回键，退出app
-        if (appUpgrade == Constant.CONSTANT_FORCE_UPDATE) {
+        if (appUpgrade == ConstantLancher.CONSTANT_FORCE_UPDATE) {
             getActivity().finish();
             return;
         }
@@ -157,9 +157,9 @@ public class SplashDelegate extends LongForDelegate implements IError{
      * 网络请求成功回调
      * @param response
      */
-    BaseSucessListener sucessListener = new BaseSucessListener() {
+    BaseSuccessListener sucessListener = new BaseSuccessListener() {
         @Override
-        public void onSucessd(String response) {
+        public void success(String response) {
             UpdateVersionBaen entity = JSON.parseObject(response, UpdateVersionBaen.class);
             if (entity != null && entity.getCode() == 0) {
                 versionInfo = entity.getData();
