@@ -19,20 +19,16 @@ public abstract class BottomItemDelegate extends LongForDelegate {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (!(getActivity() instanceof BackHandledInterface)) {
-            throw new ClassCastException(
-                    "Hosting Activity must implement BackHandledInterface");
-        } else {
-            this.mBackHandledInterface = (BackHandledInterface) getActivity();
-        }
+
     }
 
     @Override
-    public void onStart() {
-        mBackHandledInterface.setSelectedFragment(this);
-        super.onStart();
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            mBackHandledInterface.setSelectedFragment(this);
+        }
     }
-
 
     public boolean onBackPressed() {
         if(System.currentTimeMillis() - touch_time < WATE_TIME){

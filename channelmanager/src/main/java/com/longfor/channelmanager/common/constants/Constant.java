@@ -12,4 +12,8 @@ public interface Constant {
     String WEB_TITLE = "web_view_title";
 
     String EMPLOYEE_ID = "employeeId";
+
+    /** 权限请求Code */
+    int REQUEST_WRITE_CODE = 0xefff;
+    int REQUEST_CAMERA_CODE = 0xeffe;
 }

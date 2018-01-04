@@ -30,8 +30,9 @@ public  class RestParamsUtils {
         sb.append("}");
         return sb.toString();
     }
+
     //params 转  body 错位参数传递
-    public static final String paramsTranferBody( RequestParams params) {
+    public static final RequestBody paramsTranferBody( RequestParams params) {
         MultipartBody.Builder requestBody = new MultipartBody.Builder();
         requestBody.setType(MultipartBody.FORM);
         if (params != null) {
@@ -51,6 +52,6 @@ public  class RestParamsUtils {
                 LogUtils.e("HttpReq","params---"+entry.getKey()+":"+entry.getValue());
             }
         }
-        return requestBody.toString();
+        return requestBody.build();
     }
 }
