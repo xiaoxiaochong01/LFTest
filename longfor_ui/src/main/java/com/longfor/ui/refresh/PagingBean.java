@@ -61,7 +61,7 @@ public final class PagingBean {
         return this;
     }
 
-    PagingBean addIndex(){
+    public PagingBean addIndex(){
         mPageIndex++;
         return this;
     }

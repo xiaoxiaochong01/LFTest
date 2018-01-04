@@ -13,5 +13,8 @@ public enum MultipleFields {
     SPAN_SIZE,
     ID,
     NAME,
-    TAG
+    TAG,
+    EMPLOYEE_NAME,
+    WORK_ADDRESSES,
+    INNER_CHECK_INS,
 }

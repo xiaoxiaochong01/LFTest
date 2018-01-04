@@ -1,8 +1,8 @@
 package com.longfor.core.net;
 
 import android.content.Context;
-import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
 import com.longfor.core.net.callback.IError;
 import com.longfor.core.net.callback.IFailure;
 import com.longfor.core.net.callback.IRequest;
@@ -15,10 +15,7 @@ import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import okhttp3.Headers;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.Request;
 import okhttp3.RequestBody;
 
 /**
@@ -89,6 +86,7 @@ public class RestClientBuilder {
     }
 
     public final RestClientBuilder raw(Map<String, String> params) {
+        LogUtils.e("Http","url:"+mUrl+"---params:"+ JSON.toJSONString(params));
         this.mRequestbody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), RestParamsUtils.paramsTransferJson(params));
         return this;
     }
