@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
 /**
  * @author: tongzhenhua
  * @date: 2017/12/28
- * @function:
+ * @function: 龙策主操作界面
  */
 public class ChannelMainDelegate extends BaseBottomDelegate {
     @Override

@@ -28,9 +28,9 @@ public class MainActivity extends ProxyActivity implements BackHandledInterface{
 
     @Override
     public void onBackPressed() {
-        if (mPlaceholderFragment == null|| mPlaceholderFragment.isVisible()||!mPlaceholderFragment.onBackPressed()) {
+        if (mPlaceholderFragment != null&& mPlaceholderFragment.isVisible()) {
             //处理
-
+            mPlaceholderFragment.onBackPressed();
         } else {
             //处理
             super.onBackPressed();

@@ -6,6 +6,20 @@ package com.longfor.channelmanager.main.constants;
  * @function:
  */
 public interface ConstantMain {
+    int TAKE_COVER_REQUEST_CODE = 0xffff;
+    int SELECT_COVER_REQUEST_CODE = 0xfffe;
+
+    int TAKE_PORTRAIT_REQUEST_CODE = 0xfffd;
+    int SELECT_PORTRAIT_REQUEST_CODE = 0xfffc;
+
+    // 跳转类
+    enum JUMB_TO{
+        ABOUT_US,
+        FEED_BACK,
+        RECOMMEND,
+        SETTING
+    }
+
     /** ---------------------个人信息接口相关 begin-------------------------*/
     String URL_TRAINEE_GET_PROFILE = "employee/getProfile";    //渠道专员 - 获取个人信息
     String EMPLOYEE_ID = "employeeId";

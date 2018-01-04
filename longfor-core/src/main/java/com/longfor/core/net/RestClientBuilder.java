@@ -94,7 +94,7 @@ public class RestClientBuilder {
     }
 
     public final RestClientBuilder raw(RequestParams params) {
-        this.mRequestbody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), RestParamsUtils.paramsTranferBody(params));
+        this.mRequestbody = RestParamsUtils.paramsTranferBody(params);
         return this;
     }
     public final RestClientBuilder onRequest(IRequest iRequest) {
