@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v7.widget.AppCompatTextView
+
+    <com.longfor.channelmanager.common.view.commonheadview.CommonHeadView
+        android:id="@+id/index_statistics_head"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:layout_alignParentTop="true">
+
+    </com.longfor.channelmanager.common.view.commonheadview.CommonHeadView>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="这是数+"
-        />
-</android.support.v7.widget.LinearLayoutCompat>
+        android:layout_below="@+id/index_statistics_head"
+        android:gravity="center">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_statistics_check_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/statistics_check_in"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_statistics_query_attendance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_statistics_check_in"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            android:src="@mipmap/statistics_query_attendance"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
