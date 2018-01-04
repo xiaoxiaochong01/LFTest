@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.longfor.channelmanager.common.view.commonheadview.CommonHeadView
         android:id="@+id/header_query_attendance"
@@ -13,12 +13,14 @@
     </com.longfor.channelmanager.common.view.commonheadview.CommonHeadView>
 
     <android.support.design.widget.TabLayout
+        android:id="@+id/tl_query_attendance"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height">
 
     </android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager
+        android:id="@+id/vp_query_attendance"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

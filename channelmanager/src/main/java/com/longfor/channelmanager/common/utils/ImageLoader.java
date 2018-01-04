@@ -21,8 +21,8 @@ public class ImageLoader {
     public static void display(Context context, ImageView imageView, String path, int loadResId, int errorResId) {
         Glide.with(context)
                 .load(path)
-                .placeholder(loadResId)
-                .error(errorResId)
+//                .placeholder(loadResId)
+//                .error(errorResId)
                 .into(imageView);
     }
 

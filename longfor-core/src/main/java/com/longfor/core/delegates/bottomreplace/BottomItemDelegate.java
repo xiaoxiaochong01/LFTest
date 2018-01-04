@@ -19,7 +19,12 @@ public abstract class BottomItemDelegate extends LongForDelegate {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-
+        if (!(getActivity() instanceof BackHandledInterface)) {
+            throw new ClassCastException(
+                    "Hosting Activity must implement BackHandledInterface");
+        } else {
+            this.mBackHandledInterface = (BackHandledInterface) getActivity();
+        }
     }
 
     @Override

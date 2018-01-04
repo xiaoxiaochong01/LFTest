@@ -12,13 +12,12 @@ import com.longfor.core.net.callback.ISuccess;
 import com.longfor.ui.recycler.DataConverter;
 import com.longfor.ui.recycler.MultipleRecyclerAdapter;
 
-import org.greenrobot.greendao.database.Database;
-
 /**
  * Created by zhanghaitao1 on 2017/12/25.
  */
 
-public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener,
+public class RefreshHandler implements
+        SwipeRefreshLayout.OnRefreshListener,
         BaseQuickAdapter.RequestLoadMoreListener {
 
     private final SwipeRefreshLayout REFRESH_LAYOUT;
