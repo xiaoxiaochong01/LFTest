@@ -1,9 +1,6 @@
 package com.longfor.core.net;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.util.Log;
 
 import com.longfor.core.R;
 import com.longfor.core.app.LongFor;
@@ -21,7 +18,6 @@ import com.longfor.core.utils.net.NetUtils;
 import com.longfor.core.utils.toast.ToastUtils;
 
 import java.io.File;
-import java.util.Map;
 import java.util.WeakHashMap;
 
 import okhttp3.MediaType;

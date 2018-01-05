@@ -17,7 +17,7 @@ import java.io.File;
  * @date: 2018/1/3
  * @function:
  */
-public class GlideImageLoader implements ImageLoader {
+public class PickerImageLoader implements ImageLoader {
 
     private static final RequestOptions GLIDE_OPTIONS =
             new RequestOptions()

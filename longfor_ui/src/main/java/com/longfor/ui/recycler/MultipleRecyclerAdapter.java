@@ -13,6 +13,7 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.longfor.ui.R;
 import com.longfor.ui.banner.BannerCreator;
+import com.longfor.ui.bean.InnerCheckinsBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +60,7 @@ public class MultipleRecyclerAdapter extends
         addItemType(ItemType.IMAGE, R.layout.item_multiple_image);
         addItemType(ItemType.TEXT_IMAGE, R.layout.item_multiple_image_text);
         addItemType(ItemType.BANNER, R.layout.item_multiple_banner);
+        addItemType(ItemType.QUERY_ATTENDANCE, R.layout.item_query_attendance);
 
         setSpanSizeLookup(this);
         openLoadAnimation();
@@ -105,6 +107,12 @@ public class MultipleRecyclerAdapter extends
                     BannerCreator.setDefault(convenientBanner, bannerImages, this);
                     mIsInitBanner = true;
                 }
+                break;
+            case ItemType.QUERY_ATTENDANCE:
+                String employName = (String) entity.getField(MultipleFields.EMPLOYEE_NAME);
+                List<String> workAddress = (List<String>) entity.getField(MultipleFields.WORK_ADDRESSES);
+                List<InnerCheckinsBean> innerCheckinsBeanList = (List<InnerCheckinsBean>) entity.getField(MultipleFields.INNER_CHECK_INS);
+                holder.setText(R.id.tv_name,employName);
                 break;
         }
     }

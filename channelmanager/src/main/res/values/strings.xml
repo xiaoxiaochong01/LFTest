@@ -57,4 +57,16 @@
     <string name="recommend_your_code">您的推荐码</string>
     <!--推荐 end-->
     <!-- 我的 end-->
+
+    <!--实习生角色 begin-->
+    <string name="trainee_role_show_get_num">外展</string>
+    <string name="trainee_role_expand_get_num">外拓</string>
+    <string name="trainee_role_show_and_expand_call_num">外展外拓追电</string>
+    <string name="trainee_role_call_get_num">外呼陌电</string>
+    <string name="trainee_role_call_call_num">外呼追电</string>
+    <string name="off_duty">下班</string>
+    <string name="on_duty">上班</string>
+    <string name="name">姓名</string>
+    <string name="position">地点</string>
+    <!--实习生角色 end-->
 </resources>
