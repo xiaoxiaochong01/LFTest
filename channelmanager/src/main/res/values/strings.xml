@@ -53,6 +53,9 @@
     <string name="feed_back_title">反馈意见</string>
     <string name="feed_back_list">反馈列表</string>
     <!--反馈意见 end-->
+    <!--推荐 begin-->
+    <string name="recommend_your_code">您的推荐码</string>
+    <!--推荐 end-->
     <!-- 我的 end-->
 
     <!--实习生角色 begin-->

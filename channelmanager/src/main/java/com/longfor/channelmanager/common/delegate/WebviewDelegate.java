@@ -39,8 +39,8 @@ public class WebviewDelegate extends LongForDelegate {
         if(bundle != null) {
             String leftText = bundle.getString(Constant.TITLE_LEFT_TEXT);
             if(!TextUtils.isEmpty(leftText)) {
-                mHeadView.setLeftTitleVisiable(true);
-                mHeadView.setLeftTitle(leftText);
+                mHeadView.setLeftMsgVisiable(true);
+                mHeadView.setLeftMsg(leftText);
             }
             String title = bundle.getString(Constant.WEB_TITLE);
             mHeadView.setTitle(title);
