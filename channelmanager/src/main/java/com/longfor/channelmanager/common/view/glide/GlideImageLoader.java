@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.longfor.channelmanager.R;
 import com.lzy.imagepicker.loader.ImageLoader;
 
@@ -16,14 +18,19 @@ import java.io.File;
  * @function:
  */
 public class GlideImageLoader implements ImageLoader {
+
+    private static final RequestOptions GLIDE_OPTIONS =
+            new RequestOptions()
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .dontAnimate()
+                    .placeholder(R.mipmap.default_image)
+                    .error(R.mipmap.default_image);
     @Override
     public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
         Glide.with(activity)
                 .load(Uri.fromFile(new File(path)))
-                .placeholder(R.mipmap.default_image)
-                .error(R.mipmap.default_image)
-                .dontAnimate()
-                .centerCrop()
+                .apply(GLIDE_OPTIONS)
                 .into(imageView);
     }
 

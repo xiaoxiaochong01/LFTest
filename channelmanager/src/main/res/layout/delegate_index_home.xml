@@ -69,42 +69,52 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ScrollView
-            android:id="@+id/sv_group_home"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/srl_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <LinearLayout
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_home"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingBottom="20dp">
+                android:layout_height="match_parent" />
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <!--<ScrollView-->
+            <!--android:id="@+id/sv_group_home"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="20dp">-->
 
-                <!--<com.youth.banner.Banner-->
-                    <!--app:indicator_drawable_selected="@mipmap/icon_point_true"-->
-                    <!--app:indicator_drawable_unselected="@mipmap/icon_point_false"-->
-                    <!--app:indicator_width="8dp"-->
-                    <!--app:indicator_height="8dp"-->
-                    <!--app:indicator_margin="3dp"-->
-                    <!--app:banner_default_image="@mipmap/default_banner"-->
-                    <!--app:image_scale_type="center_crop"-->
-                    <!--android:id="@+id/banner"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="170dp" />-->
+                <!--&lt;!&ndash;<com.youth.banner.Banner&ndash;&gt;-->
+                    <!--&lt;!&ndash;app:indicator_drawable_selected="@mipmap/icon_point_true"&ndash;&gt;-->
+                    <!--&lt;!&ndash;app:indicator_drawable_unselected="@mipmap/icon_point_false"&ndash;&gt;-->
+                    <!--&lt;!&ndash;app:indicator_width="8dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;app:indicator_height="8dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;app:indicator_margin="3dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;app:banner_default_image="@mipmap/default_banner"&ndash;&gt;-->
+                    <!--&lt;!&ndash;app:image_scale_type="center_crop"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/banner"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="170dp" />&ndash;&gt;-->
 
-                <!--<com.longfor.channelmanager.views.ListViewForScrollView-->
-                    <!--android:id="@+id/lv_features"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:divider="@color/transparent"-->
-                    <!--android:scrollbars="none"-->
-                    <!--android:listSelector="@color/transparent"-->
-                    <!--&gt;-->
+                <!--&lt;!&ndash;<com.longfor.channelmanager.views.ListViewForScrollView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/lv_features"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:divider="@color/transparent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:scrollbars="none"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:listSelector="@color/transparent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;&gt;&ndash;&gt;-->
 
-                <!--</com.longfor.channelmanager.views.ListViewForScrollView>-->
+                <!--&lt;!&ndash;</com.longfor.channelmanager.views.ListViewForScrollView>&ndash;&gt;-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
-        </ScrollView>
+        <!--</ScrollView>-->
         <LinearLayout
             android:id="@+id/ll_group_project"
             android:layout_width="match_parent"
