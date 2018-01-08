@@ -12,6 +12,7 @@ public interface Constant {
     String WEB_TITLE = "web_view_title";
 
     String EMPLOYEE_ID = "employeeId";
+    String PROJECT_ID = "projectId";
 
     /** 权限请求Code */
     int REQUEST_WRITE_CODE = 0xefff;

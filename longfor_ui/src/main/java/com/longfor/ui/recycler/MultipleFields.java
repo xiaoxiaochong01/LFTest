@@ -6,12 +6,14 @@ package com.longfor.ui.recycler;
 
 public enum MultipleFields {
     ITEM_TYPE,
-    TITLE,
-    TEXT,
-    IMAGE_URL,
     BANNERS,
     SPAN_SIZE,
     ID,
+    OBJECTS,
+    OBJECT,
+    TITLE,
+    TEXT,
+    IMAGE_URL,
     NAME,
     TAG,
     EMPLOYEE_NAME,

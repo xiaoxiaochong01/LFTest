@@ -1,4 +1,4 @@
-package com.longfor.channelmanager.common.view.glide;
+package com.longfor.channelmanager.common.utils;
 
 import android.app.Activity;
 import android.net.Uri;

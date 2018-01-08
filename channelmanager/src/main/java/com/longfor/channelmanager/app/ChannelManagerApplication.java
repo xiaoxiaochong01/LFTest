@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.longfor.channelmanager.R;
-import com.longfor.channelmanager.common.view.glide.GlideImageLoader;
+import com.longfor.channelmanager.common.utils.PickerImageLoader;
 import com.longfor.channelmanager.database.DatabaseManager;
 import com.longfor.core.app.LongFor;
 import com.longfor.core.net.interceptors.DebugInterceptor;
@@ -48,7 +48,7 @@ public class ChannelManagerApplication extends Application {
      */
     private void initImagePicker() {
         ImagePicker imagePicker = ImagePicker.getInstance();
-        imagePicker.setImageLoader(new GlideImageLoader());
+        imagePicker.setImageLoader(new PickerImageLoader());
         imagePicker.setShowCamera(false);
         imagePicker.setCrop(false);
         imagePicker.setSaveRectangle(true);

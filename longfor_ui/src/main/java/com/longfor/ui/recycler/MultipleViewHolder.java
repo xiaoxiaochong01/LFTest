@@ -1,6 +1,7 @@
 package com.longfor.ui.recycler;
 
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -15,5 +16,10 @@ public class MultipleViewHolder extends BaseViewHolder{
 
     public static MultipleViewHolder creat(View view){
         return new MultipleViewHolder(view);
+    }
+
+    @Override
+    public BaseViewHolder setOnItemSelectedClickListener(int viewId, AdapterView.OnItemSelectedListener listener) {
+        return super.setOnItemSelectedClickListener(viewId, listener);
     }
 }

@@ -42,6 +42,7 @@
     <string name="mine_recommend">推荐</string>
     <string name="mine_feed_back">意见反馈</string>
     <string name="mine_setting">设置</string>
+    <string name="mine_home">首页</string>
 
     <!--关于我们 begin-->
     <string name="about_us_function_intro">功能介绍</string>

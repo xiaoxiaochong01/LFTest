@@ -42,6 +42,7 @@ public class RestClientBuilder {
 
     public final RestClientBuilder url(String url) {
         this.mUrl = url;
+        LogUtils.e("Http","url:"+mUrl);
         return this;
     }
 
@@ -86,7 +87,7 @@ public class RestClientBuilder {
     }
 
     public final RestClientBuilder raw(Map<String, String> params) {
-        LogUtils.e("Http","url:"+mUrl+"---params:"+ JSON.toJSONString(params));
+        LogUtils.e("Http","---params:"+ JSON.toJSONString(params));
         this.mRequestbody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), RestParamsUtils.paramsTransferJson(params));
         return this;
     }

@@ -66,4 +66,5 @@ public class DatabaseManager {
     public static String getEmployeeId() {
         return getUserProfile().getEmployeeId()+"";
     }
+    public static String getProjectId() { return getUserProfile().getProjectId()+"";}
 }

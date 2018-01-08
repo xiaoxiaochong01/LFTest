@@ -34,4 +34,10 @@ public interface ConstantMain {
     String URL_STUDENT_HEAD_IMG = "student/updateAvatar";//大学生-个人头像上传
     String HEAD_PORTRAIT = "avatar";
     /** ---------------------上传头像图片相关 end-------------------------*/
+
+    /** ---------------------Home页接口相关 begin-------------------------*/
+    String URL_HOME_PAGE = "channelManager/homepage";//首页接口
+    String URL_GET_PROJECTS = "channelManager/getProjects";//渠道专员 - 获取项目列表接口
+    String URL_STUDENT_UNREAD_MESSAGE_COUNT = "employee/unReadMessageCount";//实习生、渠道专员-未读消息
+    /** ---------------------Home页接口相关 end-------------------------*/
 }

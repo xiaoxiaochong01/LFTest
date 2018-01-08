@@ -15,16 +15,22 @@ import com.longfor.core.utils.toast.ToastUtils;
 public abstract class BaseSuccessListener implements ISuccess {
     @Override
     public void onSuccess(String response) {
-        BaseResponse baseResponse = JSON.parseObject(response, BaseResponse.class);
-        if(baseResponse == null) {
+        try {
+            BaseResponse baseResponse = JSON.parseObject(response, BaseResponse.class);
+            if(baseResponse == null) {
+                ToastUtils.showMessage(LongFor.getApplicationContext(), R.string.data_parsing_error);
+                return;
+            }
+            if(baseResponse.getCode() != 0) {
+                ToastUtils.showMessage(LongFor.getApplicationContext(), baseResponse.getMessage());
+                return;
+            }
+            success(response);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
             ToastUtils.showMessage(LongFor.getApplicationContext(), R.string.data_parsing_error);
-            return;
         }
-        if(baseResponse.getCode() != 0) {
-            ToastUtils.showMessage(LongFor.getApplicationContext(), baseResponse.getMessage());
-            return;
-        }
-        success(response);
     }
 
      public abstract void success(String response);

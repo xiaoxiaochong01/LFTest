@@ -39,4 +39,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     implementation project(':longfor-ec')
     compile 'com.lzy.widget:imagepicker:0.5.5'
+    compile 'com.zhy:base-rvadapter:3.0.3'
 }

@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class IndexDataConverter extends DataConverter {
 
-
     @Override
     public ArrayList<MultipleItemEntity> convert() {
         final JSONArray dataArray = JSON.parseObject(getJsonData()).getJSONArray("data");
