@@ -67,7 +67,8 @@ public class QueryAttendanceRefreshHandler implements
     public void firstPage(String roleType) {
         BEAN.setDelayed(1000);
         mEmployeeId = DatabaseManager.getEmployeeId();
-        mProjectId = DatabaseManager.getUserProfile().getProjectId();
+        mProjectId = "80B03281-B931-4838-AEAD-EE2BA11DF224";
+//        mProjectId = DatabaseManager.getUserProfile().getProjectId();
         mRoleType = roleType;
         Map<String, String> map = new HashMap<>();
         map.put(ConstantQueryAttendance.EMPLOYEE_ID, mEmployeeId);

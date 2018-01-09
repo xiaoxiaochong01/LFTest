@@ -45,7 +45,7 @@ public class QueryAttendanceSubDelegate extends LongForDelegate {
         mRefreshHandler = QueryAttendanceRefreshHandler.creat(mSrlQueryAttendance, mRvQueryAttendance, new QueryAttendanceConverter());
         initRefreshLayout();
         initRecyclerView();
-        roleType="1";
+        roleType="5";
         mRefreshHandler.firstPage(roleType);
     }
 
