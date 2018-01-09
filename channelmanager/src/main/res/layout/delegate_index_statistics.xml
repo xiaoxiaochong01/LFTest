@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.longfor.channelmanager.common.view.commonheadview.CommonHeadView
+    <com.longfor.channelmanager.common.view.CommonHeadView
         android:id="@+id/index_statistics_head"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
         android:layout_alignParentTop="true">
 
-    </com.longfor.channelmanager.common.view.commonheadview.CommonHeadView>
+    </com.longfor.channelmanager.common.view.CommonHeadView>
 
     <RelativeLayout
         android:layout_width="match_parent"

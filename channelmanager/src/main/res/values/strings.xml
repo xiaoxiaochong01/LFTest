@@ -70,4 +70,21 @@
     <string name="name">姓名</string>
     <string name="position">地点</string>
     <!--实习生角色 end-->
+
+    <!-- 渠道平台 begin-->
+
+    <string name="channel_platform_title">渠道平台</string>
+    <string name="channel_platform_student_client_list">实习生客户列表</string>
+    <string name="channel_platform_broker_list">经纪人客户列表</string>
+    <string name="channel_platform_team_report">团队战报</string>
+    <string name="channel_platform_performance">战绩榜</string>
+    <string name="channel_platform_arrange_work">排班</string>
+    <string name="channel_platform_client_list">客户列表</string>
+    <!-- 渠道平台 end-->
+    <!--客户列表 begin-->
+    <string name="all">全部</string>
+    <string name="first_floor">一级</string>
+    <string name="second_floor">二级</string>
+    <string name="subscribe">认购</string>
+    <!--客户列表 end-->
 </resources>

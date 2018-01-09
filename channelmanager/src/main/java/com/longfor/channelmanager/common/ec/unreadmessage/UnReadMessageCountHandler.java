@@ -5,8 +5,6 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.database.DatabaseManager;
-import com.longfor.channelmanager.main.bean.UnReadMsgBean;
-import com.longfor.channelmanager.main.index.mine.ConstantMine;
 import com.longfor.core.net.RestClient;
 import com.longfor.core.net.callback.IError;
 import com.longfor.core.net.callback.ISuccess;

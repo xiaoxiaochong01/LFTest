@@ -10,7 +10,7 @@ import android.webkit.WebView;
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.common.ec.Constant;
-import com.longfor.channelmanager.common.view.commonheadview.CommonHeadView;
+import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.core.delegates.LongForDelegate;
 
 import butterknife.BindView;

@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.common.ec.Constant;
-import com.longfor.channelmanager.common.view.commonheadview.CommonHeadView;
+import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.channelmanager.database.DatabaseManager;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendancePagerAdapter;
 import com.longfor.core.delegates.LongForDelegate;

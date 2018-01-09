@@ -6,6 +6,7 @@
     <!-- 公共颜色库 begin-->
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="translucence_99">#99000000</color>
 
     <color name="common_dividing_line">#eeeeee</color>
     <color name="common_head_view_bg">#fafafa</color>
@@ -31,6 +32,7 @@
     <!--首页模块 end-->
 
     <color name="alpha_0.8_black">#cc000000</color>
+    <color name="alpha">#00ffffff</color>
     <color name="trans_gray_3">#80333333</color>
     <color name="black_03">#030303</color>
     <color name="gray_4a">#4a4a4a</color>

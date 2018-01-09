@@ -1,4 +1,4 @@
-package com.longfor.channelmanager.main.bean;
+package com.longfor.channelmanager.common.ec.unreadmessage;
 
 import com.longfor.core.bean.BaseResponse;
 

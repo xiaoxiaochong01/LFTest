@@ -67,4 +67,10 @@ public class DatabaseManager {
         return getUserProfile().getEmployeeId()+"";
     }
     public static String getProjectId() { return getUserProfile().getProjectId()+"";}
+    public static void updateProject(String projectId, String projectName) {
+        UserProfile userProfile = getUserProfile();
+        userProfile.setProjectId(projectId);
+        userProfile.setProjectName(projectName);
+        getInstance().getDao().update(userProfile);
+    }
 }
