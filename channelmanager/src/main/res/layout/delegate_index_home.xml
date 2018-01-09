@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_f8"
     android:orientation="vertical">
     <!-- 标头栏-->
     <RelativeLayout
+        android:id="@+id/rl_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height">
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_project_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,7 +26,7 @@
             android:maxLines="1"
             />
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -39,14 +40,14 @@
             android:layout_height="@dimen/title_height"
             android:layout_alignParentRight="true">
 
-            <ImageView
+            <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/img_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:src="@mipmap/home_message_icon" />
 
-            <ImageView
+            <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/img_message_dot"
                 android:layout_width="5dp"
                 android:layout_height="5dp"
@@ -57,84 +58,87 @@
 
         </RelativeLayout>
 
-        <View
+        <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/gray_e0"
             android:layout_alignParentBottom="true"
             />
     </RelativeLayout>
-
-    <RelativeLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_home"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <!--<ScrollView-->
-            <!--android:id="@+id/sv_group_home"-->
+        android:layout_height="match_parent" />
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/rv_home"-->
             <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent">-->
-            <!--<LinearLayout-->
+            <!--android:layout_height="match_parent" />-->
+        <!--&lt;!&ndash;<ScrollView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/sv_group_home"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="match_parent">&ndash;&gt;-->
+            <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:orientation="vertical"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:paddingBottom="20dp">&ndash;&gt;-->
+
+                <!--&lt;!&ndash;&lt;!&ndash;<com.youth.banner.Banner&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;app:indicator_drawable_selected="@mipmap/icon_point_true"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;app:indicator_drawable_unselected="@mipmap/icon_point_false"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;app:indicator_width="8dp"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;app:indicator_height="8dp"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;app:indicator_margin="3dp"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;app:banner_default_image="@mipmap/default_banner"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;app:image_scale_type="center_crop"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:id="@+id/banner"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="170dp" />&ndash;&gt;&ndash;&gt;-->
+
+                <!--&lt;!&ndash;&lt;!&ndash;<com.longfor.channelmanager.views.ListViewForScrollView&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:id="@+id/lv_features"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:divider="@color/transparent"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:scrollbars="none"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:listSelector="@color/transparent"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+                <!--&lt;!&ndash;&lt;!&ndash;</com.longfor.channelmanager.views.ListViewForScrollView>&ndash;&gt;&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;</ScrollView>&ndash;&gt;-->
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ll_group_project"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical"-->
+            <!--android:visibility="gone"-->
+            <!--&gt;-->
+            <!--<ExpandableListView-->
+                <!--android:id="@+id/elv_project_home"-->
                 <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:orientation="vertical"-->
-                <!--android:paddingBottom="20dp">-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:groupIndicator="@null"-->
+                <!--android:dividerHeight="0.5dp"-->
+                <!--android:divider="@color/gray_e"-->
+                <!--android:childDivider="@color/gray_e"-->
+                <!--&gt;-->
 
-                <!--&lt;!&ndash;<com.youth.banner.Banner&ndash;&gt;-->
-                    <!--&lt;!&ndash;app:indicator_drawable_selected="@mipmap/icon_point_true"&ndash;&gt;-->
-                    <!--&lt;!&ndash;app:indicator_drawable_unselected="@mipmap/icon_point_false"&ndash;&gt;-->
-                    <!--&lt;!&ndash;app:indicator_width="8dp"&ndash;&gt;-->
-                    <!--&lt;!&ndash;app:indicator_height="8dp"&ndash;&gt;-->
-                    <!--&lt;!&ndash;app:indicator_margin="3dp"&ndash;&gt;-->
-                    <!--&lt;!&ndash;app:banner_default_image="@mipmap/default_banner"&ndash;&gt;-->
-                    <!--&lt;!&ndash;app:image_scale_type="center_crop"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:id="@+id/banner"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_height="170dp" />&ndash;&gt;-->
+            <!--</ExpandableListView>-->
 
-                <!--&lt;!&ndash;<com.longfor.channelmanager.views.ListViewForScrollView&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:id="@+id/lv_features"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:divider="@color/transparent"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:scrollbars="none"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:listSelector="@color/transparent"&ndash;&gt;-->
-                    <!--&lt;!&ndash;&gt;&ndash;&gt;-->
+            <!--<Button-->
+                <!--android:id="@+id/btn_out_project_item"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="#99000000"-->
+                <!--/>-->
+        <!--</LinearLayout>-->
 
-                <!--&lt;!&ndash;</com.longfor.channelmanager.views.ListViewForScrollView>&ndash;&gt;-->
-
-            <!--</LinearLayout>-->
-
-        <!--</ScrollView>-->
-        <LinearLayout
-            android:id="@+id/ll_group_project"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="gone"
-            >
-            <ExpandableListView
-                android:id="@+id/elv_project_home"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:groupIndicator="@null"
-                android:dividerHeight="0.5dp"
-                android:divider="@color/gray_e"
-                android:childDivider="@color/gray_e"
-                >
-
-            </ExpandableListView>
-
-            <Button
-                android:id="@+id/btn_out_project_item"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="#99000000"
-                />
-        </LinearLayout>
-
-    </RelativeLayout>
-</LinearLayout>
+    <!--</RelativeLayout>-->
+</android.support.v7.widget.LinearLayoutCompat>

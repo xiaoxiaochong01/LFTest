@@ -46,7 +46,7 @@ public class HomeRecyclerAdapter extends BaseRecyclerAdapter {
                 if(bannersBeans != null) {
                     List<String> urls = new ArrayList<>();
                     for(IHomePage.HomePageBean.DataBean.BannersBean bannersBean : bannersBeans) {
-                        urls.add(bannersBean.getBannerUrl());
+                        urls.add(bannersBean.getBannerImage());
                     }
                     ConvenientBanner mBanner = helper.getView(R.id.banner_recycler_item);
                     mBanner.setPages(new HolderCreator(), urls)

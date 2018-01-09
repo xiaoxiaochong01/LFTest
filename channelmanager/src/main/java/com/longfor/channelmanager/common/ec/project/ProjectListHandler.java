@@ -9,6 +9,7 @@ import com.longfor.channelmanager.database.DatabaseManager;
 import com.longfor.core.net.RestClient;
 import com.longfor.core.net.callback.IError;
 import com.longfor.core.net.callback.ISuccess;
+import com.longfor.core.utils.log.LogUtils;
 import com.longfor.core.utils.toast.ToastUtils;
 
 import java.util.HashMap;
@@ -21,18 +22,18 @@ import java.util.Map;
  */
 public class ProjectListHandler {
     private final Context CONTEXT;
-    private final IProjectList IPROJECT;
+    private final ISuccess IPROJECT;
 
-    public ProjectListHandler(Context context, IProjectList iProjectList) {
+    public ProjectListHandler(Context context, ISuccess iProjectList) {
         IPROJECT = iProjectList;
         CONTEXT = context;
     }
 
-    public static UnReadMessageCountHandler create(Context context, IUnReadMessageCount iUnReadMessageCount) {
-        return new UnReadMessageCountHandler(context, iUnReadMessageCount);
+    public static ProjectListHandler create(Context context, ISuccess iProjectList) {
+        return new ProjectListHandler(context, iProjectList);
     }
 
-    public void requestUnReadMessageCount() {
+    public void requestProjects() {
         Map<String, String> params = new HashMap<>();
         params.put(Constant.EMPLOYEE_ID, DatabaseManager.getEmployeeId());
         RestClient.builder()
@@ -41,9 +42,10 @@ public class ProjectListHandler {
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-//                        UnReadMsgBean unReadMsgBean = JSON.parseObject(response, UnReadMsgBean.class);
-//                        Iproject.callBack(unReadMsgBean.getData().getMsgCount());
-
+                        LogUtils.e("project", "response="+response);
+                        if(IPROJECT != null) {
+                            IPROJECT.onSuccess(response);
+                        }
                     }
                 })
                 .error(new IError() {
