@@ -7,5 +7,10 @@
     <ExpandableListView
         android:id="@+id/elv_projects"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:groupIndicator="@null"
+        android:dividerHeight="0.5dp"
+        android:divider="@color/gray_e"
+        android:childDivider="@color/gray_e"
+        />
 </android.support.v7.widget.LinearLayoutCompat>
