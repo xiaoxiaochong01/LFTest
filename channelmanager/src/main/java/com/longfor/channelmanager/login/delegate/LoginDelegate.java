@@ -15,7 +15,7 @@ import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.login.LoginHandler;
 import com.longfor.channelmanager.login.bean.LoginBean;
 import com.longfor.channelmanager.login.contants.ConstantLogin;
-import com.longfor.channelmanager.main.delegate.ChannelMainDelegate;
+import com.longfor.channelmanager.main.ChannelMainDelegate;
 import com.longfor.channelmanager.common.net.BaseSuccessListener;
 import com.longfor.core.bean.BaseResponse;
 import com.longfor.core.delegates.LongForDelegate;

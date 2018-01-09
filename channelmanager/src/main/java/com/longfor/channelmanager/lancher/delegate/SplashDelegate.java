@@ -19,7 +19,7 @@ import com.longfor.channelmanager.lancher.constants.ConstantLancher;
 import com.longfor.channelmanager.lancher.dialog.UpdateAppVersionDialog;
 import com.longfor.channelmanager.lancher.dialog.listener.OnUpdataVersionClickListener;
 import com.longfor.channelmanager.login.delegate.LoginVideoDelegate;
-import com.longfor.channelmanager.main.delegate.ChannelMainDelegate;
+import com.longfor.channelmanager.main.ChannelMainDelegate;
 import com.longfor.channelmanager.common.net.BaseSuccessListener;
 import com.longfor.core.app.AccountManager;
 import com.longfor.core.delegates.LongForDelegate;
