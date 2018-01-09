@@ -1,4 +1,4 @@
-package com.longfor.channelmanager.statistics.constants;
+package com.longfor.channelmanager.statistics.queryattendance.constants;
 
 /**
  * @author: gaomei

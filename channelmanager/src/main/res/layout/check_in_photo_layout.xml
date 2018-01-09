@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rl_check_in"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <com.longfor.channelmanager.views.CircleImageView
+        android:id="@+id/img_check_in_photo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        />
+
+    <ImageView
+        android:id="@+id/img_exception"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@mipmap/img_check_in_exception"
+        />
+
+</RelativeLayout>

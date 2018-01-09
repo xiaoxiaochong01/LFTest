@@ -16,7 +16,4 @@ public enum MultipleFields {
     IMAGE_URL,
     NAME,
     TAG,
-    EMPLOYEE_NAME,
-    WORK_ADDRESSES,
-    INNER_CHECK_INS,
 }

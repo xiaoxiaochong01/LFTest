@@ -1,4 +1,4 @@
-package com.longfor.channelmanager.statistics.delegate;
+package com.longfor.channelmanager.statistics.queryattendance.delegate;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,8 +12,8 @@ import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
-import com.longfor.channelmanager.statistics.adapter.QueryAttendanceConverter;
-import com.longfor.channelmanager.statistics.handler.QueryAttendanceRefreshHandler;
+import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceConverter;
+import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceRefreshHandler;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.ui.recycler.BaseDecoration;
 
@@ -22,7 +22,7 @@ import butterknife.BindView;
 /**
  * @author: gaomei
  * @date: 2018/1/4
- * @function:考勤查询子页面
+ * @function:考勤查询子页面-区分角色
  */
 
 public class QueryAttendanceSubDelegate extends LongForDelegate {

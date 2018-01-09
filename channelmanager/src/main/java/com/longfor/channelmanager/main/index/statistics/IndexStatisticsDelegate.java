@@ -10,7 +10,7 @@ import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.view.commonheadview.CommonHeadView;
-import com.longfor.channelmanager.statistics.delegate.QueryAttendanceDelegate;
+import com.longfor.channelmanager.statistics.queryattendance.delegate.QueryAttendanceDelegate;
 import com.longfor.core.delegates.bottomreplace.BottomItemDelegate;
 
 import butterknife.BindView;
