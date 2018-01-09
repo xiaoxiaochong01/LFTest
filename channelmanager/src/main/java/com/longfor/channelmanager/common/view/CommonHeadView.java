@@ -1,4 +1,4 @@
-package com.longfor.channelmanager.common.view.commonheadview;
+package com.longfor.channelmanager.common.view;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;

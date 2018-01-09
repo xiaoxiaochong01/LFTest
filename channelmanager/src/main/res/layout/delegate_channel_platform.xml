@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/gray_f4"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.longfor.channelmanager.common.view.CommonHeadView
+        android:id="@+id/channel_platform_head"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height">
+
+    </com.longfor.channelmanager.common.view.CommonHeadView>
+
+    <RelativeLayout
+        android:id="@+id/rl_group_student_customer_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/platform_item_height"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        >
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_student_customer_list"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/client_list_icon"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/img_student_customer_list"
+            android:layout_marginLeft="13dp"
+            android:textColor="@color/gray_3"
+            android:textSize="16sp"
+            android:text="@string/channel_platform_student_client_list"
+            />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/mine_more_icon"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            />
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/gray_e"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_group_broker_customer_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/platform_item_height"
+        android:background="@color/white"
+        android:visibility="gone"
+        >
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_broker_customer_list"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/img_broker_customer_list"
+            android:layout_marginLeft="13dp"
+            android:textColor="@color/gray_3"
+            android:textSize="16sp"
+            android:text="@string/channel_platform_broker_list"
+            />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/mine_more_icon"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_team_report"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/platform_item_height"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        >
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_team_report"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/platform_group_fight_report_ic"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="13dp"
+            android:layout_toRightOf="@+id/img_team_report"
+            android:text="@string/channel_platform_team_report"
+            android:textColor="@color/gray_3"
+            android:textSize="16sp" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/mine_more_icon" />
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/gray_e"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_performance"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/platform_item_height"
+        android:background="@color/white"
+        >
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_performance"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/platform_fight_record_list_ic"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/img_performance"
+            android:layout_marginLeft="13dp"
+            android:textColor="@color/gray_3"
+            android:textSize="16sp"
+            android:text="@string/channel_platform_performance"
+            />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/mine_more_icon"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/gray_e"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_arrange_work"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/platform_item_height"
+        android:background="@color/white"
+        >
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_arrange_work"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/platform_arrange_work"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/img_arrange_work"
+            android:layout_marginLeft="13dp"
+            android:textColor="@color/gray_3"
+            android:textSize="16sp"
+            android:text="@string/channel_platform_arrange_work"
+            />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/mine_more_icon"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            />
+    </RelativeLayout>
+
+</android.support.v7.widget.LinearLayoutCompat>

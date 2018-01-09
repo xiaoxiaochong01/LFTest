@@ -5,7 +5,7 @@
     android:background="@color/gray_f4"
     android:orientation="vertical"
     >
-    <com.longfor.channelmanager.common.view.commonheadview.CommonHeadView
+    <com.longfor.channelmanager.common.view.CommonHeadView
         android:id="@+id/recommend_head"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"/>

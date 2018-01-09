@@ -23,6 +23,7 @@ import com.longfor.channelmanager.common.ec.project.popupwindow.ProjectsPopWindo
 import com.longfor.channelmanager.common.ec.unreadmessage.IUnReadMessageCount;
 import com.longfor.channelmanager.common.ec.unreadmessage.UnReadMessageCountHandler;
 import com.longfor.channelmanager.database.DatabaseManager;
+import com.longfor.channelmanager.platform.ChannelPlatformDelegate;
 import com.longfor.core.delegates.bottomreplace.BottomItemDelegate;
 import com.longfor.core.utils.toast.ToastUtils;
 import com.longfor.ui.recycler.BaseDecoration;
@@ -98,11 +99,15 @@ public class IndexHomeDelegate extends BottomItemDelegate implements IUnReadMess
 
     @Override
     public void OnItemClickListener(boolean isPlatform, HomePageBean.DataBean.FeatureInfo featureInfo) {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.TITLE_LEFT_TEXT, getResources().getString(R.string.mine_home));
         if (isPlatform) {
-            ToastUtils.showMessage(getContext(), "渠道平台");
+//            ToastUtils.showMessage(getContext(), "渠道平台");
+            ChannelPlatformDelegate delegate = new ChannelPlatformDelegate();
+            delegate.setArguments(bundle);
+            getParentDelegate().start(delegate);
+
         } else {
-            Bundle bundle = new Bundle();
-            bundle.putString(Constant.TITLE_LEFT_TEXT, getResources().getString(R.string.mine_home));
             bundle.putString(Constant.WEB_URL, featureInfo.getFeatureUrl());
             bundle.putString(Constant.WEB_TITLE, featureInfo.getFeatureUrl());
             WebviewDelegate delegate = new WebviewDelegate();

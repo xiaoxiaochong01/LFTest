@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class HomeRecyclerAdapter extends BaseRecyclerAdapter {
     IHomePage IHOME_PAGE;
+
     public HomeRecyclerAdapter(List<MultipleItemEntity> data, IHomePage iHomePage) {
         super(data);
         IHOME_PAGE = iHomePage;
