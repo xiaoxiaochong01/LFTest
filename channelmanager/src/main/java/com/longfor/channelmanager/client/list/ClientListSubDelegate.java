@@ -40,7 +40,7 @@ public class ClientListSubDelegate extends LongForDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        mRefreshHandler = QueryAttendanceRefreshHandler.creat(srlClientList, rvClientSub, new QueryAttendanceConverter());
+        mRefreshHandler = QueryAttendanceRefreshHandler.create(srlClientList, rvClientSub, new QueryAttendanceConverter());
         initRefreshLayout();
         initRecyclerView();
         roleType="1";

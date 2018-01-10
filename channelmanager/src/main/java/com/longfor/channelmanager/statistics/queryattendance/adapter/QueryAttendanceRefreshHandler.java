@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.database.DatabaseManager;
 import com.longfor.channelmanager.statistics.queryattendance.constants.ConstantQueryAttendance;
 import com.longfor.core.app.LongFor;
@@ -48,9 +49,9 @@ public class QueryAttendanceRefreshHandler implements
         REFRESH_LAYOUT.setOnRefreshListener(this);
     }
 
-    public static QueryAttendanceRefreshHandler creat(SwipeRefreshLayout swipeRefreshLayout,
-                                                      RecyclerView recyclerView,
-                                                      DataConverter converter) {
+    public static QueryAttendanceRefreshHandler create(SwipeRefreshLayout swipeRefreshLayout,
+                                                       RecyclerView recyclerView,
+                                                       DataConverter converter) {
         return new QueryAttendanceRefreshHandler(swipeRefreshLayout, new PagingBean(), recyclerView, converter);
     }
 
@@ -65,17 +66,17 @@ public class QueryAttendanceRefreshHandler implements
         }, 2000);
     }
 
-    public void firstPage(String roleType) {
+    public void firstPage(String roleType, String projectId) {
         BEAN.setDelayed(1000);
         mEmployeeId = DatabaseManager.getEmployeeId();
-        mProjectId = "80B03281-B931-4838-AEAD-EE2BA11DF224";
         mRoleType = roleType;
+        mProjectId = projectId;
         Map<String, String> map = new HashMap<>();
-        map.put(ConstantQueryAttendance.EMPLOYEE_ID, mEmployeeId);
-        map.put(ConstantQueryAttendance.PROJECT_ID, mProjectId);
-        map.put(ConstantQueryAttendance.ROLE_TYPE, mRoleType);
-        map.put(ConstantQueryAttendance.CURRENT_PAGE, String.valueOf(1));
-        map.put(ConstantQueryAttendance.PAGE_SIZE, String.valueOf(20));
+        map.put(Constant.EMPLOYEE_ID, mEmployeeId);
+        map.put(Constant.PROJECT_ID, mProjectId);
+        map.put(Constant.ROLE_TYPE, mRoleType);
+        map.put(Constant.CURRENT_PAGE, String.valueOf(1));
+        map.put(Constant.PAGE_SIZE, String.valueOf(20));
         RestClient.builder()
                 .url(ConstantQueryAttendance.URL_GET_CHECK_IN_LIST)
                 .raw(map)
@@ -109,11 +110,11 @@ public class QueryAttendanceRefreshHandler implements
             mAdapter.loadMoreEnd(true);
         } else {
             final Map<String, String> map = new HashMap<>();
-            map.put(ConstantQueryAttendance.EMPLOYEE_ID, mEmployeeId);
-            map.put(ConstantQueryAttendance.PROJECT_ID, mProjectId);
-            map.put(ConstantQueryAttendance.ROLE_TYPE, mRoleType);
-            map.put(ConstantQueryAttendance.CURRENT_PAGE, String.valueOf(index));
-            map.put(ConstantQueryAttendance.PAGE_SIZE, String.valueOf(20));
+            map.put(Constant.EMPLOYEE_ID, mEmployeeId);
+            map.put(Constant.PROJECT_ID, mProjectId);
+            map.put(Constant.ROLE_TYPE, mRoleType);
+            map.put(Constant.CURRENT_PAGE, String.valueOf(index));
+            map.put(Constant.PAGE_SIZE, String.valueOf(20));
             LongFor.getHandler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
