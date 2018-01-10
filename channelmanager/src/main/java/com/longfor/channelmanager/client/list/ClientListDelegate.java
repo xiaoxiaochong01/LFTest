@@ -1,4 +1,4 @@
-package com.longfor.channelmanager.client;
+package com.longfor.channelmanager.client.list;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

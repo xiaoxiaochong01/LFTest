@@ -65,4 +65,9 @@ public final class PagingBean {
         mPageIndex++;
         return this;
     }
+
+    public PagingBean resetPageIndex() {
+        mPageIndex=0;
+        return this;
+    }
 }

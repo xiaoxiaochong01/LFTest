@@ -1,4 +1,4 @@
-package com.longfor.channelmanager.client;
+package com.longfor.channelmanager.client.list;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -53,11 +54,11 @@ public class ClientListSubDelegate extends LongForDelegate {
     }
 
     private void initRecyclerView() {
-        LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        final GridLayoutManager manager = new GridLayoutManager(getContext(), 1);
         final Context context = getContext();
         rvClientSub.setLayoutManager(manager);
         if (context != null) {
-            rvClientSub.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, com.longfor.ec.R.color.app_background), 5));
+            rvClientSub.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, R.color.app_background), 5));
         }
     }
 

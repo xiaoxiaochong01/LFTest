@@ -59,7 +59,7 @@ public class HomeRecyclerAdapter extends BaseRecyclerAdapter {
                                     }
                                 }
                             })
-                            .setCanLoop(false);
+                            .setCanLoop(true);
                     mBanner.startTurning(2000);
                 }
                 break;
