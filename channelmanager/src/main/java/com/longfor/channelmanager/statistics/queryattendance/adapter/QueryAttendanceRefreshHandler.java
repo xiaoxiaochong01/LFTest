@@ -13,7 +13,6 @@ import com.longfor.core.app.LongFor;
 import com.longfor.core.net.RestClient;
 import com.longfor.core.net.callback.ISuccess;
 import com.longfor.ui.recycler.DataConverter;
-import com.longfor.ui.recycler.MultipleRecyclerAdapter;
 import com.longfor.ui.refresh.PagingBean;
 
 import java.util.HashMap;
@@ -32,7 +31,7 @@ public class QueryAttendanceRefreshHandler implements
     private final SwipeRefreshLayout REFRESH_LAYOUT;
     private final PagingBean BEAN;
     private final RecyclerView RECYCLERVIEW;
-    private MultipleRecyclerAdapter mAdapter = null;
+    private QueryAttendanceRvAdapter mAdapter = null;
     private final DataConverter CONVERTER;
     private String mEmployeeId;
     private String mProjectId;
@@ -70,7 +69,6 @@ public class QueryAttendanceRefreshHandler implements
         BEAN.setDelayed(1000);
         mEmployeeId = DatabaseManager.getEmployeeId();
         mProjectId = "80B03281-B931-4838-AEAD-EE2BA11DF224";
-//        mProjectId = DatabaseManager.getUserProfile().getProjectId();
         mRoleType = roleType;
         Map<String, String> map = new HashMap<>();
         map.put(ConstantQueryAttendance.EMPLOYEE_ID, mEmployeeId);
@@ -91,7 +89,7 @@ public class QueryAttendanceRefreshHandler implements
                         }
                         BEAN.setTotal(totals).setPageSize(20);
                         //设置adapter
-                        mAdapter = MultipleRecyclerAdapter.creat(CONVERTER.setJsonData(response));
+                        mAdapter = QueryAttendanceRvAdapter.create(CONVERTER.setJsonData(response));
                         mAdapter.setOnLoadMoreListener(QueryAttendanceRefreshHandler.this, RECYCLERVIEW);
                         RECYCLERVIEW.setAdapter(mAdapter);
                         BEAN.setCurrentCount(mAdapter.getData().size());

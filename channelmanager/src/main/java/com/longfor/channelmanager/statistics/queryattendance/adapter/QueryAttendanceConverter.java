@@ -19,7 +19,7 @@ public class QueryAttendanceConverter extends DataConverter {
     @Override
     public ArrayList<MultipleItemEntity> convert() {
         ArrayList<MultipleItemEntity> entities=new ArrayList<>();
-        List<CheckInListBean.CheckInListData.EmplyoeeCheckinsInfo> checkins = JSON.parseObject(getJsonData(), CheckInListBean.class).getData().getCheckins();
+        List<CheckInListBean.DataBean.CheckinsBean> checkins = JSON.parseObject(getJsonData(), CheckInListBean.class).getData().getCheckins();
         if (checkins!=null){
             for (int i = 0; i < checkins.size(); i++) {
                 final MultipleItemEntity entity = MultipleItemEntity.builder()

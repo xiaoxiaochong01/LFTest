@@ -11,23 +11,29 @@ import java.util.List;
  */
 
 public class CheckInListBean extends BaseResponse{
-    private CheckInListData data;
 
-    public CheckInListData getData() {
+    /**
+     * data : {"totals":2,"checkins":[{"employeeName":"高美","workAddresses":["北京市北京市朝阳区安定路11号(上午)","北京市北京市朝阳区安定路11号(下午)","北京市北京市朝阳区安定路11号(晚上)"],"innerCheckins":[{"arriveStatus":2,"leaveImageUrl":"","arriveImageUrl":"http://192.168.36.101:8080//pic/2018-01-10/98141_1515549461788.jpg","leaveStatus":3}]},{"employeeName":"测试高大美","workAddresses":["北京市北京市朝阳区安定路11号(下午)","北京市北京市朝阳区安定路11号(晚上)"],"innerCheckins":[{"arriveStatus":0,"leaveImageUrl":"","arriveImageUrl":"http://192.168.36.101:8080//pic/2018-01-10/98267_1515549706861.jpg","leaveStatus":3}]}]}
+     */
+
+    private DataBean data;
+
+    public DataBean getData() {
         return data;
     }
 
-    public void setData(CheckInListData data) {
+    public void setData(DataBean data) {
         this.data = data;
     }
 
-    public static class CheckInListData {
+    public static class DataBean {
         /**
-         * "totals":90,   //一共有多少条考勤记录，用于分页判断
-         * "checkins": []  //分页每页请求多少条数据，有的话数组中就返回多少个元素
+         * totals : 2
+         * checkins : [{"employeeName":"高美","workAddresses":["北京市北京市朝阳区安定路11号(上午)","北京市北京市朝阳区安定路11号(下午)","北京市北京市朝阳区安定路11号(晚上)"],"innerCheckins":[{"arriveStatus":2,"leaveImageUrl":"","arriveImageUrl":"http://192.168.36.101:8080//pic/2018-01-10/98141_1515549461788.jpg","leaveStatus":3}]},{"employeeName":"测试高大美","workAddresses":["北京市北京市朝阳区安定路11号(下午)","北京市北京市朝阳区安定路11号(晚上)"],"innerCheckins":[{"arriveStatus":0,"leaveImageUrl":"","arriveImageUrl":"http://192.168.36.101:8080//pic/2018-01-10/98267_1515549706861.jpg","leaveStatus":3}]}]
          */
+
         private int totals;
-        private List<EmplyoeeCheckinsInfo> checkins;
+        private List<CheckinsBean> checkins;
 
         public int getTotals() {
             return totals;
@@ -37,23 +43,24 @@ public class CheckInListBean extends BaseResponse{
             this.totals = totals;
         }
 
-        public List<EmplyoeeCheckinsInfo> getCheckins() {
+        public List<CheckinsBean> getCheckins() {
             return checkins;
         }
 
-        public void setCheckins(List<EmplyoeeCheckinsInfo> checkins) {
+        public void setCheckins(List<CheckinsBean> checkins) {
             this.checkins = checkins;
         }
 
-        public static class EmplyoeeCheckinsInfo {
+        public static class CheckinsBean {
             /**
-             * "employeeName":"张三", //员工姓名
-             * "workAdresses": [] 工作地点 集合 //必须按照班次从早到晚来拼装
-             * innerCheckins  头像集合  //必须按照班次从早到晚来拼装
+             * employeeName : 高美
+             * workAddresses : ["北京市北京市朝阳区安定路11号(上午)","北京市北京市朝阳区安定路11号(下午)","北京市北京市朝阳区安定路11号(晚上)"]
+             * innerCheckins : [{"arriveStatus":2,"leaveImageUrl":"","arriveImageUrl":"http://192.168.36.101:8080//pic/2018-01-10/98141_1515549461788.jpg","leaveStatus":3}]
              */
+
             private String employeeName;
             private List<String> workAddresses;
-            private List<InnerCheckins> innerCheckins;
+            private List<InnerCheckinsBean> innerCheckins;
 
             public String getEmployeeName() {
                 return employeeName;
@@ -63,33 +70,34 @@ public class CheckInListBean extends BaseResponse{
                 this.employeeName = employeeName;
             }
 
-            public List<String> getWorkAdresses() {
+            public List<String> getWorkAddresses() {
                 return workAddresses;
             }
 
-            public void setWorkAdresses(List<String> workAdresses) {
-                this.workAddresses = workAdresses;
+            public void setWorkAddresses(List<String> workAddresses) {
+                this.workAddresses = workAddresses;
             }
 
-            public List<InnerCheckins> getInnerCheckins() {
+            public List<InnerCheckinsBean> getInnerCheckins() {
                 return innerCheckins;
             }
 
-            public void setInnerCheckins(List<InnerCheckins> innerCheckins) {
+            public void setInnerCheckins(List<InnerCheckinsBean> innerCheckins) {
                 this.innerCheckins = innerCheckins;
             }
 
-            public static class InnerCheckins {
+            public static class InnerCheckinsBean {
                 /**
-                 * "arriveStatus":0,//打卡状态：0：打卡正常 1：迟到 2：早退 3：未打卡
-                 * "leaveStatus":0,//打卡状态：0：打卡正常 1：迟到 2：早退 3：未打卡
-                 * "arriveImageUrl":"",//上班打卡的照片
-                 * "leaveImageUrl":"",//下班打卡的照片
+                 * arriveStatus : 2
+                 * leaveImageUrl :
+                 * arriveImageUrl : http://192.168.36.101:8080//pic/2018-01-10/98141_1515549461788.jpg
+                 * leaveStatus : 3
                  */
+
                 private int arriveStatus;
-                private int leaveStatus;
-                private String arriveImageUrl;
                 private String leaveImageUrl;
+                private String arriveImageUrl;
+                private int leaveStatus;
 
                 public int getArriveStatus() {
                     return arriveStatus;
@@ -99,12 +107,12 @@ public class CheckInListBean extends BaseResponse{
                     this.arriveStatus = arriveStatus;
                 }
 
-                public int getLeaveStatus() {
-                    return leaveStatus;
+                public String getLeaveImageUrl() {
+                    return leaveImageUrl;
                 }
 
-                public void setLeaveStatus(int leaveStatus) {
-                    this.leaveStatus = leaveStatus;
+                public void setLeaveImageUrl(String leaveImageUrl) {
+                    this.leaveImageUrl = leaveImageUrl;
                 }
 
                 public String getArriveImageUrl() {
@@ -115,12 +123,12 @@ public class CheckInListBean extends BaseResponse{
                     this.arriveImageUrl = arriveImageUrl;
                 }
 
-                public String getLeaveImageUrl() {
-                    return leaveImageUrl;
+                public int getLeaveStatus() {
+                    return leaveStatus;
                 }
 
-                public void setLeaveImageUrl(String leaveImageUrl) {
-                    this.leaveImageUrl = leaveImageUrl;
+                public void setLeaveStatus(int leaveStatus) {
+                    this.leaveStatus = leaveStatus;
                 }
             }
         }
