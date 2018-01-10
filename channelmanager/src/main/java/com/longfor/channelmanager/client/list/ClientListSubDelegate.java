@@ -7,14 +7,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
-import com.longfor.channelmanager.statistics.adapter.QueryAttendanceConverter;
-import com.longfor.channelmanager.statistics.handler.QueryAttendanceRefreshHandler;
+import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceConverter;
+import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceRefreshHandler;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.ui.recycler.BaseDecoration;
 

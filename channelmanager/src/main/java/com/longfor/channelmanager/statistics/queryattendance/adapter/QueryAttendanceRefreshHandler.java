@@ -1,4 +1,4 @@
-package com.longfor.channelmanager.statistics.handler;
+package com.longfor.channelmanager.statistics.queryattendance.adapter;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -8,19 +8,20 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.longfor.channelmanager.database.DatabaseManager;
-import com.longfor.channelmanager.statistics.constants.ConstantQueryAttendance;
+import com.longfor.channelmanager.statistics.queryattendance.constants.ConstantQueryAttendance;
 import com.longfor.core.app.LongFor;
 import com.longfor.core.net.RestClient;
 import com.longfor.core.net.callback.ISuccess;
 import com.longfor.ui.recycler.DataConverter;
-import com.longfor.ui.recycler.MultipleRecyclerAdapter;
 import com.longfor.ui.refresh.PagingBean;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by zhanghaitao1 on 2017/12/25.
+ * @author: gaomei
+ * @date: 2018/1/4
+ * @function:考勤查询
  */
 
 public class QueryAttendanceRefreshHandler implements
@@ -30,7 +31,7 @@ public class QueryAttendanceRefreshHandler implements
     private final SwipeRefreshLayout REFRESH_LAYOUT;
     private final PagingBean BEAN;
     private final RecyclerView RECYCLERVIEW;
-    private MultipleRecyclerAdapter mAdapter = null;
+    private QueryAttendanceRvAdapter mAdapter = null;
     private final DataConverter CONVERTER;
     private String mEmployeeId;
     private String mProjectId;
@@ -67,7 +68,7 @@ public class QueryAttendanceRefreshHandler implements
     public void firstPage(String roleType) {
         BEAN.setDelayed(1000);
         mEmployeeId = DatabaseManager.getEmployeeId();
-        mProjectId = DatabaseManager.getUserProfile().getProjectId();
+        mProjectId = "80B03281-B931-4838-AEAD-EE2BA11DF224";
         mRoleType = roleType;
         Map<String, String> map = new HashMap<>();
         map.put(ConstantQueryAttendance.EMPLOYEE_ID, mEmployeeId);
@@ -88,7 +89,7 @@ public class QueryAttendanceRefreshHandler implements
                         }
                         BEAN.setTotal(totals).setPageSize(20);
                         //设置adapter
-                        mAdapter = MultipleRecyclerAdapter.creat(CONVERTER.setJsonData(response));
+                        mAdapter = QueryAttendanceRvAdapter.create(CONVERTER.setJsonData(response));
                         mAdapter.setOnLoadMoreListener(QueryAttendanceRefreshHandler.this, RECYCLERVIEW);
                         RECYCLERVIEW.setAdapter(mAdapter);
                         BEAN.setCurrentCount(mAdapter.getData().size());

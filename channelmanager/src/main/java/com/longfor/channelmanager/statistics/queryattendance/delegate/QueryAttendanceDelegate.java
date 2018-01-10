@@ -1,4 +1,4 @@
-package com.longfor.channelmanager.statistics.delegate;
+package com.longfor.channelmanager.statistics.queryattendance.delegate;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -16,7 +16,7 @@ import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.channelmanager.database.DatabaseManager;
-import com.longfor.channelmanager.statistics.adapter.QueryAttendancePagerAdapter;
+import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendancePagerAdapter;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.core.utils.toast.ToastUtils;
 

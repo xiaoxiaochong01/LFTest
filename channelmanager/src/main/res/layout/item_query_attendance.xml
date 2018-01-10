@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="11"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:textSize="14sp"/>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="16"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        >
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_address_morning"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:textColor="@color/gray_3"
+            android:textSize="15sp"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_address_noon"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:textColor="@color/gray_3"
+            android:textSize="15sp"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_address_night"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:textColor="@color/gray_3"
+            android:textSize="15sp"
+            />
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/ll_group_img"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="20dp"
+        android:layout_weight="10"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:id="@+id/rl_first_img_group"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            >
+
+            <com.longfor.channelmanager.common.view.checkincircleimageview.CheckInPhotoView
+                android:id="@+id/img_on_duty_first"
+                android:layout_width="30dp"
+                android:layout_height="30dp">
+
+            </com.longfor.channelmanager.common.view.checkincircleimageview.CheckInPhotoView>
+
+            <com.longfor.channelmanager.common.view.checkincircleimageview.CheckInPhotoView
+                android:id="@+id/img_off_duty_first"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                >
+
+            </com.longfor.channelmanager.common.view.checkincircleimageview.CheckInPhotoView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_second_img_group"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+
+            <com.longfor.channelmanager.common.view.checkincircleimageview.CheckInPhotoView
+                android:id="@+id/img_on_duty_second"
+                android:layout_width="30dp"
+                android:layout_height="30dp">
+
+            </com.longfor.channelmanager.common.view.checkincircleimageview.CheckInPhotoView>
+
+            <com.longfor.channelmanager.common.view.checkincircleimageview.CheckInPhotoView
+                android:id="@+id/img_off_duty_second"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                >
+
+            </com.longfor.channelmanager.common.view.checkincircleimageview.CheckInPhotoView>
+
+        </RelativeLayout>
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</android.support.v7.widget.LinearLayoutCompat>
