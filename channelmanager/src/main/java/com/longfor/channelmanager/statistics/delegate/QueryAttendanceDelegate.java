@@ -74,7 +74,7 @@ public class QueryAttendanceDelegate extends LongForDelegate {
         mHeaderQueryAttendance.setRightLayoutOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showMessage(getContext(), getString(R.string.index_statistics_title));
+                ToastUtils.showMessage(getString(R.string.index_statistics_title));
             }
         });
     }

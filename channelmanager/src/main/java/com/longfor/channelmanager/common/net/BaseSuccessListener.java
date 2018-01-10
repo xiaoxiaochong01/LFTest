@@ -18,18 +18,18 @@ public abstract class BaseSuccessListener implements ISuccess {
         try {
             BaseResponse baseResponse = JSON.parseObject(response, BaseResponse.class);
             if(baseResponse == null) {
-                ToastUtils.showMessage(LongFor.getApplicationContext(), R.string.data_parsing_error);
+                ToastUtils.showMessage(R.string.data_parsing_error);
                 return;
             }
             if(baseResponse.getCode() != 0) {
-                ToastUtils.showMessage(LongFor.getApplicationContext(), baseResponse.getMessage());
+                ToastUtils.showMessage(baseResponse.getMessage());
                 return;
             }
             success(response);
         }
         catch (Exception e) {
             e.printStackTrace();
-            ToastUtils.showMessage(LongFor.getApplicationContext(), R.string.data_parsing_error);
+            ToastUtils.showMessage(R.string.data_parsing_error);
         }
     }
 

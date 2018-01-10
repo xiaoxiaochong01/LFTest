@@ -1,9 +1,10 @@
 package com.longfor.core.utils.toast;
 
-import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
+
+import com.longfor.core.app.LongFor;
 
 /**
  * Toast工具类
@@ -20,55 +21,50 @@ public class ToastUtils {
      * Toast发送消息，默认Toast.LENGTH_SHORT
      * @author WikerYong   Email:<a href="#">yw_312@foxmail.com</a>
      * @version 2012-5-22 上午11:13:10
-     * @param act
      * @param msg
      */
-    public static void showMessage(final Context act, final String msg) {
-        showMessage(act, msg, Toast.LENGTH_SHORT);
+    public static void showMessage(final String msg) {
+        showMessage(msg, Toast.LENGTH_SHORT);
     }
 
     /**
      * Toast发送消息，默认Toast.LENGTH_LONG
      * @author WikerYong   Email:<a href="#">yw_312@foxmail.com</a>
      * @version 2012-5-22 上午11:13:10
-     * @param act
      * @param msg
      */
-    public static void showMessageLong(final Context act, final String msg) {
-        showMessage(act, msg, Toast.LENGTH_LONG);
+    public static void showMessageLong(final String msg) {
+        showMessage(msg, Toast.LENGTH_LONG);
     }
 
     /**
      * Toast发送消息，默认Toast.LENGTH_SHORT
      * @author WikerYong   Email:<a href="#">yw_312@foxmail.com</a>
      * @version 2012-5-22 上午11:13:35
-     * @param act
      * @param msg
      */
-    public static void showMessage(final Context act, final int msg) {
-        showMessage(act, msg, Toast.LENGTH_SHORT);
+    public static void showMessage(final int msg) {
+        showMessage(msg, Toast.LENGTH_SHORT);
     }
 
     /**
      * Toast发送消息，默认Toast.LENGTH_LONG
      * @author WikerYong   Email:<a href="#">yw_312@foxmail.com</a>
      * @version 2012-5-22 上午11:13:35
-     * @param act
      * @param msg
      */
-    public static void showMessageLong(final Context act, final int msg) {
-        showMessage(act, msg, Toast.LENGTH_LONG);
+    public static void showMessageLong(final int msg) {
+        showMessage(msg, Toast.LENGTH_LONG);
     }
 
     /**
      * Toast发送消息
      * @author WikerYong   Email:<a href="#">yw_312@foxmail.com</a>
      * @version 2012-5-22 上午11:14:09
-     * @param act
      * @param msg
      * @param len
      */
-    public static void showMessage(final Context act, final int msg,
+    public static void showMessage(final int msg,
                                    final int len) {
         new Thread(new Runnable() {
             public void run() {
@@ -77,11 +73,8 @@ public class ToastUtils {
                     @Override
                     public void run() {
                         synchronized (synObj) {
-                            if (toast != null) {
-                                toast.cancel();
-                                toast = null;
-                            }
-                            toast = Toast.makeText(act, msg, len);
+                            cancelCurrentToast();
+                            toast = Toast.makeText(LongFor.getApplicationContext(), msg, len);
                             toast.show();
                         }
                     }
@@ -94,11 +87,10 @@ public class ToastUtils {
      * Toast发送消息
      * @author WikerYong   Email:<a href="#">yw_312@foxmail.com</a>
      * @version 2012-5-22 上午11:14:27
-     * @param act
      * @param msg
      * @param len
      */
-    public static void showMessage(final Context act, final String msg,
+    public static void showMessage(final String msg,
                                    final int len) {
         new Thread(new Runnable() {
             public void run() {
@@ -107,10 +99,8 @@ public class ToastUtils {
                     @Override
                     public void run() {
                         synchronized (synObj) {
-                            if (toast != null) {
-                                toast.cancel();
-                            }
-                            toast = Toast.makeText(act, msg, len);
+                            cancelCurrentToast();
+                            toast = Toast.makeText(LongFor.getApplicationContext(), msg, len);
                             toast.show();
                         }
                     }
@@ -127,6 +117,7 @@ public class ToastUtils {
     public static void cancelCurrentToast() {
         if (toast != null) {
             toast.cancel();
+            toast = null;
         }
     }
 }

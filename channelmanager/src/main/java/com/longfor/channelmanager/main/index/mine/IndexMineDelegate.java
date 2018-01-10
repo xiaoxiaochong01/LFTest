@@ -200,7 +200,7 @@ public class IndexMineDelegate extends BottomItemDelegate {
                 .error(new IError() {
                     @Override
                     public void onError(int code, String msg) {
-                        ToastUtils.showMessage(getContext(), msg);
+                        ToastUtils.showMessage(msg);
                     }
                 })
                 .build()
@@ -237,7 +237,7 @@ public class IndexMineDelegate extends BottomItemDelegate {
             public void run() {
                 mUploadFile = PicCompressUtils.getSmallPicFile(getContext(), images.get(0).path);
                 if (mUploadFile == null) {
-                    ToastUtils.showMessage(getContext(), getString(R.string.picture_illegal));
+                    ToastUtils.showMessage(getString(R.string.picture_illegal));
                     return;
                 }
                 requstUploadPhoto(requestUrl,mUploadFile,isCover);
@@ -271,7 +271,7 @@ public class IndexMineDelegate extends BottomItemDelegate {
                             if(dataBean != null) {
                                 ImageLoader.display(getContext(), imgTopBg, dataBean.getImageUrl());
                             }
-                            ToastUtils.showMessage(getContext(),coverUploadBean.getMessage());
+                            ToastUtils.showMessage(coverUploadBean.getMessage());
                         }
                         else {
                             AvatarUploadBean avatarUploadBean = JSON.parseObject(response, AvatarUploadBean.class);
@@ -279,14 +279,14 @@ public class IndexMineDelegate extends BottomItemDelegate {
                             if(dataBean != null) {
                                 ImageLoader.display(getContext(), imgHead, dataBean.getAvatarUrl());
                             }
-                            ToastUtils.showMessage(getContext(),avatarUploadBean.getMessage());
+                            ToastUtils.showMessage(avatarUploadBean.getMessage());
                         }
                     }
                 })
                 .error(new IError() {
                     @Override
                     public void onError(int code, String msg) {
-                        ToastUtils.showMessage(getContext(), msg);
+                        ToastUtils.showMessage(msg);
                     }
                 })
                 .build()
@@ -299,7 +299,7 @@ public class IndexMineDelegate extends BottomItemDelegate {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 uploadPicture();
             } else {
-                ToastUtils.showMessage(getContext(), getString(R.string.no_permission_to_save_file));
+                ToastUtils.showMessage(getString(R.string.no_permission_to_save_file));
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

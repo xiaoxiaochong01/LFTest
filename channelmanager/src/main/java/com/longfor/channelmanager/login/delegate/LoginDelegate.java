@@ -77,18 +77,18 @@ public class LoginDelegate extends LongForDelegate{
 
                                 }
                                 else {
-                                    ToastUtils.showMessage(getContext(), R.string.login_toast_user_error);
+                                    ToastUtils.showMessage(R.string.login_toast_user_error);
                                 }
                             }
                             else {
-                                ToastUtils.showMessage(getContext(), R.string.data_parsing_error);
+                                ToastUtils.showMessage(R.string.data_parsing_error);
                             }
                         }
                     })
                     .error(new IError() {
                         @Override
                         public void onError(int code, String msg) {
-                            ToastUtils.showMessage(getContext(),msg);
+                            ToastUtils.showMessage(msg);
                         }
                     })
                     .build()
@@ -100,7 +100,7 @@ public class LoginDelegate extends LongForDelegate{
     void onGetCodeClick() {
         strOA = etOA.getText().toString().trim();
         if(TextUtils.isEmpty(strOA)) {
-            ToastUtils.showMessage(getContext(), getContext().getResources().getString(R.string.login_toast_oa_null));
+            ToastUtils.showMessage(getResources().getString(R.string.login_toast_oa_null));
             return;
         }
         startCountDownTimer();
@@ -119,7 +119,7 @@ public class LoginDelegate extends LongForDelegate{
                             }
                         }
                         else {
-                            ToastUtils.showMessage(getContext(), getContext().getResources().getString(R.string.data_parsing_error));
+                            ToastUtils.showMessage(getResources().getString(R.string.data_parsing_error));
                         }
                     }
                 })
@@ -132,7 +132,7 @@ public class LoginDelegate extends LongForDelegate{
                 .failure(new IFailure() {
                     @Override
                     public void onFailure() {
-                        ToastUtils.showMessage(getContext(), R.string.net_connect_time_out);
+                        ToastUtils.showMessage(R.string.net_connect_time_out);
                     }
                 })
                 .loader(getContext())
@@ -149,11 +149,11 @@ public class LoginDelegate extends LongForDelegate{
         strOA = etOA.getText().toString().trim();
         strCode = etCode.getText().toString().trim();
         if(TextUtils.isEmpty(strOA)) {
-            ToastUtils.showMessage(getContext(), getContext().getResources().getString(R.string.login_toast_oa_null));
+            ToastUtils.showMessage(getResources().getString(R.string.login_toast_oa_null));
             return false;
         }
         if(TextUtils.isEmpty(strCode) || !(strCode.length() == 4)) {
-            ToastUtils.showMessage(getContext(), getContext().getResources().getString(R.string.login_toast_code_error));
+            ToastUtils.showMessage(getResources().getString(R.string.login_toast_code_error));
             return false;
         }
 

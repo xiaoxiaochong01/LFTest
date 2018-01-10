@@ -57,16 +57,12 @@ public class HomePageHandler {
                     public void success(String response) {
                         mAdapter = HomeRecyclerAdapter.create(CONVERTER.setJsonData(response), CALL_BACK);
                         RECYCLERVIEW.setAdapter(mAdapter);
-//                        HomePageBean homePageBean = JSON.parseObject(response, HomePageBean.class);
-//                        if(CALL_BACK != null) {
-//                            CALL_BACK.callBack(homePageBean);
-//                        }
                     }
                 })
                 .error(new IError() {
                     @Override
                     public void onError(int code, String msg) {
-                        ToastUtils.showMessage(CONTEXT, msg);
+                        ToastUtils.showMessage(msg);
                     }
                 })
                 .build()

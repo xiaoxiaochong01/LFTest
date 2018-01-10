@@ -47,7 +47,7 @@ public class UnReadMessageCountHandler {
                     .error(new IError() {
                         @Override
                         public void onError(int code, String msg) {
-                            ToastUtils.showMessage(CONTEXT, msg);
+                            ToastUtils.showMessage(msg);
                         }
                     })
                     .build()
