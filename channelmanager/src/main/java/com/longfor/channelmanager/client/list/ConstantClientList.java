@@ -7,10 +7,10 @@ package com.longfor.channelmanager.client.list;
  */
 public interface ConstantClientList {
     // 客户列表
-    int CLIENT_ALL = 0; // 全部
-    int CLIENT_FIRST = 1; // 一级
-    int CLIENT_SECOND = 2; // 二级
-    int CLIENT_SUBSCRIBE = 3; // 认购
+    String CLIENT_ALL = "0"; // 全部
+    String CLIENT_FIRST = "1"; // 一级
+    String CLIENT_SECOND = "2"; // 二级
+    String CLIENT_SUBSCRIBE = "3"; // 认购
 
     /**--------------------------客户列表数据请求相关 begin ----------------------*/
     String CURRENT_PAGE = "currentPage";
