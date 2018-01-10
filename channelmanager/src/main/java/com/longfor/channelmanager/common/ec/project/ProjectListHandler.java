@@ -3,8 +3,6 @@ package com.longfor.channelmanager.common.ec.project;
 import android.content.Context;
 
 import com.longfor.channelmanager.common.ec.Constant;
-import com.longfor.channelmanager.common.ec.unreadmessage.IUnReadMessageCount;
-import com.longfor.channelmanager.common.ec.unreadmessage.UnReadMessageCountHandler;
 import com.longfor.channelmanager.database.DatabaseManager;
 import com.longfor.core.net.RestClient;
 import com.longfor.core.net.callback.IError;
@@ -51,7 +49,7 @@ public class ProjectListHandler {
                 .error(new IError() {
                     @Override
                     public void onError(int code, String msg) {
-                        ToastUtils.showMessage(CONTEXT, msg);
+                        ToastUtils.showMessage(msg);
                     }
                 })
                 .build()

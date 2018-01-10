@@ -12,6 +12,7 @@ import com.longfor.channelmanager.client.ClientListDelegate;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.core.delegates.LongForDelegate;
+import com.longfor.core.utils.toast.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -62,12 +63,16 @@ public class ChannelPlatformDelegate extends LongForDelegate {
                 getSupportDelegate().start(delegate);
                 break;
             case R.id.rl_group_broker_customer_list:
+                ToastUtils.showMessage(R.string.channel_platform_broker_list);
                 break;
             case R.id.rl_team_report:
+                ToastUtils.showMessage(R.string.channel_platform_team_report);
                 break;
             case R.id.rl_performance:
+                ToastUtils.showMessage(R.string.channel_platform_performance);
                 break;
             case R.id.rl_arrange_work:
+                ToastUtils.showMessage(R.string.channel_platform_arrange_work);
                 break;
         }
     }

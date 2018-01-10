@@ -199,7 +199,7 @@ public class SplashDelegate extends LongForDelegate implements IError{
      */
     @Override
     public void onError(int code, String msg) {
-        ToastUtils.showMessage(getContext(), msg);
+        ToastUtils.showMessage(msg);
     }
 
 }

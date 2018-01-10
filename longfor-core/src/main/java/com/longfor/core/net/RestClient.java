@@ -79,7 +79,7 @@ public class RestClient {
     private void request(HttpMethod method) {
         //添加一个网络判断的方法
         if(!NetUtils.isNetworkAvailable(LongFor.getApplicationContext())) {
-            ToastUtils.showMessage(LongFor.getApplicationContext(), R.string.net_connect_error);
+            ToastUtils.showMessage(R.string.net_connect_error);
             LogUtils.e("net_unconnect", "网路连接失败");
             return;
         }
