@@ -12,7 +12,6 @@ import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
-import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceConverter;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceRefreshHandler;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.ui.recycler.BaseDecoration;
@@ -40,7 +39,7 @@ public class ClientListSubDelegate extends LongForDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        mRefreshHandler = QueryAttendanceRefreshHandler.create(srlClientList, rvClientSub, new QueryAttendanceConverter());
+//        mRefreshHandler = QueryAttendanceRefreshHandler.create(srlClientList, rvClientSub, new QueryAttendanceConverter());
         initRefreshLayout();
         initRecyclerView();
         roleType="1";

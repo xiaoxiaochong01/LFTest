@@ -93,7 +93,7 @@ public class QueryAttendanceDelegate extends LongForDelegate {
                 ConstantQueryAttendance.CALL_GET_NUM, ConstantQueryAttendance.CALL_CALL_NUM});
         List<Fragment> fragmentList = new ArrayList<>();
         for (int i = 0; i < mTabTitles.size(); i++) {
-            fragmentList.add(QueryAttendanceSubDelegate.getInstance(mRoleTypes.get(i), mProjectId));
+            fragmentList.add(QueryAttendanceSubDelegate.getInstance(mRoleTypes.get(i), mProjectId,this));
         }
         QueryAttendancePagerAdapter pagerAdapter = new QueryAttendancePagerAdapter(getFragmentManager(), mTabTitles, fragmentList);
         mVpQueryAttendance.setAdapter(pagerAdapter);

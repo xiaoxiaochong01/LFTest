@@ -37,22 +37,26 @@ public class QueryAttendanceRefreshHandler implements
     private String mEmployeeId;
     private String mProjectId;
     private String mRoleType;
+    IQueryAttendancexClickPhotoListener mIQueryAttendancexClickPhotoListener;
 
     public QueryAttendanceRefreshHandler(SwipeRefreshLayout REFRESH_LAYOUT,
                                          PagingBean BEAN,
                                          RecyclerView RECYCLERVIEW,
-                                         DataConverter CONVERTER) {
+                                         DataConverter CONVERTER,
+                                         IQueryAttendancexClickPhotoListener listener) {
         this.REFRESH_LAYOUT = REFRESH_LAYOUT;
         this.BEAN = BEAN;
         this.RECYCLERVIEW = RECYCLERVIEW;
         this.CONVERTER = CONVERTER;
+        mIQueryAttendancexClickPhotoListener=listener;
         REFRESH_LAYOUT.setOnRefreshListener(this);
     }
 
     public static QueryAttendanceRefreshHandler create(SwipeRefreshLayout swipeRefreshLayout,
                                                        RecyclerView recyclerView,
-                                                       DataConverter converter) {
-        return new QueryAttendanceRefreshHandler(swipeRefreshLayout, new PagingBean(), recyclerView, converter);
+                                                       DataConverter converter,
+                                                       IQueryAttendancexClickPhotoListener listener) {
+        return new QueryAttendanceRefreshHandler(swipeRefreshLayout, new PagingBean(), recyclerView, converter,listener);
     }
 
     @Override
@@ -90,7 +94,7 @@ public class QueryAttendanceRefreshHandler implements
                         }
                         BEAN.setTotal(totals).setPageSize(20);
                         //设置adapter
-                        mAdapter = QueryAttendanceRvAdapter.create(CONVERTER.setJsonData(response));
+                        mAdapter = QueryAttendanceRvAdapter.create(CONVERTER.setJsonData(response),mIQueryAttendancexClickPhotoListener);
                         mAdapter.setOnLoadMoreListener(QueryAttendanceRefreshHandler.this, RECYCLERVIEW);
                         RECYCLERVIEW.setAdapter(mAdapter);
                         BEAN.setCurrentCount(mAdapter.getData().size());

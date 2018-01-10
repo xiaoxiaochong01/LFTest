@@ -13,6 +13,7 @@ import android.view.View;
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.common.ec.Constant;
+import com.longfor.channelmanager.statistics.queryattendance.adapter.IQueryAttendancexClickPhotoListener;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceConverter;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceRefreshHandler;
 import com.longfor.core.delegates.LongForDelegate;
@@ -26,21 +27,22 @@ import butterknife.BindView;
  * @function:考勤查询子页面-区分角色
  */
 
-public class QueryAttendanceSubDelegate extends LongForDelegate {
+public class QueryAttendanceSubDelegate extends LongForDelegate implements IQueryAttendancexClickPhotoListener{
     @BindView(R2.id.srl_query_attendance)
     SwipeRefreshLayout mSrlQueryAttendance;
     @BindView(R2.id.rv_query_attendance)
     RecyclerView mRvQueryAttendance;
     public QueryAttendanceRefreshHandler mRefreshHandler;
-    private String employeeId;
     private String mProjectId;
     private String mRoleType;
+    private LongForDelegate mParentDelegate;
 
-    public static QueryAttendanceSubDelegate getInstance(String roleType,String projectId){
+    public static QueryAttendanceSubDelegate getInstance(String roleType, String projectId, LongForDelegate parentDelegate){
         Bundle bundle=new Bundle();
         bundle.putString(Constant.ROLE_TYPE,roleType);
         bundle.putString(Constant.PROJECT_ID,projectId);
         QueryAttendanceSubDelegate delegate=new QueryAttendanceSubDelegate();
+        delegate.mParentDelegate=parentDelegate;
         delegate.setArguments(bundle);
         return delegate;
     }
@@ -53,7 +55,7 @@ public class QueryAttendanceSubDelegate extends LongForDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         initData();
-        mRefreshHandler = QueryAttendanceRefreshHandler.create(mSrlQueryAttendance, mRvQueryAttendance, new QueryAttendanceConverter());
+        mRefreshHandler = QueryAttendanceRefreshHandler.create(mSrlQueryAttendance, mRvQueryAttendance, new QueryAttendanceConverter(),this);
         initRefreshLayout();
         initRecyclerView();
         mRefreshHandler.firstPage(mRoleType,mProjectId);
@@ -85,5 +87,10 @@ public class QueryAttendanceSubDelegate extends LongForDelegate {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
         mSrlQueryAttendance.setProgressViewOffset(true, 120, 300);
+    }
+
+    @Override
+    public void onClickPhoto(String imageUrl) {
+        mParentDelegate.start(LargePhotoDelegate.getInstance(imageUrl));
     }
 }
