@@ -17,6 +17,7 @@ import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.channelmanager.database.DatabaseManager;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendancePagerAdapter;
+import com.longfor.channelmanager.statistics.queryattendance.constants.ConstantQueryAttendance;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.core.utils.toast.ToastUtils;
 
@@ -25,7 +26,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 /**
  * @author: gaomei
@@ -40,7 +40,7 @@ public class QueryAttendanceDelegate extends LongForDelegate {
     TabLayout mTlQueryAttendance;
     @BindView(R.id.vp_query_attendance)
     ViewPager mVpQueryAttendance;
-    Unbinder unbinder;
+    public String mProjectId;
 
     @Override
     public Object setLayout() {
@@ -49,8 +49,13 @@ public class QueryAttendanceDelegate extends LongForDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
+        initData();
         initHeader();
         initTabLayout();
+    }
+
+    private void initData() {
+        mProjectId = DatabaseManager.getProjectId();
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -83,11 +88,14 @@ public class QueryAttendanceDelegate extends LongForDelegate {
         List<String> mTabTitles = Arrays.asList(new String[]{getString(R.string.trainee_role_show_get_num),
                 getString(R.string.trainee_role_expand_get_num), getString(R.string.trainee_role_show_and_expand_call_num),
                 getString(R.string.trainee_role_call_get_num), getString(R.string.trainee_role_call_call_num)});
+        List<String> mRoleTypes = Arrays.asList(new String[]{ConstantQueryAttendance.SHOW_GET_NUM,
+                ConstantQueryAttendance.EXPAND_GET_NUM, ConstantQueryAttendance.SHOW_AND_EXPAND_CALL_NUM,
+                ConstantQueryAttendance.CALL_GET_NUM, ConstantQueryAttendance.CALL_CALL_NUM});
         List<Fragment> fragmentList = new ArrayList<>();
         for (int i = 0; i < mTabTitles.size(); i++) {
-            fragmentList.add(new QueryAttendanceSubDelegate());
+            fragmentList.add(QueryAttendanceSubDelegate.getInstance(mRoleTypes.get(i), mProjectId));
         }
-        QueryAttendancePagerAdapter pagerAdapter=new QueryAttendancePagerAdapter(getFragmentManager(),mTabTitles,fragmentList);
+        QueryAttendancePagerAdapter pagerAdapter = new QueryAttendancePagerAdapter(getFragmentManager(), mTabTitles, fragmentList);
         mVpQueryAttendance.setAdapter(pagerAdapter);
         mTlQueryAttendance.setupWithViewPager(mVpQueryAttendance);
     }

@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
+import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceConverter;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceRefreshHandler;
 import com.longfor.core.delegates.LongForDelegate;
@@ -32,8 +33,17 @@ public class QueryAttendanceSubDelegate extends LongForDelegate {
     RecyclerView mRvQueryAttendance;
     public QueryAttendanceRefreshHandler mRefreshHandler;
     private String employeeId;
-    private String projectId;
-    private String roleType;
+    private String mProjectId;
+    private String mRoleType;
+
+    public static QueryAttendanceSubDelegate getInstance(String roleType,String projectId){
+        Bundle bundle=new Bundle();
+        bundle.putString(Constant.ROLE_TYPE,roleType);
+        bundle.putString(Constant.PROJECT_ID,projectId);
+        QueryAttendanceSubDelegate delegate=new QueryAttendanceSubDelegate();
+        delegate.setArguments(bundle);
+        return delegate;
+    }
 
     @Override
     public Object setLayout() {
@@ -42,11 +52,18 @@ public class QueryAttendanceSubDelegate extends LongForDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        mRefreshHandler = QueryAttendanceRefreshHandler.creat(mSrlQueryAttendance, mRvQueryAttendance, new QueryAttendanceConverter());
+        initData();
+        mRefreshHandler = QueryAttendanceRefreshHandler.create(mSrlQueryAttendance, mRvQueryAttendance, new QueryAttendanceConverter());
         initRefreshLayout();
         initRecyclerView();
-        roleType="5";
-        mRefreshHandler.firstPage(roleType);
+        mRefreshHandler.firstPage(mRoleType,mProjectId);
+    }
+
+    private void initData() {
+        mRoleType =getArguments().getString(Constant.ROLE_TYPE);
+        mProjectId=getArguments().getString(Constant.PROJECT_ID);
+        // TODO: 2018/1/10 test
+        mProjectId = "80B03281-B931-4838-AEAD-EE2BA11DF224";
     }
 
     @Override
