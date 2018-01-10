@@ -44,7 +44,7 @@ public class ClientListSubDelegate extends LongForDelegate {
         initRefreshLayout();
         initRecyclerView();
         roleType="1";
-        mRefreshHandler.firstPage(roleType);
+//        mRefreshHandler.firstPage(roleType);
     }
 
     @Override

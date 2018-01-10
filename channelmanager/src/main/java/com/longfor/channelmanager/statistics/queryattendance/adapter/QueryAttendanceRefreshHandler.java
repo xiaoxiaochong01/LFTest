@@ -76,7 +76,7 @@ public class QueryAttendanceRefreshHandler implements
         map.put(Constant.PROJECT_ID, mProjectId);
         map.put(Constant.ROLE_TYPE, mRoleType);
         map.put(Constant.CURRENT_PAGE, String.valueOf(1));
-        map.put(Constant.PAGE_SIZE, String.valueOf(20));
+        map.put(Constant.KEY_PAGE_SIZE, Constant.VALUE_PAGE_SIZE);
         RestClient.builder()
                 .url(ConstantQueryAttendance.URL_GET_CHECK_IN_LIST)
                 .raw(map)
@@ -114,7 +114,7 @@ public class QueryAttendanceRefreshHandler implements
             map.put(Constant.PROJECT_ID, mProjectId);
             map.put(Constant.ROLE_TYPE, mRoleType);
             map.put(Constant.CURRENT_PAGE, String.valueOf(index));
-            map.put(Constant.PAGE_SIZE, String.valueOf(20));
+            map.put(Constant.KEY_PAGE_SIZE, String.valueOf(20));
             LongFor.getHandler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

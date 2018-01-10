@@ -16,7 +16,8 @@ public interface Constant {
     String EMPLOYEE_ID = "employeeId";
     String PROJECT_ID = "projectId";
     String CURRENT_PAGE = "currentPage";//请求-当前页键名
-    String PAGE_SIZE = "pageSize";//请求-每页数量键名
+    String KEY_PAGE_SIZE = "pageSize";//请求-每页数量键名
+    String VALUE_PAGE_SIZE = "20";//请求-每页数量值
     String ROLE_TYPE="roleType";//请求-用户角色的键名
 
     /**
