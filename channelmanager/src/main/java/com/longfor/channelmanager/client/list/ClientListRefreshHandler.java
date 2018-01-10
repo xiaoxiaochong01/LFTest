@@ -40,10 +40,10 @@ public class ClientListRefreshHandler implements
         REFRESH_LAYOUT.setOnRefreshListener(this);
     }
 
-    public static RefreshHandler creat(SwipeRefreshLayout swipeRefreshLayout,
+    public static ClientListRefreshHandler creat(SwipeRefreshLayout swipeRefreshLayout,
                                        RecyclerView recyclerView,
                                        DataConverter converter) {
-        return new RefreshHandler(swipeRefreshLayout, new PagingBean(), recyclerView, converter);
+        return new ClientListRefreshHandler(swipeRefreshLayout, new PagingBean(), recyclerView, converter);
     }
 
     @Override

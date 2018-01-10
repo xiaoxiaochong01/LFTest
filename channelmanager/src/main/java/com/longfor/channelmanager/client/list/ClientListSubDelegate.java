@@ -22,17 +22,14 @@ import butterknife.BindView;
 /**
  * @author: tongzhenhua
  * @date: 2018/1/9
- * @function:
+ * @function: 客户列表子界面
  */
 public class ClientListSubDelegate extends LongForDelegate {
     @BindView(R2.id.rv_client_sub)
     RecyclerView rvClientSub;
     @BindView(R2.id.srl_client_list)
     SwipeRefreshLayout srlClientList;
-    public QueryAttendanceRefreshHandler mRefreshHandler;
-    private String employeeId;
-    private String projectId;
-    private String roleType;
+    public ClientListRefreshHandler mRefreshHandler;
     @Override
     public Object setLayout() {
         return R.layout.delegate_client_list_sub;
@@ -40,11 +37,10 @@ public class ClientListSubDelegate extends LongForDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        mRefreshHandler = QueryAttendanceRefreshHandler.creat(srlClientList, rvClientSub, new QueryAttendanceConverter());
         initRefreshLayout();
         initRecyclerView();
-        roleType="1";
-        mRefreshHandler.firstPage(roleType);
+        mRefreshHandler = ClientListRefreshHandler.creat(srlClientList, rvClientSub, new ClientListDataConverter());
+        mRefreshHandler.firstPage("");
     }
 
     @Override
