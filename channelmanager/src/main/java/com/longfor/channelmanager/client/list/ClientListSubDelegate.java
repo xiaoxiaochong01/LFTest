@@ -28,12 +28,12 @@ public class ClientListSubDelegate extends LongForDelegate {
     @BindView(R2.id.srl_client_list)
     SwipeRefreshLayout srlClientList;
     public ClientListRefreshHandler mRefreshHandler;
+    private String intentType;
 
     public static ClientListSubDelegate getInstance(String intentType) {
-        Bundle bundle = new Bundle();
-        bundle.putString(ConstantClientList.INTENT_TYPE, intentType);
+
         ClientListSubDelegate delegate = new ClientListSubDelegate();
-        delegate.setArguments(bundle);
+        delegate.intentType = intentType;
         return delegate;
     }
     @Override
@@ -45,7 +45,7 @@ public class ClientListSubDelegate extends LongForDelegate {
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         initRefreshLayout();
         initRecyclerView();
-        mRefreshHandler = ClientListRefreshHandler.creat(srlClientList, rvClientSub, new ClientListDataConverter());
+        mRefreshHandler = ClientListRefreshHandler.creat(intentType, srlClientList, rvClientSub, new ClientListDataConverter());
         mRefreshHandler.firstPage();
     }
 

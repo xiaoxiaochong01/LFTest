@@ -39,4 +39,9 @@ public abstract class BaseRecyclerAdapter extends BaseMultiItemQuickAdapter<Mult
         setNewData(data);
         notifyDataSetChanged();
     }
+    public void refresh(DataConverter data) {
+        getData().clear();
+        setNewData(data.convert());
+        notifyDataSetChanged();
+    }
 }

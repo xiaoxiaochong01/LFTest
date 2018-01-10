@@ -30,7 +30,10 @@ public class ClientListRecyclerAdapter extends BaseRecyclerAdapter {
     }
     @Override
     protected void convert(MultipleViewHolder helper, MultipleItemEntity item) {
-
+        switch (item.getItemType()) {
+            case ItemTypeClient.TEXTS:
+                break;
+        }
     }
 
     @Override
@@ -40,7 +43,7 @@ public class ClientListRecyclerAdapter extends BaseRecyclerAdapter {
 
     @Override
     public int getSpanSize(GridLayoutManager gridLayoutManager, int position) {
-        return 0;
+        return 1;
     }
 
     @Override

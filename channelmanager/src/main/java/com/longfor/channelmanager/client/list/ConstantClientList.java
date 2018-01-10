@@ -18,6 +18,6 @@ public interface ConstantClientList {
     String SEARCH_CONTENT = "searchContent";
     String INTENT_TYPE ="intentType";
     String ROLE_TYPE = "roleType";
-    String URL_COMMISSION_QUERY_CUSTOMER_FOR_MANAGER = "/customer/queryCustomersForChannelManager";  //渠道专员-查询客户列表
+    String URL_COMMISSION_QUERY_CUSTOMER_FOR_MANAGER = "customer/queryCustomersForChannelManager";  //渠道专员-查询客户列表
     /**--------------------------客户列表数据请求相关 end ------------------------*/
 }

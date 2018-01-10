@@ -6,7 +6,7 @@ package com.longfor.ui.refresh;
 
 public final class PagingBean {
     //当前是第几页
-    private int mPageIndex = 0;
+    private int mPageIndex = 1;
     //总数据条数
     private int mTotal = 0;
     //一页一共显示几条数据
@@ -51,7 +51,10 @@ public final class PagingBean {
         this.mCurrentCount = mCurrentCount;
         return this;
     }
-
+    public PagingBean addCurrentCount() {
+        this.mCurrentCount += mPageSize;
+        return this;
+    }
     public int getmDelayed() {
         return mDelayed;
     }
@@ -67,7 +70,7 @@ public final class PagingBean {
     }
 
     public PagingBean resetPageIndex() {
-        mPageIndex=0;
+        mPageIndex=1;
         return this;
     }
 }
