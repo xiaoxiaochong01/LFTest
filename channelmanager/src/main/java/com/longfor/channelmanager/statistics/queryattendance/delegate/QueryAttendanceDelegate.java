@@ -114,9 +114,7 @@ public class QueryAttendanceDelegate extends LongForDelegate implements IProject
         for (int i = 0; i < mFragmentList.size(); i++) {
             ((QueryAttendanceSubDelegate) mFragmentList.get(i)).mProjectId = mProjectId;
             if (mFragmentList.get(i).isAdded()) {
-                ((QueryAttendanceSubDelegate) mFragmentList.get(i)).mRefreshHandler.firstPage(
-                        ((QueryAttendanceSubDelegate) mFragmentList.get(i)).mRoleType,
-                        ((QueryAttendanceSubDelegate) mFragmentList.get(i)).mProjectId);
+                ((QueryAttendanceSubDelegate) mFragmentList.get(i)).mRefreshHandler.updateParams(mProjectId);
             }
         }
     }

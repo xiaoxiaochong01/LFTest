@@ -4,7 +4,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.longfor.channelmanager.client.list.ConstantClientList;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.net.BaseSuccessListener;
 import com.longfor.core.net.RestClient;
@@ -98,7 +97,7 @@ public abstract class BaseRefreshHandler implements
         BEAN.resetPageIndex();
         RestClient.builder()
                 .raw(getParams())
-                .url(ConstantClientList.URL_COMMISSION_QUERY_CUSTOMER_FOR_MANAGER)
+                .url(getUrl())
                 .success(new BaseSuccessListener() {
                     @Override
                     public void success(String response) {
@@ -115,7 +114,7 @@ public abstract class BaseRefreshHandler implements
     public void firstPage() {
         RestClient.builder()
                 .raw(getParams())
-                .url(ConstantClientList.URL_COMMISSION_QUERY_CUSTOMER_FOR_MANAGER)
+                .url(getUrl())
                 .success(new BaseSuccessListener() {
                     @Override
                     public void success(String response) {
@@ -142,7 +141,7 @@ public abstract class BaseRefreshHandler implements
         } else {
             RestClient.builder()
                     .raw(getParams())
-                    .url(ConstantClientList.URL_COMMISSION_QUERY_CUSTOMER_FOR_MANAGER)
+                    .url(getUrl())
                     .success(new BaseSuccessListener() {
                         @Override
                         public void success(String response) {

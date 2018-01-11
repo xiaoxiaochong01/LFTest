@@ -36,7 +36,7 @@ public class QueryAttendanceSubDelegate extends LongForDelegate implements IQuer
     public String mProjectId;
     public String mRoleType;
     private LongForDelegate mParentDelegate;
-    private String TAG="QueryAttendanceSubDelegate";
+    private String TAG = "QueryAttendanceSubDelegate";
 
     public static QueryAttendanceSubDelegate getInstance(String roleType, String projectId, LongForDelegate parentDelegate) {
         QueryAttendanceSubDelegate delegate = new QueryAttendanceSubDelegate();
@@ -53,17 +53,16 @@ public class QueryAttendanceSubDelegate extends LongForDelegate implements IQuer
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        LogUtils.e(TAG,"onCreateView"+mRoleType);
-        mRefreshHandler = QueryAttendanceRefreshHandler.create(mSrlQueryAttendance, mRvQueryAttendance, new QueryAttendanceConverter(), this);
+        LogUtils.e(TAG, "onCreateView" + mRoleType);
+        mRefreshHandler = QueryAttendanceRefreshHandler.create(mSrlQueryAttendance, mRvQueryAttendance, new QueryAttendanceConverter(), mRoleType, mProjectId, this);
         initRefreshLayout();
         initRecyclerView();
-        mRefreshHandler.firstPage(mRoleType, mProjectId);
     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-
+        mRefreshHandler.firstPage();
     }
 
     private void initRecyclerView() {
@@ -90,66 +89,66 @@ public class QueryAttendanceSubDelegate extends LongForDelegate implements IQuer
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        LogUtils.e(TAG,"onAttach"+mRoleType);
+        LogUtils.e(TAG, "onAttach" + mRoleType);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.e(TAG,"onCreate"+mRoleType);
+        LogUtils.e(TAG, "onCreate" + mRoleType);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        LogUtils.e(TAG,"onActivityCreated"+mRoleType);
+        LogUtils.e(TAG, "onActivityCreated" + mRoleType);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        LogUtils.e(TAG,"onStart"+mRoleType);
+        LogUtils.e(TAG, "onStart" + mRoleType);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        LogUtils.e(TAG,"onResume"+mRoleType);
+        LogUtils.e(TAG, "onResume" + mRoleType);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        LogUtils.e(TAG,"onPause"+mRoleType);
+        LogUtils.e(TAG, "onPause" + mRoleType);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        LogUtils.e(TAG,"onStop"+mRoleType);
+        LogUtils.e(TAG, "onStop" + mRoleType);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        LogUtils.e(TAG,"onDestroyView"+mRoleType);
+        LogUtils.e(TAG, "onDestroyView" + mRoleType);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LogUtils.e(TAG,"onDestroy"+mRoleType);
+        LogUtils.e(TAG, "onDestroy" + mRoleType);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        LogUtils.e(TAG,"onDetach"+mRoleType);
+        LogUtils.e(TAG, "onDetach" + mRoleType);
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        LogUtils.e(TAG,"setUserVisibleHint"+mRoleType);
+        LogUtils.e(TAG, "setUserVisibleHint" + mRoleType);
     }
 }
