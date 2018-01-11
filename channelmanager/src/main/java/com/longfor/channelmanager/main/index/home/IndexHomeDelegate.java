@@ -25,7 +25,6 @@ import com.longfor.channelmanager.common.ec.unreadmessage.UnReadMessageCountHand
 import com.longfor.channelmanager.database.DatabaseManager;
 import com.longfor.channelmanager.platform.ChannelPlatformDelegate;
 import com.longfor.core.delegates.bottomreplace.BottomItemDelegate;
-import com.longfor.core.utils.toast.ToastUtils;
 import com.longfor.ui.recycler.BaseDecoration;
 
 import butterknife.BindView;
@@ -102,7 +101,6 @@ public class IndexHomeDelegate extends BottomItemDelegate implements IUnReadMess
         Bundle bundle = new Bundle();
         bundle.putString(Constant.TITLE_LEFT_TEXT, getResources().getString(R.string.mine_home));
         if (isPlatform) {
-//            ToastUtils.showMessage(getContext(), "渠道平台");
             ChannelPlatformDelegate delegate = new ChannelPlatformDelegate();
             delegate.setArguments(bundle);
             getParentDelegate().start(delegate);

@@ -49,6 +49,12 @@ public class ClientListDelegate extends LongForDelegate {
         initHeader();
         initTabLayout();
     }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+    }
+
     private void initHeader() {
         Bundle arguments = getArguments();
         headerClientList.setLeftMsg(arguments.getString(Constant.TITLE_LEFT_TEXT));
@@ -59,6 +65,7 @@ public class ClientListDelegate extends LongForDelegate {
             @Override
             public void onClick(View v) {
                 getSupportDelegate().pop();
+
             }
         });
 //        headerClientList.setRightLayoutOnClickListener(new View.OnClickListener() {
@@ -85,7 +92,6 @@ public class ClientListDelegate extends LongForDelegate {
             ClientListSubDelegate delegate = ClientListSubDelegate.getInstance(intentType);
             delegates.add(delegate);
         }
-
         vpClientList.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -105,5 +111,4 @@ public class ClientListDelegate extends LongForDelegate {
         tlClientList.setupWithViewPager(vpClientList);
     }
 
-//    private FragmentPagerAdapter pagerAdapter
 }
