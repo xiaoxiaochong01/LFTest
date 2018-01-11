@@ -13,6 +13,7 @@ import android.view.View;
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
 import com.longfor.core.delegates.LongForDelegate;
+import com.longfor.core.utils.log.LogUtils;
 import com.longfor.ui.recycler.BaseDecoration;
 
 import butterknife.BindView;
@@ -27,7 +28,7 @@ public class ClientListSubDelegate extends LongForDelegate {
     RecyclerView rvClientSub;
     @BindView(R2.id.srl_client_list)
     SwipeRefreshLayout srlClientList;
-    public ClientListRefreshHandler mRefreshHandler;
+    public TestBaseRefreshHandler mRefreshHandler;
     private String intentType;
 
     public static ClientListSubDelegate getInstance(String intentType) {
@@ -42,16 +43,52 @@ public class ClientListSubDelegate extends LongForDelegate {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LogUtils.e("test", "onCreate走了intentType="+intentType);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        LogUtils.e("test", "setUserVisibleHint走了intentType="+intentType);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtils.e("test", "onResume走了intentType="+intentType);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtils.e("test", "onPause走了intentType="+intentType);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LogUtils.e("test", "onDestroy走了intentType="+intentType);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        LogUtils.e("test", "onDestroyView走了intentType="+intentType);
+    }
+
+    @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         initRefreshLayout();
         initRecyclerView();
-        mRefreshHandler = ClientListRefreshHandler.creat(intentType, srlClientList, rvClientSub, new ClientListDataConverter());
-        mRefreshHandler.firstPage();
+        mRefreshHandler = TestBaseRefreshHandler.create(intentType, srlClientList, rvClientSub, new ClientListDataConverter());
     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
+        mRefreshHandler.firstPage();
     }
 
     private void initRecyclerView() {
