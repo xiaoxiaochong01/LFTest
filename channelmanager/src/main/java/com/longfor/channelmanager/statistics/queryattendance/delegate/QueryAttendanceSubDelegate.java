@@ -58,7 +58,6 @@ public class QueryAttendanceSubDelegate extends LongForDelegate implements IQuer
         mRefreshHandler = QueryAttendanceRefreshHandler.create(mSrlQueryAttendance, mRvQueryAttendance, new QueryAttendanceConverter(),this);
         initRefreshLayout();
         initRecyclerView();
-        mRefreshHandler.firstPage(mRoleType,mProjectId);
     }
 
     private void initData() {
@@ -69,6 +68,7 @@ public class QueryAttendanceSubDelegate extends LongForDelegate implements IQuer
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
+        mRefreshHandler.firstPage(mRoleType,mProjectId);
     }
 
     private void initRecyclerView() {
@@ -90,5 +90,9 @@ public class QueryAttendanceSubDelegate extends LongForDelegate implements IQuer
     @Override
     public void onClickPhoto(String imageUrl) {
         mParentDelegate.start(LargePhotoDelegate.getInstance(imageUrl));
+    }
+
+    public void setProjectId(String projectId) {
+        mProjectId = projectId;
     }
 }
