@@ -12,11 +12,11 @@ import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
-import com.longfor.channelmanager.common.ec.Constant;
-import com.longfor.channelmanager.statistics.queryattendance.adapter.IQueryAttendancexClickPhotoListener;
+import com.longfor.channelmanager.statistics.queryattendance.adapter.IQueryAttendanceClickPhotoListener;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceConverter;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceRefreshHandler;
 import com.longfor.core.delegates.LongForDelegate;
+import com.longfor.core.utils.log.LogUtils;
 import com.longfor.ui.recycler.BaseDecoration;
 
 import butterknife.BindView;
@@ -27,23 +27,22 @@ import butterknife.BindView;
  * @function:考勤查询子页面-区分角色
  */
 
-public class QueryAttendanceSubDelegate extends LongForDelegate implements IQueryAttendancexClickPhotoListener{
+public class QueryAttendanceSubDelegate extends LongForDelegate implements IQueryAttendanceClickPhotoListener {
     @BindView(R2.id.srl_query_attendance)
     SwipeRefreshLayout mSrlQueryAttendance;
     @BindView(R2.id.rv_query_attendance)
     RecyclerView mRvQueryAttendance;
     public QueryAttendanceRefreshHandler mRefreshHandler;
-    private String mProjectId;
-    private String mRoleType;
+    public String mProjectId;
+    public String mRoleType;
     private LongForDelegate mParentDelegate;
+    private String TAG="QueryAttendanceSubDelegate";
 
-    public static QueryAttendanceSubDelegate getInstance(String roleType, String projectId, LongForDelegate parentDelegate){
-        Bundle bundle=new Bundle();
-        bundle.putString(Constant.ROLE_TYPE,roleType);
-        bundle.putString(Constant.PROJECT_ID,projectId);
-        QueryAttendanceSubDelegate delegate=new QueryAttendanceSubDelegate();
-        delegate.mParentDelegate=parentDelegate;
-        delegate.setArguments(bundle);
+    public static QueryAttendanceSubDelegate getInstance(String roleType, String projectId, LongForDelegate parentDelegate) {
+        QueryAttendanceSubDelegate delegate = new QueryAttendanceSubDelegate();
+        delegate.mParentDelegate = parentDelegate;
+        delegate.mRoleType = roleType;
+        delegate.mProjectId = projectId;
         return delegate;
     }
 
@@ -54,21 +53,17 @@ public class QueryAttendanceSubDelegate extends LongForDelegate implements IQuer
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        initData();
-        mRefreshHandler = QueryAttendanceRefreshHandler.create(mSrlQueryAttendance, mRvQueryAttendance, new QueryAttendanceConverter(),this);
+        LogUtils.e(TAG,"onCreateView"+mRoleType);
+        mRefreshHandler = QueryAttendanceRefreshHandler.create(mSrlQueryAttendance, mRvQueryAttendance, new QueryAttendanceConverter(), this);
         initRefreshLayout();
         initRecyclerView();
-    }
-
-    private void initData() {
-        mRoleType =getArguments().getString(Constant.ROLE_TYPE);
-        mProjectId=getArguments().getString(Constant.PROJECT_ID);
+        mRefreshHandler.firstPage(mRoleType, mProjectId);
     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        mRefreshHandler.firstPage(mRoleType,mProjectId);
+
     }
 
     private void initRecyclerView() {
@@ -92,7 +87,69 @@ public class QueryAttendanceSubDelegate extends LongForDelegate implements IQuer
         mParentDelegate.start(LargePhotoDelegate.getInstance(imageUrl));
     }
 
-    public void setProjectId(String projectId) {
-        mProjectId = projectId;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        LogUtils.e(TAG,"onAttach"+mRoleType);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LogUtils.e(TAG,"onCreate"+mRoleType);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        LogUtils.e(TAG,"onActivityCreated"+mRoleType);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LogUtils.e(TAG,"onStart"+mRoleType);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtils.e(TAG,"onResume"+mRoleType);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtils.e(TAG,"onPause"+mRoleType);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        LogUtils.e(TAG,"onStop"+mRoleType);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        LogUtils.e(TAG,"onDestroyView"+mRoleType);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LogUtils.e(TAG,"onDestroy"+mRoleType);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        LogUtils.e(TAG,"onDetach"+mRoleType);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        LogUtils.e(TAG,"setUserVisibleHint"+mRoleType);
     }
 }

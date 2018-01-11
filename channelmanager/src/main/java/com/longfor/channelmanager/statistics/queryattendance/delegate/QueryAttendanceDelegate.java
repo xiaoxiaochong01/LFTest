@@ -46,6 +46,7 @@ public class QueryAttendanceDelegate extends LongForDelegate implements IProject
     private ProjectsPopWindow mProjectWindow;
     public TextView mTvTitleRight;
     public List<Fragment> mFragmentList;
+    public QueryAttendancePagerAdapter mPagerAdapter;
 
     @Override
     public Object setLayout() {
@@ -101,8 +102,8 @@ public class QueryAttendanceDelegate extends LongForDelegate implements IProject
         for (int i = 0; i < mTabTitles.size(); i++) {
             mFragmentList.add(QueryAttendanceSubDelegate.getInstance(mRoleTypes.get(i), mProjectId, this));
         }
-        QueryAttendancePagerAdapter pagerAdapter = new QueryAttendancePagerAdapter(getFragmentManager(), mTabTitles, mFragmentList);
-        mVpQueryAttendance.setAdapter(pagerAdapter);
+        mPagerAdapter = new QueryAttendancePagerAdapter(getFragmentManager(), mTabTitles, mFragmentList);
+        mVpQueryAttendance.setAdapter(mPagerAdapter);
         mTlQueryAttendance.setupWithViewPager(mVpQueryAttendance);
     }
 
@@ -111,7 +112,12 @@ public class QueryAttendanceDelegate extends LongForDelegate implements IProject
         mProjectId = projectsBean.getProjectId();
         mTvTitleRight.setText(projectsBean.getProjectName());
         for (int i = 0; i < mFragmentList.size(); i++) {
-            ((QueryAttendanceSubDelegate) mFragmentList.get(i)).setProjectId(mProjectId);
+            ((QueryAttendanceSubDelegate) mFragmentList.get(i)).mProjectId = mProjectId;
+            if (mFragmentList.get(i).isAdded()) {
+                ((QueryAttendanceSubDelegate) mFragmentList.get(i)).mRefreshHandler.firstPage(
+                        ((QueryAttendanceSubDelegate) mFragmentList.get(i)).mRoleType,
+                        ((QueryAttendanceSubDelegate) mFragmentList.get(i)).mProjectId);
+            }
         }
     }
 }

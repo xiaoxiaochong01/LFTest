@@ -6,6 +6,6 @@ package com.longfor.channelmanager.statistics.queryattendance.adapter;
  * @function:
  */
 
-public interface IQueryAttendancexClickPhotoListener {
+public interface IQueryAttendanceClickPhotoListener {
     void onClickPhoto(String imageUrl);
 }

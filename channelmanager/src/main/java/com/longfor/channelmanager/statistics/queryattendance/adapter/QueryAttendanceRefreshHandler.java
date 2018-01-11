@@ -37,13 +37,13 @@ public class QueryAttendanceRefreshHandler implements
     private String mEmployeeId;
     private String mProjectId;
     private String mRoleType;
-    IQueryAttendancexClickPhotoListener mIQueryAttendancexClickPhotoListener;
+    IQueryAttendanceClickPhotoListener mIQueryAttendancexClickPhotoListener;
 
     public QueryAttendanceRefreshHandler(SwipeRefreshLayout REFRESH_LAYOUT,
                                          PagingBean BEAN,
                                          RecyclerView RECYCLERVIEW,
                                          DataConverter CONVERTER,
-                                         IQueryAttendancexClickPhotoListener listener) {
+                                         IQueryAttendanceClickPhotoListener listener) {
         this.REFRESH_LAYOUT = REFRESH_LAYOUT;
         this.BEAN = BEAN;
         this.RECYCLERVIEW = RECYCLERVIEW;
@@ -55,7 +55,7 @@ public class QueryAttendanceRefreshHandler implements
     public static QueryAttendanceRefreshHandler create(SwipeRefreshLayout swipeRefreshLayout,
                                                        RecyclerView recyclerView,
                                                        DataConverter converter,
-                                                       IQueryAttendancexClickPhotoListener listener) {
+                                                       IQueryAttendanceClickPhotoListener listener) {
         return new QueryAttendanceRefreshHandler(swipeRefreshLayout, new PagingBean(), recyclerView, converter,listener);
     }
 
@@ -65,7 +65,7 @@ public class QueryAttendanceRefreshHandler implements
         LongFor.getHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                REFRESH_LAYOUT.setRefreshing(false);
+                firstPage(mRoleType,mProjectId);
             }
         }, 2000);
     }

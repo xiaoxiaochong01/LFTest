@@ -24,14 +24,14 @@ import java.util.List;
  */
 
 public class QueryAttendanceRvAdapter extends BaseRecyclerAdapter {
-    private IQueryAttendancexClickPhotoListener mIQueryAttendancexClickPhotoListener;
+    private IQueryAttendanceClickPhotoListener mIQueryAttendancexClickPhotoListener;
 
-    public QueryAttendanceRvAdapter(List<MultipleItemEntity> data, IQueryAttendancexClickPhotoListener listener) {
+    public QueryAttendanceRvAdapter(List<MultipleItemEntity> data, IQueryAttendanceClickPhotoListener listener) {
         super(data);
         mIQueryAttendancexClickPhotoListener = listener;
     }
 
-    public static QueryAttendanceRvAdapter create(DataConverter dataConverter, IQueryAttendancexClickPhotoListener listener) {
+    public static QueryAttendanceRvAdapter create(DataConverter dataConverter, IQueryAttendanceClickPhotoListener listener) {
         return new QueryAttendanceRvAdapter(dataConverter.convert(), listener);
     }
 
