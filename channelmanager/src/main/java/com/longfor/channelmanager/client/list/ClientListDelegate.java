@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -34,6 +35,9 @@ public class ClientListDelegate extends LongForDelegate {
     TabLayout tlClientList;
     @BindView(R2.id.vp_client_list)
     ViewPager vpClientList;
+    private final List<LongForDelegate> delegates = new ArrayList<>();
+    private final List<String> mTabTitles = new ArrayList<>();
+    private final List<String> intentTypes = new ArrayList<>();
 
     @Override
     public Object setLayout() {
@@ -66,15 +70,40 @@ public class ClientListDelegate extends LongForDelegate {
     }
 
     private void initTabLayout() {
-        List<String> mTabTitles = Arrays.asList(new String[]{getString(R.string.all),
+        delegates.clear();
+        mTabTitles.clear();
+        intentTypes.clear();
+        mTabTitles.addAll(Arrays.asList(new String[]{getString(R.string.all),
                 getString(R.string.first_floor), getString(R.string.second_floor),
-                getString(R.string.subscribe)});
-        List<Fragment> fragmentList = new ArrayList<>();
-        for (int i = 0; i < mTabTitles.size(); i++) {
-            fragmentList.add(new QueryAttendanceSubDelegate());
+                getString(R.string.subscribe)}));
+        intentTypes.addAll(Arrays.asList(new String[]{ConstantClientList.CLIENT_ALL,
+                ConstantClientList.CLIENT_FIRST,
+                ConstantClientList.CLIENT_SECOND,
+                ConstantClientList.CLIENT_SUBSCRIBE}
+        ));
+        for (String intentType : intentTypes) {
+            ClientListSubDelegate delegate = ClientListSubDelegate.getInstance(intentType);
+            delegates.add(delegate);
         }
-        QueryAttendancePagerAdapter pagerAdapter=new QueryAttendancePagerAdapter(getFragmentManager(),mTabTitles,fragmentList);
-        vpClientList.setAdapter(pagerAdapter);
+
+        vpClientList.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return delegates.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return delegates.size();
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return mTabTitles.get(position);
+            }
+        });
         tlClientList.setupWithViewPager(vpClientList);
     }
+
+//    private FragmentPagerAdapter pagerAdapter
 }

@@ -19,7 +19,7 @@
         android:layout_height="@dimen/title_height"
         app:tabIndicatorColor="@color/orange"
         app:tabIndicatorHeight="2dp"
-        app:tabMode="scrollable"
+        app:tabMode="fixed"
         app:tabSelectedTextColor="@color/gray_3"
         app:tabTextAppearance="@style/text_14sp_gray9">
 

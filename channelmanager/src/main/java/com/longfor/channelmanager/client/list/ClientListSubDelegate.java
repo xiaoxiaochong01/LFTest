@@ -12,7 +12,6 @@ import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
-import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceRefreshHandler;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.ui.recycler.BaseDecoration;
 
@@ -21,17 +20,22 @@ import butterknife.BindView;
 /**
  * @author: tongzhenhua
  * @date: 2018/1/9
- * @function:
+ * @function: 客户列表子界面
  */
 public class ClientListSubDelegate extends LongForDelegate {
     @BindView(R2.id.rv_client_sub)
     RecyclerView rvClientSub;
     @BindView(R2.id.srl_client_list)
     SwipeRefreshLayout srlClientList;
-    public QueryAttendanceRefreshHandler mRefreshHandler;
-    private String employeeId;
-    private String projectId;
-    private String roleType;
+    public ClientListRefreshHandler mRefreshHandler;
+    private String intentType;
+
+    public static ClientListSubDelegate getInstance(String intentType) {
+
+        ClientListSubDelegate delegate = new ClientListSubDelegate();
+        delegate.intentType = intentType;
+        return delegate;
+    }
     @Override
     public Object setLayout() {
         return R.layout.delegate_client_list_sub;
@@ -39,11 +43,10 @@ public class ClientListSubDelegate extends LongForDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-//        mRefreshHandler = QueryAttendanceRefreshHandler.create(srlClientList, rvClientSub, new QueryAttendanceConverter());
         initRefreshLayout();
         initRecyclerView();
-        roleType="1";
-//        mRefreshHandler.firstPage(roleType);
+        mRefreshHandler = ClientListRefreshHandler.creat(intentType, srlClientList, rvClientSub, new ClientListDataConverter());
+        mRefreshHandler.firstPage();
     }
 
     @Override
