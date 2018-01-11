@@ -23,4 +23,10 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/gray_9</item>
     </style>
+
+    <style name="style_translucent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/alpha_0.8_black</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>

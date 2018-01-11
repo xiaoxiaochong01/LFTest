@@ -64,8 +64,6 @@ public class QueryAttendanceSubDelegate extends LongForDelegate implements IQuer
     private void initData() {
         mRoleType =getArguments().getString(Constant.ROLE_TYPE);
         mProjectId=getArguments().getString(Constant.PROJECT_ID);
-        // TODO: 2018/1/10 test
-        mProjectId = "80B03281-B931-4838-AEAD-EE2BA11DF224";
     }
 
     @Override
