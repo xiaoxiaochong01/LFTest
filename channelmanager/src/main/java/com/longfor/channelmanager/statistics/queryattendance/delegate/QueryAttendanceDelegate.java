@@ -1,7 +1,6 @@
 package com.longfor.channelmanager.statistics.queryattendance.delegate;
 
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,7 +19,7 @@ import com.longfor.channelmanager.common.ec.project.popupwindow.ProjectsPopWindo
 import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.channelmanager.database.DatabaseManager;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendancePagerAdapter;
-import com.longfor.channelmanager.statistics.queryattendance.constants.ConstantQueryAttendance;
+import com.longfor.channelmanager.statistics.queryattendance.constant.ConstantQueryAttendance;
 import com.longfor.core.delegates.LongForDelegate;
 
 import java.util.ArrayList;
@@ -48,6 +47,14 @@ public class QueryAttendanceDelegate extends LongForDelegate implements IProject
     public List<Fragment> mFragmentList;
     public QueryAttendancePagerAdapter mPagerAdapter;
 
+    public static QueryAttendanceDelegate getInstance(String leftMsg){
+        Bundle bundle=new Bundle();
+        bundle.putString(Constant.TITLE_LEFT_TEXT,leftMsg);
+        QueryAttendanceDelegate delegate=new QueryAttendanceDelegate();
+        delegate.setArguments(bundle);
+        return delegate;
+    }
+
     @Override
     public Object setLayout() {
         return R.layout.delegate_statistics_query_attendance;
@@ -64,17 +71,17 @@ public class QueryAttendanceDelegate extends LongForDelegate implements IProject
         mProjectId = DatabaseManager.getProjectId();
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void initHeader() {
-        Bundle arguments = getArguments();
-        mHeaderQueryAttendance.setLeftMsg(arguments.getString(Constant.TITLE_LEFT_TEXT));
+        mHeaderQueryAttendance.setLeftMsg(getArguments().getString(Constant.TITLE_LEFT_TEXT));
         mHeaderQueryAttendance.setLeftBackImageVisible(true);
         mHeaderQueryAttendance.setTitle(getString(R.string.query_attendance));
         mHeaderQueryAttendance.setRightTextViewVisible(true);
         mHeaderQueryAttendance.setRightTextViewText(DatabaseManager.getUserProfile().getProjectName());
         mTvTitleRight = (TextView) mHeaderQueryAttendance.findViewById(R.id.tv_head_common_right_text);
+        Drawable drawable = getResources().getDrawable(R.mipmap.ic_arrow_down_s);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
         mTvTitleRight.setCompoundDrawablePadding(5);
-        mTvTitleRight.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.mipmap.ic_arrow_down_s, 0);
+        mTvTitleRight.setCompoundDrawables(null, null, drawable, null);
         mHeaderQueryAttendance.setBottomLineVisible(true);
         mProjectWindow = new ProjectsPopWindow(getContext(), this);
         mHeaderQueryAttendance.setLeftLayoutOnClickListener(new View.OnClickListener() {

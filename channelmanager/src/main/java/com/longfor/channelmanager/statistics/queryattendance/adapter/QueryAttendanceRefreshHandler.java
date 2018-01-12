@@ -8,7 +8,7 @@ import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.ec.baseadapter.BaseRefreshHandler;
 import com.longfor.channelmanager.database.DatabaseManager;
 import com.longfor.channelmanager.statistics.queryattendance.bean.CheckInListBean;
-import com.longfor.channelmanager.statistics.queryattendance.constants.ConstantQueryAttendance;
+import com.longfor.channelmanager.statistics.queryattendance.constant.ConstantQueryAttendance;
 import com.longfor.ui.recycler.BaseRecyclerAdapter;
 import com.longfor.ui.recycler.DataConverter;
 
@@ -25,7 +25,7 @@ public class QueryAttendanceRefreshHandler extends BaseRefreshHandler {
     private String mEmployeeId;
     private String mProjectId;
     private String mRoleType;
-    IQueryAttendanceClickPhotoListener mIQueryAttendancexClickPhotoListener;
+    IQueryAttendanceClickPhotoListener mIQueryAttendanceClickPhotoListener;
 
     public QueryAttendanceRefreshHandler(SwipeRefreshLayout REFRESH_LAYOUT, RecyclerView RECYCLERVIEW,
                                          DataConverter CONVERTER, String roleType, String projectId,
@@ -33,7 +33,7 @@ public class QueryAttendanceRefreshHandler extends BaseRefreshHandler {
         super(REFRESH_LAYOUT, RECYCLERVIEW, CONVERTER);
         mRoleType = roleType;
         mProjectId = projectId;
-        mIQueryAttendancexClickPhotoListener = listener;
+        mIQueryAttendanceClickPhotoListener = listener;
     }
 
     public static QueryAttendanceRefreshHandler create(SwipeRefreshLayout REFRESH_LAYOUT, RecyclerView RECYCLERVIEW,
@@ -72,7 +72,7 @@ public class QueryAttendanceRefreshHandler extends BaseRefreshHandler {
 
     @Override
     public BaseRecyclerAdapter getAdapter(DataConverter converter) {
-        return QueryAttendanceRvAdapter.create(converter, mIQueryAttendancexClickPhotoListener);
+        return QueryAttendanceRvAdapter.create(converter, mIQueryAttendanceClickPhotoListener);
     }
 
     @Override

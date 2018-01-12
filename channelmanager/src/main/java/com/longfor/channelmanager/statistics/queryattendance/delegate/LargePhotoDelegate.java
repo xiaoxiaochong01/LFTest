@@ -9,7 +9,7 @@ import android.view.View;
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.common.utils.ImageLoader;
-import com.longfor.channelmanager.statistics.queryattendance.constants.ConstantQueryAttendance;
+import com.longfor.channelmanager.statistics.queryattendance.constant.ConstantQueryAttendance;
 import com.longfor.core.delegates.LongForDelegate;
 
 import butterknife.BindView;
