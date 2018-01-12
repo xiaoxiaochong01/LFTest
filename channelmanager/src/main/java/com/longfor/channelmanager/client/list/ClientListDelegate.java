@@ -1,13 +1,22 @@
 package com.longfor.channelmanager.client.list;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
@@ -16,12 +25,16 @@ import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendancePagerAdapter;
 import com.longfor.channelmanager.statistics.queryattendance.delegate.QueryAttendanceSubDelegate;
 import com.longfor.core.delegates.LongForDelegate;
+import com.longfor.core.utils.log.LogUtils;
+import com.longfor.core.utils.toast.ToastUtils;
+import com.longfor.ui.view.editwatcher.EditTextWatcher;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author: tongzhenhua
@@ -29,21 +42,44 @@ import butterknife.BindView;
  * @function:
  */
 public class ClientListDelegate extends LongForDelegate {
-    @BindView(R2.id.header_client_list)
-    CommonHeadView headerClientList;
+//    @BindView(R2.id.header_client_list)
+//    CommonHeadView headerClientList;
     @BindView(R2.id.tl_client_list)
     TabLayout tlClientList;
     @BindView(R2.id.vp_client_list)
     ViewPager vpClientList;
-    private final List<LongForDelegate> delegates = new ArrayList<>();
+    @BindView(R2.id.tv_back)
+    AppCompatTextView tvBack;
+    @BindView(R2.id.et_search)
+    AppCompatEditText etSearch;
+    @BindView(R2.id.iv_clear)
+    AppCompatImageView imgClear;
+
+    private final List<ClientListSubDelegate> delegates = new ArrayList<>();
     private final List<String> mTabTitles = new ArrayList<>();
     private final List<String> intentTypes = new ArrayList<>();
+    private String roleType = ConstantClientList.ROLE_TYPE_DEFAULT;
+    private String searchContent = ConstantClientList.SEARCH_CONTENT_DEFAULT;
 
     @Override
     public Object setLayout() {
         return R.layout.delegate_client_list;
     }
 
+    @OnClick(R2.id.iv_clear)
+    void onImgClearClick() {
+        for (ClientListSubDelegate delegate : delegates) {
+            if(delegate.isAdded()) {
+                delegate.update(ConstantClientList.ROLE_TYPE_DEFAULT, ConstantClientList.SEARCH_CONTENT_DEFAULT);
+            }
+        }
+    }
+
+    @OnClick(R2.id.fl_search)
+    void onSearchClick() {
+//        getSupportDelegate().startForResult(new);
+        ToastUtils.showMessage("查询");
+    }
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         initHeader();
@@ -56,24 +92,18 @@ public class ClientListDelegate extends LongForDelegate {
     }
 
     private void initHeader() {
-        Bundle arguments = getArguments();
-        headerClientList.setLeftMsg(arguments.getString(Constant.TITLE_LEFT_TEXT));
-        headerClientList.setLeftBackImageVisible(true);
-        headerClientList.setTitle(getString(R.string.channel_platform_client_list));
-        headerClientList.setBottomLineVisible(true);
-        headerClientList.setLeftLayoutOnClickListener(new View.OnClickListener() {
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            tvBack.setText(bundle.getString(Constant.TITLE_LEFT_TEXT));
+        }
+        tvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getSupportDelegate().pop();
-
             }
         });
-//        headerClientList.setRightLayoutOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ToastUtils.showMessage(getContext(), getString(R.string.index_statistics_title));
-//            }
-//        });
+        etSearch.addTextChangedListener(etSearchListener);
+
     }
 
     private void initTabLayout() {
@@ -90,9 +120,10 @@ public class ClientListDelegate extends LongForDelegate {
         ));
         for (String intentType : intentTypes) {
             ClientListSubDelegate delegate = ClientListSubDelegate.getInstance(intentType);
+
             delegates.add(delegate);
         }
-        vpClientList.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
+        vpClientList.setAdapter(new FragmentStatePagerAdapter(getFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
                 return delegates.get(position);
@@ -110,5 +141,22 @@ public class ClientListDelegate extends LongForDelegate {
         });
         tlClientList.setupWithViewPager(vpClientList);
     }
+    private EditTextWatcher etSearchListener = new EditTextWatcher() {
+        @Override
+        public void afterTextChanged(Editable editable) {
+            String text = etSearch.getText().toString();
+            imgClear.setVisibility(TextUtils.isEmpty(text) ? View.GONE : View.VISIBLE);
+        }
+    };
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LogUtils.e("test", "onDestroy走了intentType=ClientListDelegate");
+    }
 }

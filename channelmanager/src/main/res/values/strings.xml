@@ -89,5 +89,14 @@
     
     <string name="string_trainee">实习生</string>
     <string name="string_consultant">置业顾问</string>
+
+    <string name="input_search_content">输入查询信息</string>
     <!--客户列表 end-->
+
+    <!--客户列表搜索 begin-->
+    <string name="client_list_history_search">历史搜索</string>
+    <string name="input_search_counselor">请输入置业顾问姓名</string>
+    <string name="input_search_trainee">请输入实习生姓名</string>
+    <string name="input_search_client">请输入客户姓名或者电话</string>
+    <!--客户列表搜索 end-->
 </resources>

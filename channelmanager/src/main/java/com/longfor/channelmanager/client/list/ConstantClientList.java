@@ -12,6 +12,11 @@ public interface ConstantClientList {
     String CLIENT_SECOND = "2"; // 二级
     String CLIENT_SUBSCRIBE = "3"; // 认购
 
+    String ROLE_TYPE_DEFAULT = "0";
+    String SEARCH_CONTENT_DEFAULT = "";
+
+    int DELEGATE_ON_RESULT_CODE = 0xcccc;
+
     /**--------------------------客户列表数据请求相关 begin ----------------------*/
     String CURRENT_PAGE = "currentPage";
     String PAGE_SIZE = "pageSize";

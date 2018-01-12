@@ -23,13 +23,14 @@ import butterknife.BindView;
  * @date: 2018/1/9
  * @function: 客户列表子界面
  */
-public class ClientListSubDelegate extends LongForDelegate {
+public class ClientListSubDelegate extends LongForDelegate implements OnSearchConditionListener{
     @BindView(R2.id.rv_client_sub)
     RecyclerView rvClientSub;
     @BindView(R2.id.srl_client_list)
     SwipeRefreshLayout srlClientList;
     public TestBaseRefreshHandler mRefreshHandler;
     private String intentType;
+    private boolean isNeedLazyLoad = false;
 
     public static ClientListSubDelegate getInstance(String intentType) {
 
@@ -52,6 +53,9 @@ public class ClientListSubDelegate extends LongForDelegate {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         LogUtils.e("test", "setUserVisibleHint走了intentType="+intentType);
+        if(isVisibleToUser && isNeedLazyLoad) {
+            mRefreshHandler.onRefresh();
+        }
     }
 
     @Override
@@ -91,6 +95,11 @@ public class ClientListSubDelegate extends LongForDelegate {
         mRefreshHandler.firstPage();
     }
 
+    @Override
+    public boolean onBackPressedSupport() {
+        return super.onBackPressedSupport();
+    }
+
     private void initRecyclerView() {
         final GridLayoutManager manager = new GridLayoutManager(getContext(), 1);
         final Context context = getContext();
@@ -105,5 +114,18 @@ public class ClientListSubDelegate extends LongForDelegate {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
         srlClientList.setProgressViewOffset(true, 120, 300);
+    }
+
+    @Override
+    public void update(String roleId, String searchContent) {
+        mRefreshHandler.updateParams(roleId,searchContent);
+        if(getUserVisibleHint()) {
+            mRefreshHandler.onRefresh();
+        }
+        else{
+            if(isAdded()) {
+                isNeedLazyLoad = true;
+            }
+        }
     }
 }
