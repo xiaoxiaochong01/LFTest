@@ -9,7 +9,7 @@ import android.view.View;
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.common.utils.ImageLoader;
-import com.longfor.channelmanager.statistics.queryattendance.constant.ConstantQueryAttendance;
+import com.longfor.channelmanager.statistics.queryattendance.constant.QueryAttendanceConstant;
 import com.longfor.core.delegates.LongForDelegate;
 
 import butterknife.BindView;
@@ -28,7 +28,7 @@ public class LargePhotoDelegate extends LongForDelegate {
     public static LargePhotoDelegate getInstance(String imgUrl){
         LargePhotoDelegate delegate=new LargePhotoDelegate();
         Bundle bundle=new Bundle();
-        bundle.putString(ConstantQueryAttendance.IMG_URL,imgUrl);
+        bundle.putString(QueryAttendanceConstant.IMG_URL,imgUrl);
         delegate.setArguments(bundle);
         return delegate;
     }
@@ -40,7 +40,7 @@ public class LargePhotoDelegate extends LongForDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        String imgUrl = getArguments().getString(ConstantQueryAttendance.IMG_URL);
+        String imgUrl = getArguments().getString(QueryAttendanceConstant.IMG_URL);
         ImageLoader.display(getContext(),mIvLargePhoto,imgUrl);
     }
 

@@ -12,9 +12,8 @@ import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
-import com.longfor.channelmanager.statistics.queryattendance.adapter.IQueryAttendanceClickPhotoListener;
-import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceConverter;
-import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceRefreshHandler;
+import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceRvAdapter;
+import com.longfor.channelmanager.statistics.queryattendance.handler.QueryAttendanceRefreshHandler;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.core.utils.log.LogUtils;
 import com.longfor.ui.recycler.BaseDecoration;
@@ -27,7 +26,7 @@ import butterknife.BindView;
  * @function:考勤查询子页面-区分角色
  */
 
-public class QueryAttendanceSubDelegate extends LongForDelegate implements IQueryAttendanceClickPhotoListener {
+public class QueryAttendanceSubDelegate extends LongForDelegate implements QueryAttendanceRvAdapter.IQueryAttendanceClickPhotoListener {
     @BindView(R2.id.srl_query_attendance)
     SwipeRefreshLayout mSrlQueryAttendance;
     @BindView(R2.id.rv_query_attendance)

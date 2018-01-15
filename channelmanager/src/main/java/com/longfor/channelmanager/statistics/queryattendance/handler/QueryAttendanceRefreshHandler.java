@@ -1,4 +1,4 @@
-package com.longfor.channelmanager.statistics.queryattendance.adapter;
+package com.longfor.channelmanager.statistics.queryattendance.handler;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,10 @@ import com.alibaba.fastjson.JSON;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.ec.baseadapter.BaseRefreshHandler;
 import com.longfor.channelmanager.database.DatabaseManager;
+import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceRvAdapter;
 import com.longfor.channelmanager.statistics.queryattendance.bean.CheckInListBean;
-import com.longfor.channelmanager.statistics.queryattendance.constant.ConstantQueryAttendance;
+import com.longfor.channelmanager.statistics.queryattendance.converter.QueryAttendanceConverter;
+import com.longfor.channelmanager.statistics.queryattendance.constant.QueryAttendanceConstant;
 import com.longfor.ui.recycler.BaseRecyclerAdapter;
 import com.longfor.ui.recycler.DataConverter;
 
@@ -25,11 +27,11 @@ public class QueryAttendanceRefreshHandler extends BaseRefreshHandler {
     private String mEmployeeId;
     private String mProjectId;
     private String mRoleType;
-    IQueryAttendanceClickPhotoListener mIQueryAttendanceClickPhotoListener;
+    QueryAttendanceRvAdapter.IQueryAttendanceClickPhotoListener mIQueryAttendanceClickPhotoListener;
 
     public QueryAttendanceRefreshHandler(SwipeRefreshLayout REFRESH_LAYOUT, RecyclerView RECYCLERVIEW,
                                          DataConverter CONVERTER, String roleType, String projectId,
-                                         IQueryAttendanceClickPhotoListener listener) {
+                                         QueryAttendanceRvAdapter.IQueryAttendanceClickPhotoListener listener) {
         super(REFRESH_LAYOUT, RECYCLERVIEW, CONVERTER);
         mRoleType = roleType;
         mProjectId = projectId;
@@ -38,13 +40,13 @@ public class QueryAttendanceRefreshHandler extends BaseRefreshHandler {
 
     public static QueryAttendanceRefreshHandler create(SwipeRefreshLayout REFRESH_LAYOUT, RecyclerView RECYCLERVIEW,
                                                        String roleType, String projectId,
-                                                       IQueryAttendanceClickPhotoListener listener) {
+                                                       QueryAttendanceRvAdapter.IQueryAttendanceClickPhotoListener listener) {
         return new QueryAttendanceRefreshHandler(REFRESH_LAYOUT, RECYCLERVIEW, new QueryAttendanceConverter(), roleType, projectId, listener);
     }
 
     @Override
     public String getUrl() {
-        return ConstantQueryAttendance.URL_GET_CHECK_IN_LIST;
+        return QueryAttendanceConstant.URL_GET_CHECK_IN_LIST;
     }
 
     @Override

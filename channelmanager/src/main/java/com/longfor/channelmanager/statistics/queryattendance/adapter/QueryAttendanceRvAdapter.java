@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.common.view.checkincircleimageview.CheckInPhotoView;
 import com.longfor.channelmanager.statistics.queryattendance.bean.CheckInListBean;
+import com.longfor.channelmanager.statistics.queryattendance.constant.QueryAttendanceConstant;
 import com.longfor.ui.recycler.BaseRecyclerAdapter;
 import com.longfor.ui.recycler.DataConverter;
 import com.longfor.ui.recycler.MultipleFields;
@@ -38,7 +39,7 @@ public class QueryAttendanceRvAdapter extends BaseRecyclerAdapter {
     @Override
     protected void convert(MultipleViewHolder helper, MultipleItemEntity item) {
         switch (item.getItemType()) {
-            case QueryAttendanceItemType.QUERY_ATTENDANCE:
+            case QueryAttendanceConstant.QUERY_ATTENDANCE:
                 CheckInListBean.DataBean.CheckinsBean emplyoeeCheckinsInfo = (CheckInListBean.DataBean.CheckinsBean) item.getField(MultipleFields.OBJECT);
                 if (!TextUtils.isEmpty(emplyoeeCheckinsInfo.getEmployeeName())) {
                     helper.setText(R.id.tv_name, emplyoeeCheckinsInfo.getEmployeeName());
@@ -120,7 +121,7 @@ public class QueryAttendanceRvAdapter extends BaseRecyclerAdapter {
 
     @Override
     protected void init() {
-        addItemType(QueryAttendanceItemType.QUERY_ATTENDANCE, R.layout.item_query_attendance);
+        addItemType(QueryAttendanceConstant.QUERY_ATTENDANCE, R.layout.item_query_attendance);
     }
 
     @Override
@@ -131,5 +132,9 @@ public class QueryAttendanceRvAdapter extends BaseRecyclerAdapter {
     @Override
     public void onItemClick(int position) {
 
+    }
+
+    public interface IQueryAttendanceClickPhotoListener {
+        void onClickPhoto(String imageUrl);
     }
 }

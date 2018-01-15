@@ -19,7 +19,7 @@ import com.longfor.channelmanager.common.ec.project.popupwindow.ProjectsPopWindo
 import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.channelmanager.database.DatabaseManager;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendancePagerAdapter;
-import com.longfor.channelmanager.statistics.queryattendance.constant.ConstantQueryAttendance;
+import com.longfor.channelmanager.statistics.queryattendance.constant.QueryAttendanceConstant;
 import com.longfor.core.delegates.LongForDelegate;
 
 import java.util.ArrayList;
@@ -102,9 +102,9 @@ public class QueryAttendanceDelegate extends LongForDelegate implements IProject
         List<String> mTabTitles = Arrays.asList(new String[]{getString(R.string.trainee_role_show_get_num),
                 getString(R.string.trainee_role_expand_get_num), getString(R.string.trainee_role_show_and_expand_call_num),
                 getString(R.string.trainee_role_call_get_num), getString(R.string.trainee_role_call_call_num)});
-        List<String> mRoleTypes = Arrays.asList(new String[]{ConstantQueryAttendance.SHOW_GET_NUM,
-                ConstantQueryAttendance.EXPAND_GET_NUM, ConstantQueryAttendance.SHOW_AND_EXPAND_CALL_NUM,
-                ConstantQueryAttendance.CALL_GET_NUM, ConstantQueryAttendance.CALL_CALL_NUM});
+        List<String> mRoleTypes = Arrays.asList(new String[]{QueryAttendanceConstant.SHOW_GET_NUM,
+                QueryAttendanceConstant.EXPAND_GET_NUM, QueryAttendanceConstant.SHOW_AND_EXPAND_CALL_NUM,
+                QueryAttendanceConstant.CALL_GET_NUM, QueryAttendanceConstant.CALL_CALL_NUM});
         mFragmentList = new ArrayList<>();
         for (int i = 0; i < mTabTitles.size(); i++) {
             mFragmentList.add(QueryAttendanceSubDelegate.getInstance(mRoleTypes.get(i), mProjectId, this));
