@@ -12,8 +12,11 @@ import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.core.delegates.LongForDelegate;
+import com.longfor.core.delegates.web.WebDelegateImpl;
 
 import butterknife.BindView;
+import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
  * @author: tongzhenhua
@@ -23,14 +26,28 @@ import butterknife.BindView;
 public class WebviewDelegate extends LongForDelegate {
     @BindView(R2.id.webview_head)
     CommonHeadView mHeadView;
-    @BindView(R2.id.webview)
-    WebView mWebView;
+//    @BindView(R2.id.webview)
+//    WebView mWebView;
+    private WebDelegateImpl delegate;
 
     private String mUrl;
 
     @Override
     public Object setLayout() {
         return R.layout.delegate_webview;
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        delegate = WebDelegateImpl.creat(mUrl);
+        delegate.setTopDelegate(this.getParentDelegate());
+        getSupportDelegate().loadRootFragment(R.id.web_discovery_container,delegate);
+    }
+
+    @Override
+    public FragmentAnimator onCreateFragmentAnimator() {
+        return new DefaultHorizontalAnimator();
     }
 
     @Override
@@ -62,25 +79,19 @@ public class WebviewDelegate extends LongForDelegate {
                 });
             }
         }
-        configWebView();
-        if(mUrl != null) {
-            mWebView.loadUrl(mUrl);
-        }
+//        configWebView();
+//        if(mUrl != null) {
+//            mWebView.loadUrl(mUrl);
+//        }
         mHeadView.setLeftBackImageVisible(true);
         mHeadView.setLeftLayoutOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mWebView.canGoBack()) {
-                    mWebView.goBack();
-                }
-                else {
+                if(!delegate.onBackPressedSupport()) {
                     getSupportDelegate().pop();
                 }
             }
         });
     }
 
-    private void configWebView() {
-
-    }
 }
