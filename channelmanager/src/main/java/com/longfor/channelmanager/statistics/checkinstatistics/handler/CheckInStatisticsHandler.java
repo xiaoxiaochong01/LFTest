@@ -6,12 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.ec.baseadapter.BaseRefreshHandler;
 import com.longfor.channelmanager.database.DatabaseManager;
+import com.longfor.channelmanager.statistics.checkinstatistics.adapter.CheckInStatisticsRvAdapter;
 import com.longfor.channelmanager.statistics.checkinstatistics.constant.CheckInStatisticsConstant;
+import com.longfor.channelmanager.statistics.checkinstatistics.converter.CheckInStatisticsDataConverter;
 import com.longfor.ui.recycler.BaseRecyclerAdapter;
 import com.longfor.ui.recycler.DataConverter;
-import com.longfor.ui.recycler.MultipleItemEntity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,11 +24,11 @@ import java.util.Map;
 public class CheckInStatisticsHandler extends BaseRefreshHandler {
     private String mRoleType;
     private String mEmployeeId;
-    private String mItemType;
+    private int mItemType;
     private String mId;
 
     public CheckInStatisticsHandler(SwipeRefreshLayout REFRESH_LAYOUT, RecyclerView RECYCLERVIEW,
-                                    DataConverter CONVERTER, String roleType, String itemType,
+                                    DataConverter CONVERTER, String roleType, int itemType,
                                     String id) {
         super(REFRESH_LAYOUT, RECYCLERVIEW, CONVERTER);
         mRoleType = roleType;
@@ -38,13 +38,9 @@ public class CheckInStatisticsHandler extends BaseRefreshHandler {
 
     public static CheckInStatisticsHandler create(SwipeRefreshLayout swipeRefreshLayout,
                                                   RecyclerView recyclerView, String roleType,
-                                                  String itemType, String id) {
-        return new CheckInStatisticsHandler(swipeRefreshLayout, recyclerView, new DataConverter() {
-            @Override
-            public ArrayList<MultipleItemEntity> convert() {
-                return null;
-            }
-        }, roleType, itemType, id);
+                                                  int itemType, String id) {
+        return new CheckInStatisticsHandler(swipeRefreshLayout, recyclerView,
+                new CheckInStatisticsDataConverter(itemType), roleType, itemType, id);
     }
 
     @Override
@@ -93,7 +89,7 @@ public class CheckInStatisticsHandler extends BaseRefreshHandler {
 
     @Override
     public BaseRecyclerAdapter getAdapter(DataConverter converter) {
-        return null;
+        return CheckInStatisticsRvAdapter.create(converter.convert(), mItemType);
     }
 
     @Override

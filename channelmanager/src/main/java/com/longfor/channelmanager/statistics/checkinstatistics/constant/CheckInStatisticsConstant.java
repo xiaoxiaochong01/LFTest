@@ -12,10 +12,15 @@ public class CheckInStatisticsConstant {
     public static final String URL_GET_TEAM_CHECK_IN = "channelManager/getTeamCheckIns";
 
     //    上岗统计的类型
-    public static final String ITEM_TYPE_COMPANY = "company";
-    public static final String ITEM_TYPE_PROJECT = "project";
-    public static final String ITEM_TYPE_TEAM = "team";
+    public static final int ITEM_TYPE_COMPANY = 0;
+    public static final int ITEM_TYPE_PROJECT = 1;
+    public static final int ITEM_TYPE_TEAM = 2;
 
-    public static final String AREA_ID = "areaId";
-    public static final String PROJECT_ID = "projectId";
+    public static final String AREA_ID = "areaId";//请求-地区id
+    public static final String PROJECT_ID = "projectId";//请求-项目id
+
+    public static final String ID = "id";
+    public static final String NAME = "name";
+    public static final String TODAY_CHECK_IN = "todayCheckIn";
+    public static final String MONTH_AVG_CHECK_IN = "monthAvgCheckIn";
 }

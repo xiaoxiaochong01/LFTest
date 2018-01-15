@@ -17,6 +17,8 @@ import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.view.CommonHeadView;
+import com.longfor.channelmanager.statistics.checkinstatistics.constant.CheckInStatisticsConstant;
+import com.longfor.channelmanager.statistics.checkinstatistics.handler.CheckInStatisticsHandler;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.ui.recycler.BaseDecoration;
 
@@ -59,6 +61,10 @@ public class CompanyCheckInStatisticsDelegate extends LongForDelegate {
         initHeader();
         initRefreshLayout();
         initRecyclerView();
+        CheckInStatisticsHandler handler=CheckInStatisticsHandler.create(mSrlCompanyCheckIn,
+                mRvCompanyCheckIn,"0", CheckInStatisticsConstant.ITEM_TYPE_COMPANY,
+                null);
+        handler.firstPage();
     }
 
     private void initHeader() {

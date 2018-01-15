@@ -60,9 +60,8 @@
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_month_avg_check_in"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
                         android:layout_marginRight="15dp"
                         android:drawablePadding="5dp"
                         android:drawableRight="@mipmap/icon_check_in_sort_def"

@@ -126,7 +126,7 @@ public class QueryAttendanceRvAdapter extends BaseRecyclerAdapter {
 
     @Override
     public int getSpanSize(GridLayoutManager gridLayoutManager, int position) {
-        return getData().get(position).getItemType();
+        return getData().get(position).getField(MultipleFields.SPAN_SIZE);
     }
 
     @Override

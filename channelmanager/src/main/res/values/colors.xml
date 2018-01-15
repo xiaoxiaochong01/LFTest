@@ -48,6 +48,7 @@
     <color name="gray_fa">#fafafa</color>
     <color name="white_alpha_3">#4cffffff</color>
     <color name="orange">#ffcf64</color>
+    <color name="orange_red">#FA914A</color>
     <color name="light_orange">#fff9ec</color>
     <color name="trans_orange">#80ffcf64</color>
     <color name="red">#ec615c</color>
