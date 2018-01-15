@@ -16,5 +16,4 @@ public interface ConstantQueryAttendance {
     String SHOW_AND_EXPAND_CALL_NUM = "3";//3.外展外拓追电
     String CALL_GET_NUM = "4";//4.外呼陌电
     String CALL_CALL_NUM = "5";//5.外呼追电
-    String DELEGATE = "delegate";
 }

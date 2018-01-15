@@ -54,8 +54,8 @@ public class QueryAttendanceSubDelegate extends LongForDelegate implements IQuer
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         LogUtils.e(TAG, "onCreateView" + mRoleType);
-        mRefreshHandler = QueryAttendanceRefreshHandler.create(mSrlQueryAttendance, mRvQueryAttendance, new QueryAttendanceConverter(), mRoleType, mProjectId, this);
-        initRefreshLayout();
+        mRefreshHandler = QueryAttendanceRefreshHandler.create(mSrlQueryAttendance, mRvQueryAttendance,  mRoleType, mProjectId, this);
+        initSwipeRefreshLayout();
         initRecyclerView();
     }
 
@@ -65,7 +65,7 @@ public class QueryAttendanceSubDelegate extends LongForDelegate implements IQuer
         mRefreshHandler.firstPage();
     }
 
-    private void initRefreshLayout() {
+    private void initSwipeRefreshLayout() {
         mSrlQueryAttendance.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);

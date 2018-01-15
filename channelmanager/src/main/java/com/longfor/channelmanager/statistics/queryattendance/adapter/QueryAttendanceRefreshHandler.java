@@ -37,9 +37,9 @@ public class QueryAttendanceRefreshHandler extends BaseRefreshHandler {
     }
 
     public static QueryAttendanceRefreshHandler create(SwipeRefreshLayout REFRESH_LAYOUT, RecyclerView RECYCLERVIEW,
-                                                       DataConverter CONVERTER, String roleType, String projectId,
+                                                       String roleType, String projectId,
                                                        IQueryAttendanceClickPhotoListener listener) {
-        return new QueryAttendanceRefreshHandler(REFRESH_LAYOUT, RECYCLERVIEW, CONVERTER, roleType, projectId, listener);
+        return new QueryAttendanceRefreshHandler(REFRESH_LAYOUT, RECYCLERVIEW, new QueryAttendanceConverter(), roleType, projectId, listener);
     }
 
     @Override

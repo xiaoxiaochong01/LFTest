@@ -62,12 +62,12 @@ public class QueryAttendanceDelegate extends LongForDelegate implements IProject
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        initData();
+        getBasicData();
         initHeader();
         initTabLayout();
     }
 
-    private void initData() {
+    private void getBasicData() {
         mProjectId = DatabaseManager.getProjectId();
     }
 

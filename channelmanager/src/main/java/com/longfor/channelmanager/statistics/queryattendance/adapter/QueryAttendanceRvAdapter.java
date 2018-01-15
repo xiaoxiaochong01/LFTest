@@ -24,11 +24,11 @@ import java.util.List;
  */
 
 public class QueryAttendanceRvAdapter extends BaseRecyclerAdapter {
-    private IQueryAttendanceClickPhotoListener mIQueryAttendancexClickPhotoListener;
+    private IQueryAttendanceClickPhotoListener mIQueryAttendanceClickPhotoListener;
 
     public QueryAttendanceRvAdapter(List<MultipleItemEntity> data, IQueryAttendanceClickPhotoListener listener) {
         super(data);
-        mIQueryAttendancexClickPhotoListener = listener;
+        mIQueryAttendanceClickPhotoListener = listener;
     }
 
     public static QueryAttendanceRvAdapter create(DataConverter dataConverter, IQueryAttendanceClickPhotoListener listener) {
@@ -111,8 +111,8 @@ public class QueryAttendanceRvAdapter extends BaseRecyclerAdapter {
         photoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mIQueryAttendancexClickPhotoListener != null && !TextUtils.isEmpty(imageUrl) && photoView.isPhotoClickable()) {
-                    mIQueryAttendancexClickPhotoListener.onClickPhoto(imageUrl);
+                if (mIQueryAttendanceClickPhotoListener != null && !TextUtils.isEmpty(imageUrl) && photoView.isPhotoClickable()) {
+                    mIQueryAttendanceClickPhotoListener.onClickPhoto(imageUrl);
                 }
             }
         });
