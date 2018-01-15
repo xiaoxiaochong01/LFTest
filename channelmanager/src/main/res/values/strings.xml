@@ -86,9 +86,11 @@
     <string name="first_floor">一级</string>
     <string name="second_floor">二级</string>
     <string name="subscribe">认购</string>
-    
+
+    <string name="string_client">客户</string>
     <string name="string_trainee">实习生</string>
     <string name="string_consultant">置业顾问</string>
+
 
     <string name="input_search_content">输入查询信息</string>
     <!--客户列表 end-->

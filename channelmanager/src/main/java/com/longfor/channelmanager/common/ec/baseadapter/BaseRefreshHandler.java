@@ -167,6 +167,12 @@ public abstract class BaseRefreshHandler implements
     @Override
     public void onError(int code, String msg) {
         ToastUtils.showMessage(msg);
+        if(REFRESH_LAYOUT.isRefreshing()) {
+            REFRESH_LAYOUT.setRefreshing(false);
+        }
+        else if(mAdapter != null) {
+            mAdapter.loadMoreComplete();
+        }
     }
 
     public int getDefaultPageSize() {

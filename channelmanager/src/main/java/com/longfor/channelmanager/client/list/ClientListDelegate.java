@@ -13,6 +13,7 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -20,6 +21,8 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
+import com.longfor.channelmanager.client.search.ClientSearchDelegate;
+import com.longfor.channelmanager.client.search.ConstantClientSearch;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendancePagerAdapter;
@@ -41,9 +44,7 @@ import butterknife.OnClick;
  * @date: 2018/1/9
  * @function:
  */
-public class ClientListDelegate extends LongForDelegate {
-//    @BindView(R2.id.header_client_list)
-//    CommonHeadView headerClientList;
+public class ClientListDelegate extends LongForDelegate implements OnRefreshSearchContentListener{
     @BindView(R2.id.tl_client_list)
     TabLayout tlClientList;
     @BindView(R2.id.vp_client_list)
@@ -58,8 +59,6 @@ public class ClientListDelegate extends LongForDelegate {
     private final List<ClientListSubDelegate> delegates = new ArrayList<>();
     private final List<String> mTabTitles = new ArrayList<>();
     private final List<String> intentTypes = new ArrayList<>();
-    private String roleType = ConstantClientList.ROLE_TYPE_DEFAULT;
-    private String searchContent = ConstantClientList.SEARCH_CONTENT_DEFAULT;
 
     @Override
     public Object setLayout() {
@@ -68,17 +67,12 @@ public class ClientListDelegate extends LongForDelegate {
 
     @OnClick(R2.id.iv_clear)
     void onImgClearClick() {
-        for (ClientListSubDelegate delegate : delegates) {
-            if(delegate.isAdded()) {
-                delegate.update(ConstantClientList.ROLE_TYPE_DEFAULT, ConstantClientList.SEARCH_CONTENT_DEFAULT);
-            }
-        }
+        onRefresh(ConstantClientList.ROLE_TYPE_DEFAULT, ConstantClientList.SEARCH_CONTENT_DEFAULT);
     }
 
-    @OnClick(R2.id.fl_search)
+    @OnClick(R2.id.et_search)
     void onSearchClick() {
-//        getSupportDelegate().startForResult(new);
-        ToastUtils.showMessage("查询");
+        getSupportDelegate().startForResult(new ClientSearchDelegate(), ConstantClientSearch.DELEGATE_RESULT_CODE_CLIENT_SEARCH);
     }
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
@@ -103,7 +97,8 @@ public class ClientListDelegate extends LongForDelegate {
             }
         });
         etSearch.addTextChangedListener(etSearchListener);
-
+        etSearch.setInputType(InputType.TYPE_NULL);
+        etSearch.requestFocus();
     }
 
     private void initTabLayout() {
@@ -119,8 +114,7 @@ public class ClientListDelegate extends LongForDelegate {
                 ConstantClientList.CLIENT_SUBSCRIBE}
         ));
         for (String intentType : intentTypes) {
-            ClientListSubDelegate delegate = ClientListSubDelegate.getInstance(intentType);
-
+            ClientListSubDelegate delegate = ClientListSubDelegate.getInstance(intentType,this);
             delegates.add(delegate);
         }
         vpClientList.setAdapter(new FragmentStatePagerAdapter(getFragmentManager()) {
@@ -149,14 +143,27 @@ public class ClientListDelegate extends LongForDelegate {
         }
     };
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+//    @Override
+//    public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
+//        super.onFragmentResult(requestCode, resultCode, data);
+//        if(requestCode == ConstantClientSearch.DELEGATE_RESULT_CODE_CLIENT_SEARCH){
+//            if(resultCode == RESULT_OK) {
+//                if(data != null) {
+//                    String roleType = data.getString(ConstantClientList.ROLE_TYPE_DEFAULT);
+//                    String searchContent = data.getString(ConstantClientList.SEARCH_CONTENT_DEFAULT);
+//                    etSearch.setText(searchContent);
+////                    refreshChildDelegate(roleType, searchContent);
+//                }
+//            }
+//        }
+//        ToastUtils.showMessage("resultCode= "+resultCode);
+//    }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        LogUtils.e("test", "onDestroy走了intentType=ClientListDelegate");
+    public void onRefresh(String roleType, String searchContent) {
+        etSearch.setText(searchContent);
+        for(ClientListSubDelegate delegate : delegates) {
+            delegate.update(roleType, searchContent);
+        }
     }
 }

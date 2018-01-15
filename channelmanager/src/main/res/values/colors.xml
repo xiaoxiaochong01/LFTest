@@ -10,6 +10,8 @@
 
     <color name="common_dividing_line">#eeeeee</color>
     <color name="common_head_view_bg">#fafafa</color>
+    <color name="color_ededed">#ededed</color>
+
     <!-- 公共颜色库 end-->
     <color name="color_fa">#fafafa</color>
     <!-- 启动模块 begin-->

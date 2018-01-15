@@ -20,8 +20,8 @@ public class UserProfile {
      * projectId : D50012F0-1DFD-4640-8C49-33A85833EDBD
      * employeeId : 6753
      */
-    @Id
-    private long userid;
+    @Id(autoincrement = true)
+    private Long userid;
     private String mobilePhone;
     private int roleId;
     private int subRoleId;
@@ -64,14 +64,14 @@ public class UserProfile {
     public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
     }
-    public long getUserid() {
+    public Long getUserid() {
         return this.userid;
     }
-    public void setUserid(long userid) {
+    public void setUserid(Long userid) {
         this.userid = userid;
     }
-    @Generated(hash = 1434109476)
-    public UserProfile(long userid, String mobilePhone, int roleId, int subRoleId,
+    @Generated(hash = 1917384486)
+    public UserProfile(Long userid, String mobilePhone, int roleId, int subRoleId,
             String projectName, String projectId, int employeeId) {
         this.userid = userid;
         this.mobilePhone = mobilePhone;
@@ -84,17 +84,5 @@ public class UserProfile {
     @Generated(hash = 968487393)
     public UserProfile() {
     }
-
-    @Override
-    public String toString() {
-        return "UserProfile{" +
-                "userid=" + userid +
-                ", mobilePhone='" + mobilePhone + '\'' +
-                ", roleId=" + roleId +
-                ", subRoleId=" + subRoleId +
-                ", projectName='" + projectName + '\'' +
-                ", projectId='" + projectId + '\'' +
-                ", employeeId=" + employeeId +
-                '}';
-    }
+    
 }
