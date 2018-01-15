@@ -12,8 +12,10 @@ import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
+import com.longfor.channelmanager.client.search.ConstantClientSearch;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.core.utils.log.LogUtils;
+import com.longfor.core.utils.toast.ToastUtils;
 import com.longfor.ui.recycler.BaseDecoration;
 
 import butterknife.BindView;
@@ -23,18 +25,23 @@ import butterknife.BindView;
  * @date: 2018/1/9
  * @function: 客户列表子界面
  */
-public class ClientListSubDelegate extends LongForDelegate {
+public class ClientListSubDelegate extends LongForDelegate implements OnSearchConditionListener{
     @BindView(R2.id.rv_client_sub)
     RecyclerView rvClientSub;
     @BindView(R2.id.srl_client_list)
     SwipeRefreshLayout srlClientList;
     public TestBaseRefreshHandler mRefreshHandler;
     private String intentType;
+    private boolean isNeedLazyLoad = false;
+    private String mRoleType = ConstantClientList.ROLE_TYPE_DEFAULT;
+    private String mSearchContent = ConstantClientList.SEARCH_CONTENT_DEFAULT;
+    private OnRefreshSearchContentListener searchContentListener;
 
-    public static ClientListSubDelegate getInstance(String intentType) {
+    public static ClientListSubDelegate getInstance(String intentType, OnRefreshSearchContentListener searchContentListener) {
 
         ClientListSubDelegate delegate = new ClientListSubDelegate();
         delegate.intentType = intentType;
+        delegate.searchContentListener = searchContentListener;
         return delegate;
     }
     @Override
@@ -52,6 +59,28 @@ public class ClientListSubDelegate extends LongForDelegate {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         LogUtils.e("test", "setUserVisibleHint走了intentType="+intentType);
+        if(isVisibleToUser && isNeedLazyLoad) {
+            mRefreshHandler.firstPage();
+        }
+    }
+
+    @Override
+    public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
+        super.onFragmentResult(requestCode, resultCode, data);
+//        ToastUtils.showMessage("Jie到了");
+        if(requestCode == ConstantClientSearch.DELEGATE_RESULT_CODE_CLIENT_SEARCH&&resultCode == RESULT_OK&&data != null) {
+            mRoleType = data.getString(ConstantClientList.ROLE_TYPE, ConstantClientList.ROLE_TYPE_DEFAULT);
+            mSearchContent = data.getString(ConstantClientList.SEARCH_CONTENT, ConstantClientList.SEARCH_CONTENT_DEFAULT);
+            if (searchContentListener != null) {
+                searchContentListener.onRefresh(mRoleType, mSearchContent);
+            }
+            mRefreshHandler.updateParams(mRoleType, mSearchContent);
+            mRefreshHandler.firstPage();
+
+        }
+        else {
+            ToastUtils.showMessage("requestCode="+requestCode);
+        }
     }
 
     @Override
@@ -83,12 +112,18 @@ public class ClientListSubDelegate extends LongForDelegate {
         initRefreshLayout();
         initRecyclerView();
         mRefreshHandler = TestBaseRefreshHandler.create(intentType, srlClientList, rvClientSub, new ClientListDataConverter());
+        mRefreshHandler.updateParams(mRoleType, mSearchContent);
     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         mRefreshHandler.firstPage();
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        return super.onBackPressedSupport();
     }
 
     private void initRecyclerView() {
@@ -105,5 +140,17 @@ public class ClientListSubDelegate extends LongForDelegate {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
         srlClientList.setProgressViewOffset(true, 120, 300);
+    }
+
+    @Override
+    public void update(String roleId, String searchContent) {
+
+        if(!getUserVisibleHint()) {
+            mRoleType = roleId;
+            mSearchContent = searchContent;
+            if(isAdded()) {
+                isNeedLazyLoad = true;
+            }
+        }
     }
 }

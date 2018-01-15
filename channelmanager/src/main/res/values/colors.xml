@@ -10,6 +10,8 @@
 
     <color name="common_dividing_line">#eeeeee</color>
     <color name="common_head_view_bg">#fafafa</color>
+    <color name="color_ededed">#ededed</color>
+
     <!-- 公共颜色库 end-->
     <color name="color_fa">#fafafa</color>
     <!-- 启动模块 begin-->
@@ -30,7 +32,9 @@
     <color name="gray_e">#eeeeee</color>
     <color name="gray_e0">#e0e0e0</color>
     <!--首页模块 end-->
-
+    <!--客户模块 begin-->
+    <color name="divider_color">#f0f2f2</color>
+    <!--客户模块 end-->
     <color name="alpha_0.8_black">#cc000000</color>
     <color name="alpha">#00ffffff</color>
     <color name="trans_gray_3">#80333333</color>

@@ -60,7 +60,7 @@ public class ChannelPlatformDelegate extends LongForDelegate {
                 bundle.putString(Constant.TITLE_LEFT_TEXT, getResources().getString(R.string.channel_platform_title));
                 ClientListDelegate delegate = new ClientListDelegate();
                 delegate.setArguments(bundle);
-                getSupportDelegate().start(delegate);
+                getSupportDelegate().start(delegate, SINGLETASK);
                 break;
             case R.id.rl_group_broker_customer_list:
                 ToastUtils.showMessage(R.string.channel_platform_broker_list);
