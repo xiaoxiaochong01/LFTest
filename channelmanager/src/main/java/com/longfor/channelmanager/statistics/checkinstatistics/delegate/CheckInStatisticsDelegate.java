@@ -26,6 +26,7 @@ import com.longfor.core.utils.log.LogUtils;
 import com.longfor.ui.recycler.BaseDecoration;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author: gaomei
@@ -53,6 +54,11 @@ public class CheckInStatisticsDelegate extends LongForDelegate implements CheckI
     public String mRoleType;//用户角色
     private String mId;//mId,可能是areaId或projectId
 
+
+    private int mTodayCheckInFlag = CheckInStatisticsConstant.SORT_DEF;//按当天签到排序
+    private int mMonthAvgCheckInFlag = CheckInStatisticsConstant.SORT_DEF;//按滚动30天日均排序
+    private OnSortButtonClickListener mOnSortButtonClickListener;
+
     public static CheckInStatisticsDelegate getInstance(int checkInType, String leftMsg, String roleType, String id) {
         Bundle bundle = new Bundle();
         bundle.putInt(CheckInStatisticsConstant.CHECK_IN_TYPE, checkInType);
@@ -76,7 +82,8 @@ public class CheckInStatisticsDelegate extends LongForDelegate implements CheckI
         initRefreshLayout();
         initRecyclerView();
         CheckInStatisticsHandler handler = CheckInStatisticsHandler.create(mSrlCheckIn,
-                mRvCheckIn, mRoleType, mCheckInType, mId, this);
+                mRvCheckIn, mRoleType, mCheckInType, mId, this,this);
+
         handler.firstPage();
     }
 
@@ -181,5 +188,56 @@ public class CheckInStatisticsDelegate extends LongForDelegate implements CheckI
     public void onDestroy() {
         super.onDestroy();
         LogUtils.e(TAG, "onDestroy" + mCheckInType);
+    }
+
+    public void setOnSortButtonClickListener(OnSortButtonClickListener listener) {
+        mOnSortButtonClickListener = listener;
+    }
+
+    public interface OnSortButtonClickListener {
+        void onTodayCheckInSort(int todayCheckInFlag);
+
+        void onMonthCheckInSort(int monthAvgCheckInFlag);
+    }
+
+    @OnClick({R.id.tv_today_check_in, R.id.tv_month_avg_check_in})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_today_check_in:
+                mTodayCheckInFlag = ++mTodayCheckInFlag % CheckInStatisticsConstant.SORT_OVER;
+                if (mOnSortButtonClickListener!=null){
+                    mOnSortButtonClickListener.onTodayCheckInSort(mTodayCheckInFlag);
+                }
+                if (mMonthAvgCheckInFlag != CheckInStatisticsConstant.SORT_DEF) {
+                    mMonthAvgCheckInFlag = CheckInStatisticsConstant.SORT_DEF;
+                    drawLeft(mTvMonthAvgCheckIn, mMonthAvgCheckInFlag);
+                }
+                drawLeft(mTvTodayCheckIn, mTodayCheckInFlag);
+                break;
+            case R.id.tv_month_avg_check_in:
+                mMonthAvgCheckInFlag = ++mMonthAvgCheckInFlag % CheckInStatisticsConstant.SORT_OVER;
+                if (mOnSortButtonClickListener!=null){
+                    mOnSortButtonClickListener.onMonthCheckInSort(mMonthAvgCheckInFlag);
+                }
+                if (mTodayCheckInFlag != CheckInStatisticsConstant.SORT_DEF) {
+                    mTodayCheckInFlag = CheckInStatisticsConstant.SORT_DEF;
+                    drawLeft(mTvTodayCheckIn, mTodayCheckInFlag);
+                }
+                drawLeft(mTvMonthAvgCheckIn, mMonthAvgCheckInFlag);
+                break;
+        }
+    }
+
+    private void drawLeft(TextView textView, int type) {
+        Drawable drawable = null;
+        if (type == CheckInStatisticsConstant.SORT_DEF) {
+            drawable = getResources().getDrawable(R.mipmap.icon_check_in_sort_def);
+        } else if (type == CheckInStatisticsConstant.SORT_ASC) {
+            drawable = getResources().getDrawable(R.mipmap.icon_check_in_sort_asc);
+        } else if (type == CheckInStatisticsConstant.SORT_DESC) {
+            drawable = getResources().getDrawable(R.mipmap.icon_check_in_sort_desc);
+        }
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        textView.setCompoundDrawables(null, null, drawable, null);
     }
 }
