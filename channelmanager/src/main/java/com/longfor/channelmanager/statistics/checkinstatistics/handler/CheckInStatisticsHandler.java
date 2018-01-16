@@ -26,21 +26,24 @@ public class CheckInStatisticsHandler extends BaseRefreshHandler {
     private String mEmployeeId;
     private int mItemType;
     private String mId;
+    private CheckInStatisticsRvAdapter.OnItemClickListener mOnItemClickListener;
 
     public CheckInStatisticsHandler(SwipeRefreshLayout REFRESH_LAYOUT, RecyclerView RECYCLERVIEW,
                                     DataConverter CONVERTER, String roleType, int itemType,
-                                    String id) {
+                                    String id, CheckInStatisticsRvAdapter.OnItemClickListener onItemClickListener) {
         super(REFRESH_LAYOUT, RECYCLERVIEW, CONVERTER);
         mRoleType = roleType;
         mItemType = itemType;
         mId = id;
+        mOnItemClickListener = onItemClickListener;
     }
 
     public static CheckInStatisticsHandler create(SwipeRefreshLayout swipeRefreshLayout,
                                                   RecyclerView recyclerView, String roleType,
-                                                  int itemType, String id) {
+                                                  int itemType, String id,
+                                                  CheckInStatisticsRvAdapter.OnItemClickListener onItemClickListener) {
         return new CheckInStatisticsHandler(swipeRefreshLayout, recyclerView,
-                new CheckInStatisticsDataConverter(itemType), roleType, itemType, id);
+                new CheckInStatisticsDataConverter(itemType), roleType, itemType, id, onItemClickListener);
     }
 
     @Override
@@ -89,7 +92,7 @@ public class CheckInStatisticsHandler extends BaseRefreshHandler {
 
     @Override
     public BaseRecyclerAdapter getAdapter(DataConverter converter) {
-        return CheckInStatisticsRvAdapter.create(converter.convert(), mItemType);
+        return CheckInStatisticsRvAdapter.create(converter.convert(), mItemType,mOnItemClickListener);
     }
 
     @Override

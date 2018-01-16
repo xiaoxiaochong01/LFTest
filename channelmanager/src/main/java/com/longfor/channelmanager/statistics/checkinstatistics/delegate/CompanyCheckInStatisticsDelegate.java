@@ -17,6 +17,7 @@ import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.view.CommonHeadView;
+import com.longfor.channelmanager.statistics.checkinstatistics.adapter.CheckInStatisticsRvAdapter;
 import com.longfor.channelmanager.statistics.checkinstatistics.constant.CheckInStatisticsConstant;
 import com.longfor.channelmanager.statistics.checkinstatistics.handler.CheckInStatisticsHandler;
 import com.longfor.core.delegates.LongForDelegate;
@@ -30,7 +31,7 @@ import butterknife.BindView;
  * @function:地区级别上岗统计
  */
 
-public class CompanyCheckInStatisticsDelegate extends LongForDelegate {
+public class CompanyCheckInStatisticsDelegate extends LongForDelegate implements CheckInStatisticsRvAdapter.OnItemClickListener {
     @BindView(R2.id.header_company_check_in)
     CommonHeadView mHeaderCompanyCheckIn;
     @BindView(R2.id.tv_today_check_in)
@@ -42,6 +43,7 @@ public class CompanyCheckInStatisticsDelegate extends LongForDelegate {
     @BindView(R2.id.srl_company_check_in)
     SwipeRefreshLayout mSrlCompanyCheckIn;
     private TextView mTvTitleRight;
+    public String mRoleType=String.valueOf(0);
 
     public static CompanyCheckInStatisticsDelegate getInstance(String leftMsg) {
         Bundle bundle = new Bundle();
@@ -62,8 +64,8 @@ public class CompanyCheckInStatisticsDelegate extends LongForDelegate {
         initRefreshLayout();
         initRecyclerView();
         CheckInStatisticsHandler handler=CheckInStatisticsHandler.create(mSrlCompanyCheckIn,
-                mRvCompanyCheckIn,"0", CheckInStatisticsConstant.ITEM_TYPE_COMPANY,
-                null);
+                mRvCompanyCheckIn, mRoleType, CheckInStatisticsConstant.ITEM_TYPE_COMPANY,
+                null,this);
         handler.firstPage();
     }
 
@@ -107,5 +109,11 @@ public class CompanyCheckInStatisticsDelegate extends LongForDelegate {
         if (context != null) {
             mRvCompanyCheckIn.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, com.longfor.ec.R.color.app_background), 5));
         }
+    }
+
+    @Override
+    public void onItemClick(String id) {
+        ProjectCheckInStatisticsDelegate delegate = ProjectCheckInStatisticsDelegate.getInstance(mRoleType,id);
+        getSupportDelegate().start(delegate);
     }
 }

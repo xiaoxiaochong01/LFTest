@@ -1,6 +1,7 @@
 package com.longfor.channelmanager.statistics.checkinstatistics.adapter;
 
 import android.support.v7.widget.GridLayoutManager;
+import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.statistics.checkinstatistics.constant.CheckInStatisticsConstant;
@@ -19,22 +20,24 @@ import java.util.List;
 
 public class CheckInStatisticsRvAdapter extends BaseRecyclerAdapter {
     private int mCheckInType;
+    private OnItemClickListener mOnItemClickListener;
 
-    public CheckInStatisticsRvAdapter(List<MultipleItemEntity> data, int checkInType) {
+    public CheckInStatisticsRvAdapter(List<MultipleItemEntity> data, int checkInType, OnItemClickListener onItemClickListener) {
         super(data);
         mCheckInType = checkInType;
+        mOnItemClickListener = onItemClickListener;
     }
 
-    public static CheckInStatisticsRvAdapter create(List<MultipleItemEntity> data, int checkInType) {
-        return new CheckInStatisticsRvAdapter(data, checkInType);
+    public static CheckInStatisticsRvAdapter create(List<MultipleItemEntity> data, int checkInType, OnItemClickListener onItemClickListener) {
+        return new CheckInStatisticsRvAdapter(data, checkInType, onItemClickListener);
     }
 
     @Override
-    protected void convert(MultipleViewHolder helper, MultipleItemEntity item) {
+    protected void convert(MultipleViewHolder helper, final MultipleItemEntity item) {
         helper.setText(R.id.tv_check_in_name, ((String) item.getField(CheckInStatisticsConstant.NAME)));
         helper.setText(R.id.tv_today_check_in, String.valueOf(item.getField(CheckInStatisticsConstant.TODAY_CHECK_IN)));
         helper.setText(R.id.tv_month_avg_check_in, String.valueOf(item.getField(CheckInStatisticsConstant.MONTH_AVG_CHECK_IN)));
-        if (((Integer) item.getField(MultipleFields.ITEM_TYPE))!=mCheckInType) {
+        if (((Integer) item.getField(MultipleFields.ITEM_TYPE)) != mCheckInType) {
             helper.setTextColor(R.id.tv_check_in_name, helper.itemView.getContext().getResources().getColor(R.color.orange_red));
             helper.setTextColor(R.id.tv_today_check_in, helper.itemView.getContext().getResources().getColor(R.color.orange_red));
             helper.setTextColor(R.id.tv_month_avg_check_in, helper.itemView.getContext().getResources().getColor(R.color.orange_red));
@@ -43,6 +46,12 @@ public class CheckInStatisticsRvAdapter extends BaseRecyclerAdapter {
             helper.setTextColor(R.id.tv_today_check_in, helper.itemView.getContext().getResources().getColor(R.color.gray_6));
             helper.setTextColor(R.id.tv_month_avg_check_in, helper.itemView.getContext().getResources().getColor(R.color.gray_6));
         }
+        helper.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickItem(item.getItemType(), (String) item.getField(CheckInStatisticsConstant.ID));
+            }
+        });
     }
 
     @Override
@@ -60,5 +69,24 @@ public class CheckInStatisticsRvAdapter extends BaseRecyclerAdapter {
     @Override
     public void onItemClick(int position) {
 
+    }
+
+    private void clickItem(int itemType, String id) {
+        if (mOnItemClickListener != null && itemType == mCheckInType) {
+            switch (mCheckInType) {
+                case CheckInStatisticsConstant.ITEM_TYPE_COMPANY:
+                    mOnItemClickListener.onItemClick(id);
+                    break;
+                case CheckInStatisticsConstant.ITEM_TYPE_PROJECT:
+                    mOnItemClickListener.onItemClick(id);
+                    break;
+                case CheckInStatisticsConstant.ITEM_TYPE_TEAM:
+                    break;
+            }
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(String id);
     }
 }
