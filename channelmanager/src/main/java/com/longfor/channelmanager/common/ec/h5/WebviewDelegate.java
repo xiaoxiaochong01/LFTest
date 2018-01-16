@@ -79,17 +79,19 @@ public class WebviewDelegate extends LongForDelegate {
                 });
             }
         }
-//        configWebView();
-//        if(mUrl != null) {
-//            mWebView.loadUrl(mUrl);
-//        }
+
         mHeadView.setLeftBackImageVisible(true);
         mHeadView.setLeftLayoutOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!delegate.onBackPressedSupport()) {
+
+                if(delegate.getWebView().canGoBack()) {
+                    delegate.getWebView().goBack();
+                }
+                else {
                     getSupportDelegate().pop();
                 }
+
             }
         });
     }
