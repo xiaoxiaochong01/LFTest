@@ -1,7 +1,8 @@
-package com.longfor.channelmanager.statistics.queryattendance.adapter;
+package com.longfor.channelmanager.statistics.queryattendance.converter;
 
 import com.alibaba.fastjson.JSON;
 import com.longfor.channelmanager.statistics.queryattendance.bean.CheckInListBean;
+import com.longfor.channelmanager.statistics.queryattendance.constant.QueryAttendanceConstant;
 import com.longfor.ui.recycler.DataConverter;
 import com.longfor.ui.recycler.MultipleFields;
 import com.longfor.ui.recycler.MultipleItemEntity;
@@ -23,7 +24,7 @@ public class QueryAttendanceConverter extends DataConverter {
         if (checkins!=null){
             for (int i = 0; i < checkins.size(); i++) {
                 final MultipleItemEntity entity = MultipleItemEntity.builder()
-                        .setField(MultipleFields.ITEM_TYPE,QueryAttendanceItemType.QUERY_ATTENDANCE)
+                        .setField(MultipleFields.ITEM_TYPE, QueryAttendanceConstant.QUERY_ATTENDANCE)
                         .setField(MultipleFields.SPAN_SIZE,1)
                         .setField(MultipleFields.OBJECT,checkins.get(i))
                         .build();

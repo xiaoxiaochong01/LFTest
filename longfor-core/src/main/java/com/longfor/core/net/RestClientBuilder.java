@@ -3,6 +3,8 @@ package com.longfor.core.net;
 import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
+import com.longfor.core.app.ConfigKeys;
+import com.longfor.core.app.LongFor;
 import com.longfor.core.net.callback.IError;
 import com.longfor.core.net.callback.IFailure;
 import com.longfor.core.net.callback.IRequest;
@@ -42,7 +44,7 @@ public class RestClientBuilder {
 
     public final RestClientBuilder url(String url) {
         this.mUrl = url;
-        LogUtils.e("Http","url:"+mUrl);
+        LogUtils.e("HttpReqUrl", LongFor.getConfiguration(ConfigKeys.API_HOST) + mUrl);
         return this;
     }
 
@@ -87,7 +89,7 @@ public class RestClientBuilder {
     }
 
     public final RestClientBuilder raw(Map<String, String> params) {
-        LogUtils.e("Http","---params:"+ JSON.toJSONString(params));
+        LogUtils.e("HttpReqParams", JSON.toJSONString(params));
         this.mRequestbody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), RestParamsUtils.paramsTransferJson(params));
         return this;
     }
@@ -96,6 +98,7 @@ public class RestClientBuilder {
         this.mRequestbody = RestParamsUtils.paramsTranferBody(params);
         return this;
     }
+
     public final RestClientBuilder onRequest(IRequest iRequest) {
         this.mRequest = iRequest;
         return this;

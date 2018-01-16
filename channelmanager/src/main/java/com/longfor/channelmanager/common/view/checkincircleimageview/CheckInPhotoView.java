@@ -46,7 +46,7 @@ public class CheckInPhotoView extends RelativeLayout {
     }
 
     public void setPhoto(int status, final String url) {
-        mRlCheckIn.setClickable(true);
+        setClickable(true);
         mImgCheckInPhoto.setVisibility(VISIBLE);
         mImgException.setVisibility(VISIBLE);
         if (url != null && !TextUtils.isEmpty(url)) {
@@ -61,20 +61,14 @@ public class CheckInPhotoView extends RelativeLayout {
             case 2://早退
                 break;
             default://未打卡
-                mRlCheckIn.setClickable(false);
+                setClickable(false);
                 mImgCheckInPhoto.setVisibility(GONE);
                 mImgException.setVisibility(GONE);
                 break;
         }
-        if (mRlCheckIn.isClickable()){
-            mRlCheckIn.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    Intent intent = new Intent(getContext(), LargeImageActivity.class);
-//                    intent.putExtra("imgUrl", url);
-//                    getContext().startActivity(intent);
-                }
-            });
-        }
+    }
+
+    public boolean isPhotoClickable(){
+        return isClickable();
     }
 }

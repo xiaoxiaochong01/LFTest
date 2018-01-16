@@ -1,7 +1,6 @@
 package com.longfor.channelmanager.statistics.queryattendance.delegate;
 
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,12 +13,14 @@ import android.widget.TextView;
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.common.ec.Constant;
+import com.longfor.channelmanager.common.ec.project.IProjectChange;
+import com.longfor.channelmanager.common.ec.project.ProjectsDataBean;
+import com.longfor.channelmanager.common.ec.project.popupwindow.ProjectsPopWindow;
 import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.channelmanager.database.DatabaseManager;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendancePagerAdapter;
-import com.longfor.channelmanager.statistics.queryattendance.constants.ConstantQueryAttendance;
+import com.longfor.channelmanager.statistics.queryattendance.constant.QueryAttendanceConstant;
 import com.longfor.core.delegates.LongForDelegate;
-import com.longfor.core.utils.toast.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +34,7 @@ import butterknife.BindView;
  * @function:考勤查询
  */
 
-public class QueryAttendanceDelegate extends LongForDelegate {
+public class QueryAttendanceDelegate extends LongForDelegate implements IProjectChange {
     @BindView(R2.id.header_query_attendance)
     CommonHeadView mHeaderQueryAttendance;
     @BindView(R.id.tl_query_attendance)
@@ -41,6 +42,18 @@ public class QueryAttendanceDelegate extends LongForDelegate {
     @BindView(R.id.vp_query_attendance)
     ViewPager mVpQueryAttendance;
     public String mProjectId;
+    private ProjectsPopWindow mProjectWindow;
+    public TextView mTvTitleRight;
+    public List<Fragment> mFragmentList;
+    public QueryAttendancePagerAdapter mPagerAdapter;
+
+    public static QueryAttendanceDelegate getInstance(String leftMsg){
+        Bundle bundle=new Bundle();
+        bundle.putString(Constant.TITLE_LEFT_TEXT,leftMsg);
+        QueryAttendanceDelegate delegate=new QueryAttendanceDelegate();
+        delegate.setArguments(bundle);
+        return delegate;
+    }
 
     @Override
     public Object setLayout() {
@@ -49,27 +62,28 @@ public class QueryAttendanceDelegate extends LongForDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        initData();
+        getBasicData();
         initHeader();
         initTabLayout();
     }
 
-    private void initData() {
+    private void getBasicData() {
         mProjectId = DatabaseManager.getProjectId();
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void initHeader() {
-        Bundle arguments = getArguments();
-        mHeaderQueryAttendance.setLeftMsg(arguments.getString(Constant.TITLE_LEFT_TEXT));
+        mHeaderQueryAttendance.setLeftMsg(getArguments().getString(Constant.TITLE_LEFT_TEXT));
         mHeaderQueryAttendance.setLeftBackImageVisible(true);
         mHeaderQueryAttendance.setTitle(getString(R.string.query_attendance));
         mHeaderQueryAttendance.setRightTextViewVisible(true);
         mHeaderQueryAttendance.setRightTextViewText(DatabaseManager.getUserProfile().getProjectName());
-        TextView tvRight = (TextView) mHeaderQueryAttendance.findViewById(R.id.tv_head_common_right_text);
-        tvRight.setCompoundDrawablePadding(5);
-        tvRight.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.mipmap.ic_arrow_down_s, 0);
+        mTvTitleRight = (TextView) mHeaderQueryAttendance.findViewById(R.id.tv_head_common_right_text);
+        Drawable drawable = getResources().getDrawable(R.mipmap.ic_arrow_down_s);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        mTvTitleRight.setCompoundDrawablePadding(5);
+        mTvTitleRight.setCompoundDrawables(null, null, drawable, null);
         mHeaderQueryAttendance.setBottomLineVisible(true);
+        mProjectWindow = new ProjectsPopWindow(getContext(), this);
         mHeaderQueryAttendance.setLeftLayoutOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +93,7 @@ public class QueryAttendanceDelegate extends LongForDelegate {
         mHeaderQueryAttendance.setRightLayoutOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showMessage(getString(R.string.index_statistics_title));
+                mProjectWindow.showPopWindow(mTvTitleRight);
             }
         });
     }
@@ -88,15 +102,27 @@ public class QueryAttendanceDelegate extends LongForDelegate {
         List<String> mTabTitles = Arrays.asList(new String[]{getString(R.string.trainee_role_show_get_num),
                 getString(R.string.trainee_role_expand_get_num), getString(R.string.trainee_role_show_and_expand_call_num),
                 getString(R.string.trainee_role_call_get_num), getString(R.string.trainee_role_call_call_num)});
-        List<String> mRoleTypes = Arrays.asList(new String[]{ConstantQueryAttendance.SHOW_GET_NUM,
-                ConstantQueryAttendance.EXPAND_GET_NUM, ConstantQueryAttendance.SHOW_AND_EXPAND_CALL_NUM,
-                ConstantQueryAttendance.CALL_GET_NUM, ConstantQueryAttendance.CALL_CALL_NUM});
-        List<Fragment> fragmentList = new ArrayList<>();
+        List<String> mRoleTypes = Arrays.asList(new String[]{QueryAttendanceConstant.SHOW_GET_NUM,
+                QueryAttendanceConstant.EXPAND_GET_NUM, QueryAttendanceConstant.SHOW_AND_EXPAND_CALL_NUM,
+                QueryAttendanceConstant.CALL_GET_NUM, QueryAttendanceConstant.CALL_CALL_NUM});
+        mFragmentList = new ArrayList<>();
         for (int i = 0; i < mTabTitles.size(); i++) {
-            fragmentList.add(QueryAttendanceSubDelegate.getInstance(mRoleTypes.get(i), mProjectId));
+            mFragmentList.add(QueryAttendanceSubDelegate.getInstance(mRoleTypes.get(i), mProjectId, this));
         }
-        QueryAttendancePagerAdapter pagerAdapter = new QueryAttendancePagerAdapter(getFragmentManager(), mTabTitles, fragmentList);
-        mVpQueryAttendance.setAdapter(pagerAdapter);
+        mPagerAdapter = new QueryAttendancePagerAdapter(getFragmentManager(), mTabTitles, mFragmentList);
+        mVpQueryAttendance.setAdapter(mPagerAdapter);
         mTlQueryAttendance.setupWithViewPager(mVpQueryAttendance);
+    }
+
+    @Override
+    public void changeSucess(ProjectsDataBean.DataBean.ProjectsBean projectsBean) {
+        mProjectId = projectsBean.getProjectId();
+        mTvTitleRight.setText(projectsBean.getProjectName());
+        for (int i = 0; i < mFragmentList.size(); i++) {
+            ((QueryAttendanceSubDelegate) mFragmentList.get(i)).mProjectId = mProjectId;
+            if (mFragmentList.get(i).isAdded()) {
+                ((QueryAttendanceSubDelegate) mFragmentList.get(i)).mRefreshHandler.updateParams(mProjectId);
+            }
+        }
     }
 }

@@ -2,7 +2,7 @@ package com.longfor.channelmanager.statistics.queryattendance.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * @function:考勤查询页面ViewPager的数据适配器
  */
 
-public class QueryAttendancePagerAdapter extends FragmentPagerAdapter {
+public class QueryAttendancePagerAdapter extends FragmentStatePagerAdapter {
     private List<String> mTabTitles;
     private List<Fragment> mFragmentList;
 

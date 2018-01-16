@@ -65,6 +65,7 @@
     <string name="trainee_role_show_and_expand_call_num">外展外拓追电</string>
     <string name="trainee_role_call_get_num">外呼陌电</string>
     <string name="trainee_role_call_call_num">外呼追电</string>
+    <string name="total">合计</string>
     <string name="off_duty">下班</string>
     <string name="on_duty">上班</string>
     <string name="name">姓名</string>
@@ -95,6 +96,14 @@
     <string name="input_search_content">输入查询信息</string>
     <!--客户列表 end-->
 
+    <!--上岗统计 begin-->
+    <string name="company">公司</string>
+    <string name="today_check_in_num">当天签到</string>
+    <string name="month_avg_check_in_num">滚动30天日均</string>
+    <string name="company_check_in_statistics">上岗统计(地区)</string>
+    <string name="project_check_in_statistics">上岗统计(项目)</string>
+    <string name="team_check_in_statistics">上岗统计(考勤点)</string>
+    <!--上岗统计 end-->
     <!--客户列表搜索 begin-->
     <string name="client_list_history_search">历史搜索</string>
     <string name="input_search_counselor">请输入置业顾问姓名</string>
