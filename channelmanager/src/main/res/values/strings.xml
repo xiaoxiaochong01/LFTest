@@ -98,6 +98,9 @@
 
     <!--上岗统计 begin-->
     <string name="company">公司</string>
+    <string name="project">项目</string>
+    <string name="checkInPosition">考勤点</string>
+    <string name="close">关闭</string>
     <string name="today_check_in_num">当天签到</string>
     <string name="month_avg_check_in_num">滚动30天日均</string>
     <string name="company_check_in_statistics">上岗统计(地区)</string>

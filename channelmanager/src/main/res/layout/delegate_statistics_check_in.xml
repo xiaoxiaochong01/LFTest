@@ -7,14 +7,14 @@
     android:orientation="vertical">
 
     <com.longfor.channelmanager.common.view.CommonHeadView
-        android:id="@+id/header_company_check_in"
+        android:id="@+id/header_check_in"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height">
 
     </com.longfor.channelmanager.common.view.CommonHeadView>
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/srl_company_check_in"
+        android:id="@+id/srl_check_in"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -35,11 +35,11 @@
                     >
 
                     <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_check_in_level"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="15dp"
                         android:gravity="center_vertical"
-                        android:text="@string/company"
                         android:textColor="@color/gray_6"
                         android:textSize="14sp"
                         />
@@ -73,7 +73,7 @@
                 </RelativeLayout>
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_company_check_in"
+                    android:id="@+id/rv_check_in"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 

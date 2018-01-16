@@ -11,6 +11,7 @@ public class CheckInStatisticsConstant {
     public static final String URL_GET_PROJECT_CHECK_IN = "channelManager/getProjectCheckIns";
     public static final String URL_GET_TEAM_CHECK_IN = "channelManager/getTeamCheckIns";
 
+    public static final String CHECK_IN_TYPE="checkInType";
     //    上岗统计的类型
     public static final int ITEM_TYPE_COMPANY = 0;
     public static final int ITEM_TYPE_PROJECT = 1;
