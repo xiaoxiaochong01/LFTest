@@ -84,9 +84,14 @@ public class WebviewDelegate extends LongForDelegate {
         mHeadView.setLeftLayoutOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!delegate.onBackPressedSupport()) {
+
+                if(delegate.getWebView().canGoBack()) {
+                    delegate.getWebView().goBack();
+                }
+                else {
                     getSupportDelegate().pop();
                 }
+
             }
         });
     }
