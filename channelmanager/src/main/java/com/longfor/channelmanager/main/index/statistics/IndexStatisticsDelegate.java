@@ -9,10 +9,9 @@ import android.view.View;
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.common.view.CommonHeadView;
-import com.longfor.channelmanager.statistics.checkinstatistics.constant.CheckInStatisticsConstant;
-import com.longfor.channelmanager.statistics.checkinstatistics.delegate.CheckInStatisticsDelegate;
 import com.longfor.channelmanager.statistics.queryattendance.delegate.QueryAttendanceDelegate;
 import com.longfor.core.delegates.bottomreplace.BottomItemDelegate;
+import com.longfor.core.utils.toast.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,10 +42,7 @@ public class IndexStatisticsDelegate extends BottomItemDelegate {
 
     @OnClick(R2.id.iv_statistics_check_in)
     void onCheckInClick() {
-        CheckInStatisticsDelegate delegate = CheckInStatisticsDelegate.getInstance(
-                CheckInStatisticsConstant.ITEM_TYPE_COMPANY, getString(R.string.index_statistics_title),
-                String.valueOf(0),null);
-        getParentDelegate().start(delegate);
+        ToastUtils.showMessage(getString(R.string.index_statistics_title));
     }
 
     @OnClick(R2.id.iv_statistics_query_attendance)
