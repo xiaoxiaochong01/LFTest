@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/client_detail_follow_info_bg"
+        android:padding="10dp"
+        >
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_call_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_9"
+            android:textSize="12sp"
+            android:layout_marginBottom="9dp"
+            />
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_9"
+            android:textSize="12sp"
+            android:layout_marginBottom="9dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/tv_call_input"
+            />
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_client_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_date"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/gray_6"
+            android:textSize="14sp"/>
+
+
+    </RelativeLayout>
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/gray_f8"/>
+</android.support.v7.widget.LinearLayoutCompat>

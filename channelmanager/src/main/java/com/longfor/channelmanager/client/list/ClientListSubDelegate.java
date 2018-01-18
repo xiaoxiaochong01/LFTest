@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
+import com.longfor.channelmanager.client.detail.ClientDetailDelegate;
 import com.longfor.channelmanager.client.search.ConstantClientSearch;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.core.utils.log.LogUtils;
@@ -36,12 +37,14 @@ public class ClientListSubDelegate extends LongForDelegate implements OnSearchCo
     private String mRoleType = ConstantClientList.ROLE_TYPE_DEFAULT;
     private String mSearchContent = ConstantClientList.SEARCH_CONTENT_DEFAULT;
     private OnRefreshSearchContentListener searchContentListener;
+    private IClientList clientList;
 
-    public static ClientListSubDelegate getInstance(String intentType, OnRefreshSearchContentListener searchContentListener) {
+    public static ClientListSubDelegate getInstance(String intentType, OnRefreshSearchContentListener searchContentListener, IClientList clientList) {
 
         ClientListSubDelegate delegate = new ClientListSubDelegate();
         delegate.intentType = intentType;
         delegate.searchContentListener = searchContentListener;
+        delegate.clientList = clientList;
         return delegate;
     }
     @Override
@@ -49,17 +52,13 @@ public class ClientListSubDelegate extends LongForDelegate implements OnSearchCo
         return R.layout.delegate_client_list_sub;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        LogUtils.e("test", "onCreate走了intentType="+intentType);
-    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         LogUtils.e("test", "setUserVisibleHint走了intentType="+intentType);
         if(isVisibleToUser && isNeedLazyLoad) {
+            isNeedLazyLoad = false;
             mRefreshHandler.firstPage();
         }
     }
@@ -67,15 +66,15 @@ public class ClientListSubDelegate extends LongForDelegate implements OnSearchCo
     @Override
     public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
         super.onFragmentResult(requestCode, resultCode, data);
-//        ToastUtils.showMessage("Jie到了");
+
         if(requestCode == ConstantClientSearch.DELEGATE_RESULT_CODE_CLIENT_SEARCH&&resultCode == RESULT_OK&&data != null) {
             mRoleType = data.getString(ConstantClientList.ROLE_TYPE, ConstantClientList.ROLE_TYPE_DEFAULT);
             mSearchContent = data.getString(ConstantClientList.SEARCH_CONTENT, ConstantClientList.SEARCH_CONTENT_DEFAULT);
             if (searchContentListener != null) {
                 searchContentListener.onRefresh(mRoleType, mSearchContent);
             }
-            mRefreshHandler.updateParams(mRoleType, mSearchContent);
-            mRefreshHandler.firstPage();
+
+            update(mRoleType, mSearchContent);
 
         }
         else {
@@ -84,41 +83,31 @@ public class ClientListSubDelegate extends LongForDelegate implements OnSearchCo
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        LogUtils.e("test", "onResume走了intentType="+intentType);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        LogUtils.e("test", "onPause走了intentType="+intentType);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        LogUtils.e("test", "onDestroy走了intentType="+intentType);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        LogUtils.e("test", "onDestroyView走了intentType="+intentType);
-    }
-
-    @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         initRefreshLayout();
         initRecyclerView();
-        mRefreshHandler = TestBaseRefreshHandler.create(intentType, srlClientList, rvClientSub, new ClientListDataConverter());
-        mRefreshHandler.updateParams(mRoleType, mSearchContent);
+        mRefreshHandler = TestBaseRefreshHandler.create(intentType, srlClientList, rvClientSub, new ClientListDataConverter(), clientList);
+
     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
+        LogUtils.e("test", "roleType="+mRoleType+"search="+mSearchContent);
+        mRefreshHandler.updateParams(mRoleType, mSearchContent);
         mRefreshHandler.firstPage();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        LogUtils.e("test", "onCreate"+mSearchContent);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onDestroy() {
+        LogUtils.e("test", "onDestroy"+mSearchContent);
+        super.onDestroy();
     }
 
     @Override
@@ -144,13 +133,17 @@ public class ClientListSubDelegate extends LongForDelegate implements OnSearchCo
 
     @Override
     public void update(String roleId, String searchContent) {
-
-        if(!getUserVisibleHint()) {
-            mRoleType = roleId;
-            mSearchContent = searchContent;
+        mRoleType = roleId;
+        mSearchContent = searchContent;
+        if(getUserVisibleHint()&&isAdded()) {
+            mRefreshHandler.updateParams(mRoleType, mSearchContent);
+            mRefreshHandler.firstPage();
+        }
+        else if(!getUserVisibleHint()) {
             if(isAdded()) {
                 isNeedLazyLoad = true;
             }
         }
     }
+
 }

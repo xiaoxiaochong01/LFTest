@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_client_detail_item"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/client_detail_item_height"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/client_detail_item_padding_left_right"
+    android:paddingRight="@dimen/client_detail_item_padding_left_right"
+    >
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/client_list_info"
+        android:layout_centerVertical="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_3"
+        android:textSize="15sp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        />
+</RelativeLayout>

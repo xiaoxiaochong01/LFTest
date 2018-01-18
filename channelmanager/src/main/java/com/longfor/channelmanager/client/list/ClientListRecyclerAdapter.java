@@ -2,6 +2,7 @@ package com.longfor.channelmanager.client.list;
 
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import java.util.List;
  * @function: 客户列表item适配器
  */
 public class ClientListRecyclerAdapter extends BaseRecyclerAdapter {
+    private IClientList clientList;
 
     public ClientListRecyclerAdapter(List<MultipleItemEntity> data) {
         super(data);
@@ -33,12 +35,14 @@ public class ClientListRecyclerAdapter extends BaseRecyclerAdapter {
         return new ClientListRecyclerAdapter(data);
     }
 
-    public static ClientListRecyclerAdapter create(DataConverter converter) {
-        return new ClientListRecyclerAdapter(converter.convert());
+    public static ClientListRecyclerAdapter create(DataConverter converter, IClientList clientList) {
+        ClientListRecyclerAdapter listRecyclerAdapter = new ClientListRecyclerAdapter(converter.convert());
+        listRecyclerAdapter.clientList = clientList;
+        return listRecyclerAdapter;
     }
     @Override
     protected void convert(MultipleViewHolder helper, MultipleItemEntity item) {
-        ClientListDataBean.DataBean.CustomersBean customersBean = item.getField(MultipleFields.OBJECT);
+        final ClientListDataBean.DataBean.CustomersBean customersBean = item.getField(MultipleFields.OBJECT);
         switch (item.getItemType()) {
             case ItemTypeClient.TEXTS:
                 helper.setText(R.id.tv_intent, TextUtils.isEmpty(customersBean.getIntent()) ? "" : customersBean.getIntent());
@@ -86,6 +90,16 @@ public class ClientListRecyclerAdapter extends BaseRecyclerAdapter {
                     tvCounselorName.setVisibility(View.VISIBLE);
                     tvCounselorName.setText(nameConsultant);
                 }
+
+                LinearLayoutCompat llItem = helper.getView(R.id.ll_client_list_item);
+                llItem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(clientList != null){
+                            clientList.onClientListClick(customersBean.getCustomerId()+"");
+                        }
+                    }
+                });
                 break;
         }
     }
