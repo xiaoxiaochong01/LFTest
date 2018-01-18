@@ -140,7 +140,12 @@ public class CheckInStatisticsHandler extends BaseRefreshHandler implements Chec
 
     @Override
     public BaseRefreshHandler updateParams(String... params) {
-        return null;
+        if (params != null && params.length == 1) {
+            mRoleType = params[0];
+        }
+        clearSortState();
+        firstPage();
+        return this;
     }
 
     @Override
@@ -180,6 +185,10 @@ public class CheckInStatisticsHandler extends BaseRefreshHandler implements Chec
     @Override
     public void onRefresh() {
         super.onRefresh();
+        clearSortState();
+    }
+
+    private void clearSortState() {
         mIsAsc = false;
         mCheckInStatisticsDelegate.mTodayCheckInFlag = CheckInStatisticsConstant.SORT_DEF;
         mCheckInStatisticsDelegate.mMonthAvgCheckInFlag = CheckInStatisticsConstant.SORT_DEF;

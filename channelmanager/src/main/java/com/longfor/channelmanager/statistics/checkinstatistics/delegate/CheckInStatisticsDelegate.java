@@ -12,11 +12,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
+import com.longfor.channelmanager.client.search.ChooseRolePopwindow;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.channelmanager.main.ChannelMainDelegate;
@@ -27,7 +29,11 @@ import com.longfor.channelmanager.statistics.checkinstatistics.constant.CheckInS
 import com.longfor.channelmanager.statistics.checkinstatistics.converter.CheckInStatisticsDataConverter;
 import com.longfor.channelmanager.statistics.checkinstatistics.handler.CheckInStatisticsHandler;
 import com.longfor.core.delegates.LongForDelegate;
+import com.longfor.core.utils.UI.ScreenUtil;
 import com.longfor.ui.recycler.BaseDecoration;
+
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -70,6 +76,9 @@ public class CheckInStatisticsDelegate extends LongForDelegate implements
     public int mTodayCheckInFlag = CheckInStatisticsConstant.SORT_DEF;//按当天签到排序
     public int mMonthAvgCheckInFlag = CheckInStatisticsConstant.SORT_DEF;//按滚动30天日均排序
     private OnSortButtonClickListener mOnSortButtonClickListener;
+    private ChooseRolePopwindow mPopwindow;
+    private List<String> mPopupWindowList ;
+    public CheckInStatisticsHandler mHandler;
 
     public static CheckInStatisticsDelegate getInstance(int checkInType, String leftMsg, String roleType, String id) {
         Bundle bundle = new Bundle();
@@ -93,15 +102,20 @@ public class CheckInStatisticsDelegate extends LongForDelegate implements
         initHeader();
         initRefreshLayout();
         initRecyclerView();
-        CheckInStatisticsHandler handler = CheckInStatisticsHandler.create(mSrlCheckIn,
-                mRvCheckIn, mRoleType, mCheckInType, mId, this, this, this);
-        handler.firstPage();
+        initPopupWindow();
+        mHandler = CheckInStatisticsHandler.create(mSrlCheckIn, mRvCheckIn, mRoleType, mCheckInType,
+                mId, this, this, this);
+        mHandler.firstPage();
     }
 
     private void getBasicData() {
         mCheckInType = getArguments().getInt(CheckInStatisticsConstant.CHECK_IN_TYPE);
         mRoleType = getArguments().getString(Constant.ROLE_TYPE);
         mId = getArguments().getString(Constant.ID);
+        mPopupWindowList = Arrays.asList(new String[]{getString(R.string.trainee_role_show_get_num),
+                getString(R.string.trainee_role_expand_get_num), getString(R.string.trainee_role_show_and_expand_call_num),
+                getString(R.string.trainee_role_call_get_num), getString(R.string.trainee_role_call_call_num),
+                getString(R.string.total)});
     }
 
     private void initHeader() {
@@ -148,6 +162,7 @@ public class CheckInStatisticsDelegate extends LongForDelegate implements
     private void rightClickHeader() {
         switch (mCheckInType) {
             case CheckInStatisticsConstant.ITEM_TYPE_COMPANY:
+                mPopwindow.showAsDropDown(mTvTitleRight);
                 break;
             case CheckInStatisticsConstant.ITEM_TYPE_PROJECT:
                 getSupportDelegate().start(new ChannelMainDelegate(), SINGLETASK);
@@ -173,6 +188,20 @@ public class CheckInStatisticsDelegate extends LongForDelegate implements
             mRvCheckIn.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, com.longfor.ec.R.color.app_background), 1));
         }
         mRvCheckIn.setNestedScrollingEnabled(false);
+    }
+
+    private void initPopupWindow() {
+        mPopwindow = new ChooseRolePopwindow(getContext(), mPopupWindowList, new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mTvTitleRight.setText(mPopupWindowList.get(position));
+                mRoleType = String.valueOf((position + 1) % mPopupWindowList.size());
+                mHandler.updateParams(mRoleType);
+                mPopwindow.dismiss();
+            }
+        });
+        mPopwindow.setWidth(ScreenUtil.dip2px(getContext(), 110));
+        mPopwindow.setHeight(ScreenUtil.dip2px(getContext(), 236));
     }
 
     @Override
