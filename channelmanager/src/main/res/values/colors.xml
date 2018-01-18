@@ -34,6 +34,7 @@
     <!--首页模块 end-->
     <!--客户模块 begin-->
     <color name="divider_color">#f0f2f2</color>
+    <color name="gray_d">#dddddd</color>
     <!--客户模块 end-->
     <color name="alpha_0.8_black">#cc000000</color>
     <color name="alpha">#00ffffff</color>

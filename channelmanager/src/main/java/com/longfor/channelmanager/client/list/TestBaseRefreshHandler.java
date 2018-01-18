@@ -19,18 +19,20 @@ import java.util.Map;
  * @function:
  */
 public class TestBaseRefreshHandler extends BaseRefreshHandler {
-    private final String INTENT_TYPE;//0：全部 1：一级 2：二级  3：认购
-
-    private String mRoleType = "0";//1：置业顾问 2：实习生 3：客户
+    private final String INTENT_TYPE;// 0：全部 1：一级 2：二级  3：认购
+    final IClientList I_CLIENT_LIST;
+    private String mRoleType = "0";// 1：置业顾问 2：实习生 3：客户
     private String mSearchContent = "";
 
-    public TestBaseRefreshHandler(String INTENT_TYPE,SwipeRefreshLayout REFRESH_LAYOUT, RecyclerView RECYCLERVIEW, DataConverter CONVERTER) {
+
+    public TestBaseRefreshHandler(String INTENT_TYPE,SwipeRefreshLayout REFRESH_LAYOUT, RecyclerView RECYCLERVIEW, DataConverter CONVERTER, IClientList I_CLIENT_LIST) {
         super(REFRESH_LAYOUT, RECYCLERVIEW, CONVERTER);
         this.INTENT_TYPE = INTENT_TYPE;
+        this.I_CLIENT_LIST = I_CLIENT_LIST;
     }
 
-    public static TestBaseRefreshHandler create(String INTENT_TYPE,SwipeRefreshLayout REFRESH_LAYOUT, RecyclerView RECYCLERVIEW, DataConverter CONVERTER) {
-        return new TestBaseRefreshHandler(INTENT_TYPE, REFRESH_LAYOUT, RECYCLERVIEW, CONVERTER);
+    public static TestBaseRefreshHandler create(String INTENT_TYPE,SwipeRefreshLayout REFRESH_LAYOUT, RecyclerView RECYCLERVIEW, DataConverter CONVERTER, IClientList I_CLIENT_LIST) {
+        return new TestBaseRefreshHandler(INTENT_TYPE, REFRESH_LAYOUT, RECYCLERVIEW, CONVERTER, I_CLIENT_LIST);
     }
 
     @Override
@@ -65,12 +67,12 @@ public class TestBaseRefreshHandler extends BaseRefreshHandler {
 
     @Override
     public BaseRecyclerAdapter getAdapter(DataConverter converter) {
-        return ClientListRecyclerAdapter.create(converter);
+        return ClientListRecyclerAdapter.create(converter, I_CLIENT_LIST);
     }
 
     @Override
     public BaseRefreshHandler updateParams(String... params) {
-        if(params != null && params.length == 1) {
+        if(params != null && params.length > 1) {
             mRoleType = params[0];
             mSearchContent = params[1];
         }

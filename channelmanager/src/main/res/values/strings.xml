@@ -6,6 +6,7 @@
     <string name="ensure">确定</string>
     <string name="cancel">取消</string>
     <string name="setting">设置</string>
+    <string name="call">拨打</string>
     <string name="hint_write_external_storage">允许本软件读取文件\n请在系统设置->隐私->存储\n允许本软件读取文件</string>
     <string name="picture_illegal">未获取到图片，请检查并开启设置中应用的存储权限，且确保图片格式正确</string>
     <string name="no_permission_to_save_file">获取存储权限失败，请在设置->应用/权限管理->本应用中打开存储权限以便应用读写</string>
@@ -108,9 +109,17 @@
     <string name="team_check_in_statistics">上岗统计(考勤点)</string>
     <!--上岗统计 end-->
     <!--客户列表搜索 begin-->
+    <string name="client_list_title">客户列表</string>
     <string name="client_list_history_search">历史搜索</string>
     <string name="input_search_counselor">请输入置业顾问姓名</string>
     <string name="input_search_trainee">请输入实习生姓名</string>
     <string name="input_search_client">请输入客户姓名或者电话</string>
     <!--客户列表搜索 end-->
+    <!--客户详情 begin-->
+    <string name="client_detail_title">客户详情</string>
+    <string name="client_follow">跟进</string>
+    <string name="client_data">资料</string>
+    <string name="customer_demand">客户需求</string>
+
+    <!--客户详情 end-->
 </resources>

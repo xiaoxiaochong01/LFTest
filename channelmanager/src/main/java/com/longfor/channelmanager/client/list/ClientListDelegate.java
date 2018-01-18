@@ -21,6 +21,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
+import com.longfor.channelmanager.client.detail.ClientDetailDelegate;
 import com.longfor.channelmanager.client.search.ClientSearchDelegate;
 import com.longfor.channelmanager.client.search.ConstantClientSearch;
 import com.longfor.channelmanager.common.ec.Constant;
@@ -44,7 +45,7 @@ import butterknife.OnClick;
  * @date: 2018/1/9
  * @function:
  */
-public class ClientListDelegate extends LongForDelegate implements OnRefreshSearchContentListener{
+public class ClientListDelegate extends LongForDelegate implements OnRefreshSearchContentListener, IClientList{
     @BindView(R2.id.tl_client_list)
     TabLayout tlClientList;
     @BindView(R2.id.vp_client_list)
@@ -114,7 +115,7 @@ public class ClientListDelegate extends LongForDelegate implements OnRefreshSear
                 ConstantClientList.CLIENT_SUBSCRIBE}
         ));
         for (String intentType : intentTypes) {
-            ClientListSubDelegate delegate = ClientListSubDelegate.getInstance(intentType,this);
+            ClientListSubDelegate delegate = ClientListSubDelegate.getInstance(intentType,this, this);
             delegates.add(delegate);
         }
         vpClientList.setAdapter(new FragmentStatePagerAdapter(getFragmentManager()) {
@@ -143,27 +144,17 @@ public class ClientListDelegate extends LongForDelegate implements OnRefreshSear
         }
     };
 
-//    @Override
-//    public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
-//        super.onFragmentResult(requestCode, resultCode, data);
-//        if(requestCode == ConstantClientSearch.DELEGATE_RESULT_CODE_CLIENT_SEARCH){
-//            if(resultCode == RESULT_OK) {
-//                if(data != null) {
-//                    String roleType = data.getString(ConstantClientList.ROLE_TYPE_DEFAULT);
-//                    String searchContent = data.getString(ConstantClientList.SEARCH_CONTENT_DEFAULT);
-//                    etSearch.setText(searchContent);
-////                    refreshChildDelegate(roleType, searchContent);
-//                }
-//            }
-//        }
-//        ToastUtils.showMessage("resultCode= "+resultCode);
-//    }
-
     @Override
     public void onRefresh(String roleType, String searchContent) {
         etSearch.setText(searchContent);
         for(ClientListSubDelegate delegate : delegates) {
             delegate.update(roleType, searchContent);
         }
+    }
+
+    @Override
+    public void onClientListClick(String mCustomerId) {
+        ClientDetailDelegate detailDelegate = ClientDetailDelegate.getInstance(getString(R.string.client_list_title), mCustomerId);
+        getSupportDelegate().start(detailDelegate);
     }
 }

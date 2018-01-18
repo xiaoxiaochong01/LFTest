@@ -54,7 +54,7 @@ public class ClientListRefreshHandler implements
         REFRESH_LAYOUT.setOnRefreshListener(this);
     }
 
-    public static ClientListRefreshHandler creat(String intent_type, SwipeRefreshLayout swipeRefreshLayout,
+    public static ClientListRefreshHandler create(String intent_type, SwipeRefreshLayout swipeRefreshLayout,
                                        RecyclerView recyclerView,
                                        DataConverter converter) {
         return new ClientListRefreshHandler(intent_type,swipeRefreshLayout, new PagingBean(), recyclerView, converter);
@@ -96,7 +96,7 @@ public class ClientListRefreshHandler implements
                         final ClientListDataBean dataBean = JSON.parseObject(response, ClientListDataBean.class);
                         BEAN.setTotal(dataBean.getData().getTotals());
                         //设置adapter
-                        mAdapter = ClientListRecyclerAdapter.create(CONVERTER.setJsonData(response));
+                        mAdapter = ClientListRecyclerAdapter.create(CONVERTER.setJsonData(response),null);
                         mAdapter.setOnLoadMoreListener(ClientListRefreshHandler.this, RECYCLERVIEW);
                         RECYCLERVIEW.setAdapter(mAdapter);
                     }

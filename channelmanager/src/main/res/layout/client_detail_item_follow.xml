@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F8F8F8"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_marginLeft="20dp"
+        android:id="@+id/rl_time_line"
+        android:layout_width="20dp"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:visibility="invisible"
+            android:id="@+id/tvTopLine"
+            android:layout_width="0.5dp"
+            android:layout_height="12dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/orange"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:src="@mipmap/follow_point_icon"
+            android:id="@+id/iv_dot"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/tvTopLine"
+            android:layout_centerHorizontal="true"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_line_item"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_below="@id/iv_dot"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:background="@color/orange"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_marginLeft="15dp"
+        android:id="@+id/rl_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingRight="16dp"
+        >
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_client_name"
+                style="@style/client_list_info"
+                />
+
+            <TextView
+                android:id="@+id/tv_identity"
+                style="@style/client_list_info"
+                android:layout_marginLeft="15dp"
+                />
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recycler_details"/>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</android.support.v7.widget.LinearLayoutCompat>
