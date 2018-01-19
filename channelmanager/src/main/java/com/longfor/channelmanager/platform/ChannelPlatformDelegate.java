@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
+import com.longfor.channelmanager.arrange.group.ArrangeGroupDelegate;
 import com.longfor.channelmanager.client.list.ClientListDelegate;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.view.CommonHeadView;
@@ -72,7 +73,7 @@ public class ChannelPlatformDelegate extends LongForDelegate {
                 ToastUtils.showMessage(R.string.channel_platform_performance);
                 break;
             case R.id.rl_arrange_work:
-                ToastUtils.showMessage(R.string.channel_platform_arrange_work);
+                getSupportDelegate().start(ArrangeGroupDelegate.getInstance(getResources().getString(R.string.channel_platform_title)));
                 break;
         }
     }
