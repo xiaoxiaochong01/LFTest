@@ -20,13 +20,18 @@ import java.util.List;
 
 public class CheckInStatisticsDataConverter extends DataConverter {
     private int mItemType;
+    private OnGetNetDataListener mOnGetNetDataListener;
 
-    public CheckInStatisticsDataConverter(int itemType) {
+    public CheckInStatisticsDataConverter(int itemType, OnGetNetDataListener listener) {
         mItemType = itemType;
+        mOnGetNetDataListener = listener;
     }
 
     @Override
     public ArrayList<MultipleItemEntity> convert() {
+        if (mOnGetNetDataListener!=null){
+            mOnGetNetDataListener.onGetNetData(getJsonData());
+        }
         clearData();
         switch (mItemType) {
             case CheckInStatisticsConstant.ITEM_TYPE_COMPANY:
@@ -57,12 +62,6 @@ public class CheckInStatisticsDataConverter extends DataConverter {
     private void parseProjectCheckInData() {
         ProjectCheckInBean projectCheckInBean = JSON.parseObject(getJsonData(), ProjectCheckInBean.class);
         if (projectCheckInBean != null) {
-            CompanyCheckInBean.DataBean area = projectCheckInBean.getData().getArea();
-            if (area != null) {
-                MultipleItemEntity entity = addData(CheckInStatisticsConstant.ITEM_TYPE_COMPANY, area.getAreaId(), area.getAreaName(),
-                        area.getCheckins(), area.getAvg());
-                ENTITIES.add(0, entity);
-            }
             List<ProjectCheckInBean.DataBean.ProjectsBean> projects = projectCheckInBean.getData().getProjects();
             if (projects != null) {
                 for (int i = 0; i < projects.size(); i++) {
@@ -77,12 +76,6 @@ public class CheckInStatisticsDataConverter extends DataConverter {
     private void parseTeamCheckInData() {
         TeamCheckInBean teamCheckInBean = JSON.parseObject(getJsonData(), TeamCheckInBean.class);
         if (teamCheckInBean != null) {
-            ProjectCheckInBean.DataBean.ProjectsBean project = teamCheckInBean.getData().getProject();
-            if (project != null) {
-                MultipleItemEntity entity = addData(CheckInStatisticsConstant.ITEM_TYPE_PROJECT, project.getProjectId(), project.getProjectName(),
-                        project.getCheckins(), project.getAvg());
-                ENTITIES.add(0, entity);
-            }
             List<TeamCheckInBean.DataBean.TeamsBean> teams = teamCheckInBean.getData().getTeams();
             if (teams != null) {
                 for (int i = 0; i < teams.size(); i++) {
@@ -94,7 +87,7 @@ public class CheckInStatisticsDataConverter extends DataConverter {
         }
     }
 
-    private MultipleItemEntity addData(int itemType, String id, String name, int todayCheckIn, double monthAvgCheckIn) {
+    private MultipleItemEntity addData(int itemType, String id, String name, int todayCheckIn, int monthAvgCheckIn) {
         MultipleItemEntity entity = MultipleItemEntity.builder()
                 .setField(MultipleFields.ITEM_TYPE, itemType)
                 .setField(CheckInStatisticsConstant.ID, id)
@@ -104,5 +97,9 @@ public class CheckInStatisticsDataConverter extends DataConverter {
                 .setField(MultipleFields.SPAN_SIZE, 1)
                 .build();
         return entity;
+    }
+
+    public interface OnGetNetDataListener {
+        void onGetNetData(String jsonData);
     }
 }

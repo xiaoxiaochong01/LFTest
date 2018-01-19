@@ -31,7 +31,7 @@ public class CompanyCheckInBean extends BaseResponse {
          */
 
         private String areaId;
-        private double avg;
+        private int avg;
         private String areaName;
         private int checkins;
 
@@ -43,11 +43,11 @@ public class CompanyCheckInBean extends BaseResponse {
             this.areaId = areaId;
         }
 
-        public double getAvg() {
+        public int getAvg() {
             return avg;
         }
 
-        public void setAvg(double avg) {
+        public void setAvg(int avg) {
             this.avg = avg;
         }
 

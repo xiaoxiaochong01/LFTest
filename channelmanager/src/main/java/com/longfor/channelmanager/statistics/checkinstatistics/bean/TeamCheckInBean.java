@@ -60,7 +60,7 @@ public class TeamCheckInBean extends BaseResponse {
              */
 
             private String teamName;
-            private double avg;
+            private int avg;
             private String teamId;
             private int checkins;
 
@@ -72,11 +72,11 @@ public class TeamCheckInBean extends BaseResponse {
                 this.teamName = teamName;
             }
 
-            public double getAvg() {
+            public int getAvg() {
                 return avg;
             }
 
-            public void setAvg(double avg) {
+            public void setAvg(int avg) {
                 this.avg = avg;
             }
 

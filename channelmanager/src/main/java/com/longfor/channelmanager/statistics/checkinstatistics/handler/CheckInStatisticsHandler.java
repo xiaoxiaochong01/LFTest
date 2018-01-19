@@ -9,10 +9,16 @@ import com.longfor.channelmanager.database.DatabaseManager;
 import com.longfor.channelmanager.statistics.checkinstatistics.adapter.CheckInStatisticsRvAdapter;
 import com.longfor.channelmanager.statistics.checkinstatistics.constant.CheckInStatisticsConstant;
 import com.longfor.channelmanager.statistics.checkinstatistics.converter.CheckInStatisticsDataConverter;
+import com.longfor.channelmanager.statistics.checkinstatistics.delegate.CheckInStatisticsDelegate;
 import com.longfor.ui.recycler.BaseRecyclerAdapter;
 import com.longfor.ui.recycler.DataConverter;
+import com.longfor.ui.recycler.MultipleItemEntity;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,26 +27,63 @@ import java.util.Map;
  * @function:
  */
 
-public class CheckInStatisticsHandler extends BaseRefreshHandler {
+public class CheckInStatisticsHandler extends BaseRefreshHandler implements CheckInStatisticsDelegate.OnSortButtonClickListener {
     private String mRoleType;
     private String mEmployeeId;
     private int mItemType;
     private String mId;
+    private CheckInStatisticsRvAdapter.OnItemClickListener mOnItemClickListener;
+    private List<MultipleItemEntity> mSortList = new ArrayList<MultipleItemEntity>();
+    private List<MultipleItemEntity> mOriginList = new ArrayList<MultipleItemEntity>();
+    public CheckInStatisticsRvAdapter mCheckInStatisticsRvAdapter;
+    public Comparator<MultipleItemEntity> mMonthAvgCheckInComparator = new Comparator<MultipleItemEntity>() {
+        @Override
+        public int compare(MultipleItemEntity o1, MultipleItemEntity o2) {
+            if (mIsAsc) {
+                return ((Integer) o1.getField(CheckInStatisticsConstant.MONTH_AVG_CHECK_IN)) -
+                        ((Integer) o2.getField(CheckInStatisticsConstant.MONTH_AVG_CHECK_IN));
+            } else {
+                return ((Integer) o2.getField(CheckInStatisticsConstant.MONTH_AVG_CHECK_IN)) -
+                        ((Integer) o1.getField(CheckInStatisticsConstant.MONTH_AVG_CHECK_IN));
+            }
+        }
+    };
+    public Comparator<MultipleItemEntity> mTodayCheckInComparator = new Comparator<MultipleItemEntity>() {
+        @Override
+        public int compare(MultipleItemEntity o1, MultipleItemEntity o2) {
+            if (mIsAsc) {
+                return ((Integer) o1.getField(CheckInStatisticsConstant.TODAY_CHECK_IN)) -
+                        ((Integer) o2.getField(CheckInStatisticsConstant.TODAY_CHECK_IN));
+            } else {
+                return ((Integer) o2.getField(CheckInStatisticsConstant.TODAY_CHECK_IN)) -
+                        ((Integer) o1.getField(CheckInStatisticsConstant.TODAY_CHECK_IN));
+            }
+        }
+    };
+    private boolean mIsAsc = false;
+    private CheckInStatisticsDelegate mCheckInStatisticsDelegate;
 
     public CheckInStatisticsHandler(SwipeRefreshLayout REFRESH_LAYOUT, RecyclerView RECYCLERVIEW,
                                     DataConverter CONVERTER, String roleType, int itemType,
-                                    String id) {
+                                    String id, CheckInStatisticsRvAdapter.OnItemClickListener onItemClickListener,
+                                    CheckInStatisticsDelegate delegate) {
         super(REFRESH_LAYOUT, RECYCLERVIEW, CONVERTER);
         mRoleType = roleType;
         mItemType = itemType;
         mId = id;
+        mOnItemClickListener = onItemClickListener;
+        mCheckInStatisticsDelegate = delegate;
+        delegate.setOnSortButtonClickListener(this);
     }
 
     public static CheckInStatisticsHandler create(SwipeRefreshLayout swipeRefreshLayout,
                                                   RecyclerView recyclerView, String roleType,
-                                                  int itemType, String id) {
+                                                  int itemType, String id,
+                                                  CheckInStatisticsRvAdapter.OnItemClickListener onItemClickListener,
+                                                  CheckInStatisticsDelegate delegate,
+                                                  CheckInStatisticsDataConverter.OnGetNetDataListener onGetNetDataListener) {
         return new CheckInStatisticsHandler(swipeRefreshLayout, recyclerView,
-                new CheckInStatisticsDataConverter(itemType), roleType, itemType, id);
+                new CheckInStatisticsDataConverter(itemType, onGetNetDataListener), roleType, itemType, id, onItemClickListener, delegate);
     }
 
     @Override
@@ -89,11 +132,67 @@ public class CheckInStatisticsHandler extends BaseRefreshHandler {
 
     @Override
     public BaseRecyclerAdapter getAdapter(DataConverter converter) {
-        return CheckInStatisticsRvAdapter.create(converter.convert(), mItemType);
+        mSortList.addAll(converter.convert());
+        mOriginList.addAll(converter.convert());
+        mCheckInStatisticsRvAdapter = CheckInStatisticsRvAdapter.create(converter.convert(), mItemType, mOnItemClickListener);
+        return mCheckInStatisticsRvAdapter;
     }
 
     @Override
     public BaseRefreshHandler updateParams(String... params) {
-        return null;
+        if (params != null && params.length == 1) {
+            mRoleType = params[0];
+        }
+        clearSortState();
+        firstPage();
+        return this;
+    }
+
+    @Override
+    public void onTodayCheckInSort(int todayCheckInFlag) {
+        List<MultipleItemEntity> tempList = new ArrayList<>();
+        if (todayCheckInFlag == CheckInStatisticsConstant.SORT_ASC) {
+            mIsAsc = true;
+            Collections.sort(mSortList, mTodayCheckInComparator);
+        } else if (todayCheckInFlag == CheckInStatisticsConstant.SORT_DESC) {
+            mIsAsc = false;
+            Collections.sort(mSortList, mTodayCheckInComparator);
+        } else if (todayCheckInFlag == CheckInStatisticsConstant.SORT_DEF) {
+            mSortList.clear();
+            mSortList.addAll(mOriginList);
+        }
+        tempList.addAll(mSortList);
+        mCheckInStatisticsRvAdapter.refresh(tempList);
+    }
+
+    @Override
+    public void onMonthCheckInSort(int monthAvgCheckInFlag) {
+        List<MultipleItemEntity> tempList = new ArrayList<>();
+        if (monthAvgCheckInFlag == CheckInStatisticsConstant.SORT_ASC) {
+            mIsAsc = true;
+            Collections.sort(mSortList, mMonthAvgCheckInComparator);
+        } else if (monthAvgCheckInFlag == CheckInStatisticsConstant.SORT_DESC) {
+            mIsAsc = false;
+            Collections.sort(mSortList, mMonthAvgCheckInComparator);
+        } else if (monthAvgCheckInFlag == CheckInStatisticsConstant.SORT_DEF) {
+            mSortList.clear();
+            mSortList.addAll(mOriginList);
+        }
+        tempList.addAll(mSortList);
+        mCheckInStatisticsRvAdapter.refresh(tempList);
+    }
+
+    @Override
+    public void onRefresh() {
+        super.onRefresh();
+        clearSortState();
+    }
+
+    private void clearSortState() {
+        mIsAsc = false;
+        mCheckInStatisticsDelegate.mTodayCheckInFlag = CheckInStatisticsConstant.SORT_DEF;
+        mCheckInStatisticsDelegate.mMonthAvgCheckInFlag = CheckInStatisticsConstant.SORT_DEF;
+        mCheckInStatisticsDelegate.drawRight(mCheckInStatisticsDelegate.mTvTodayCheckIn, CheckInStatisticsConstant.SORT_DEF);
+        mCheckInStatisticsDelegate.drawRight(mCheckInStatisticsDelegate.mTvMonthAvgCheckIn, CheckInStatisticsConstant.SORT_DEF);
     }
 }

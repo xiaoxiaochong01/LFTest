@@ -59,16 +59,16 @@ public class ProjectCheckInBean extends BaseResponse {
              * checkins : 0
              */
 
-            private double avg;
+            private int avg;
             private String projectName;
             private String projectId;
             private int checkins;
 
-            public double getAvg() {
+            public int getAvg() {
                 return avg;
             }
 
-            public void setAvg(double avg) {
+            public void setAvg(int avg) {
                 this.avg = avg;
             }
 
