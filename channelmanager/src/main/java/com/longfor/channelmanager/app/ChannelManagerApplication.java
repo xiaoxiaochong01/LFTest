@@ -30,7 +30,7 @@ public class ChannelManagerApplication extends Application {
     private void initConfig() {
         LongFor.init(this)
                 .withIcon(new FontAwesomeModule())
-                .withLoaderDelayed(5000)
+                .withLoaderDelayed(0)//修改loading框在网络回调结果中消失
                 //https://mop.longfor.com:27221/v1/app/
                 .withApiHost("http://192.168.48.9:82/v1/app/")
                 .withWeChatAppId("你的微信AppKey")
