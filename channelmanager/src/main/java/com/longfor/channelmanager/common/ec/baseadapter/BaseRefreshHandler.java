@@ -107,6 +107,7 @@ public abstract class BaseRefreshHandler implements
                     }
                 })
                 .error(this)
+                .loader(RECYCLERVIEW.getContext())
                 .build()
                 .post();
     }
@@ -128,6 +129,7 @@ public abstract class BaseRefreshHandler implements
                     }
                 })
                 .error(this)
+                .loader(RECYCLERVIEW.getContext())
                 .build()
                 .post();
     }
@@ -151,6 +153,7 @@ public abstract class BaseRefreshHandler implements
                         }
                     })
                     .error(this)
+                    .loader(RECYCLERVIEW.getContext())
                     .build()
                     .post();
 
