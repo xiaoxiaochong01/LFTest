@@ -122,4 +122,7 @@
     <string name="customer_demand">客户需求</string>
 
     <!--客户详情 end-->
+    <!--排班 begin-->
+    <string name="arrange_title">排班</string>
+    <!--排班 end-->
 </resources>
