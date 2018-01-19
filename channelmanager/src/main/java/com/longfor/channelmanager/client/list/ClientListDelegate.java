@@ -1,12 +1,10 @@
 package com.longfor.channelmanager.client.list;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatEditText;
@@ -15,9 +13,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
@@ -25,12 +21,7 @@ import com.longfor.channelmanager.client.detail.ClientDetailDelegate;
 import com.longfor.channelmanager.client.search.ClientSearchDelegate;
 import com.longfor.channelmanager.client.search.ConstantClientSearch;
 import com.longfor.channelmanager.common.ec.Constant;
-import com.longfor.channelmanager.common.view.CommonHeadView;
-import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendancePagerAdapter;
-import com.longfor.channelmanager.statistics.queryattendance.delegate.QueryAttendanceSubDelegate;
 import com.longfor.core.delegates.LongForDelegate;
-import com.longfor.core.utils.log.LogUtils;
-import com.longfor.core.utils.toast.ToastUtils;
 import com.longfor.ui.view.editwatcher.EditTextWatcher;
 
 import java.util.ArrayList;
@@ -60,6 +51,8 @@ public class ClientListDelegate extends LongForDelegate implements OnRefreshSear
     private final List<ClientListSubDelegate> delegates = new ArrayList<>();
     private final List<String> mTabTitles = new ArrayList<>();
     private final List<String> intentTypes = new ArrayList<>();
+    public static String mRoleType = ConstantClientList.ROLE_TYPE_DEFAULT;
+    public static String mSearchContent = ConstantClientList.SEARCH_CONTENT_DEFAULT;
 
     @Override
     public Object setLayout() {
@@ -147,6 +140,8 @@ public class ClientListDelegate extends LongForDelegate implements OnRefreshSear
     @Override
     public void onRefresh(String roleType, String searchContent) {
         etSearch.setText(searchContent);
+        mRoleType = roleType;
+        mSearchContent = searchContent;
         for(ClientListSubDelegate delegate : delegates) {
             delegate.update(roleType, searchContent);
         }
@@ -156,5 +151,12 @@ public class ClientListDelegate extends LongForDelegate implements OnRefreshSear
     public void onClientListClick(String mCustomerId) {
         ClientDetailDelegate detailDelegate = ClientDetailDelegate.getInstance(getString(R.string.client_list_title), mCustomerId);
         getSupportDelegate().start(detailDelegate);
+    }
+
+    @Override
+    public void onDestroy() {
+        mRoleType = ConstantClientList.ROLE_TYPE_DEFAULT;
+        mSearchContent = ConstantClientList.SEARCH_CONTENT_DEFAULT;
+        super.onDestroy();
     }
 }
