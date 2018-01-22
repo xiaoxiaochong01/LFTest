@@ -125,4 +125,11 @@
     <!--排班 begin-->
     <string name="arrange_title">排班</string>
     <!--排班 end-->
+
+    <!--团队战报 begin-->
+    <string name="first_ranking">第一名</string>
+    <string name="second_ranking">第二名</string>
+    <string name="third_ranking">第三名</string>
+    <string name="headman_and_colon">组长：</string>
+    <!--团队战报 end-->
 </resources>

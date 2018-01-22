@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_black_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="124dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_trans_black_rect_corner_4"
+        android:paddingLeft="5dp"
+        android:paddingRight="6dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_group_achievement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/tv_headman"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@+id/rv_group_achievement"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="8sp"/>
+    </LinearLayout>
+
+</LinearLayout>
