@@ -8,7 +8,6 @@ import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
-import com.longfor.channelmanager.login.delegate.LoginDelegate;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.ui.login.view.ScreenMatchVideoView;
 
@@ -32,7 +31,7 @@ public class LoginVideoDelegate extends LongForDelegate {
 
     @OnClick(R2.id.btn_goto_login)
     void goToLogin() {
-        getSupportDelegate().start(new LoginDelegate(), SINGLETASK);
+        getSupportDelegate().startWithPop(new LoginDelegate());
     }
 
     @Override

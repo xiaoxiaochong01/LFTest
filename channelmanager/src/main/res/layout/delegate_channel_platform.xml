@@ -94,7 +94,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rl_team_report"
+        android:id="@+id/rl_team_campaign"
         android:layout_width="match_parent"
         android:layout_height="@dimen/platform_item_height"
         android:layout_marginTop="20dp"
@@ -116,7 +116,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="13dp"
             android:layout_toRightOf="@+id/img_team_report"
-            android:text="@string/channel_platform_team_report"
+            android:text="@string/channel_platform_team_campaign"
             android:textColor="@color/gray_3"
             android:textSize="16sp" />
 

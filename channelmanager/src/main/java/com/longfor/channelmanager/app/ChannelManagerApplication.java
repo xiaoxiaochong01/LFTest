@@ -2,6 +2,7 @@ package com.longfor.channelmanager.app;
 
 import android.app.Application;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.common.utils.PickerImageLoader;
@@ -38,7 +39,8 @@ public class ChannelManagerApplication extends Application {
                 .withJavascriptInterface("latte")
                 .withInterceptor(new DebugInterceptor("index", R.raw.test))
                 .configure();
-
+//        init BaiduMap
+        SDKInitializer.initialize(getApplicationContext());
         DatabaseManager.getInstance().init(this);
 
     }

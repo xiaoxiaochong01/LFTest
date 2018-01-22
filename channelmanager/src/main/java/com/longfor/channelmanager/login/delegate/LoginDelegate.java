@@ -73,7 +73,7 @@ public class LoginDelegate extends LongForDelegate{
                                 if(loginBean.getData() != null) {
 //                                    // 存储用户信息
                                     LoginHandler.loginSucess(loginBean.getData());
-                                    getSupportDelegate().start(new ChannelMainDelegate(), SINGLETASK);
+                                    getSupportDelegate().startWithPop(new ChannelMainDelegate());
 
                                 }
                                 else {
