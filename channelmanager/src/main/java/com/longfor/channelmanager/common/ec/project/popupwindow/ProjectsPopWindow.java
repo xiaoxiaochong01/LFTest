@@ -2,6 +2,7 @@ package com.longfor.channelmanager.common.ec.project.popupwindow;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,13 +89,20 @@ public class ProjectsPopWindow extends PopupWindow implements ISuccess{
 
     @Override
     public void onSuccess(String response) {
-        ProjectsDataBean projectsDataBean = JSON.parseObject(response, ProjectsDataBean.class);
-        if(projectsDataBean != null) {
-            dataBeans.clear();
-            if(projectsDataBean.getData() != null) {
-                dataBeans.addAll(projectsDataBean.getData());
+        try {
+            ProjectsDataBean projectsDataBean = JSON.parseObject(response, ProjectsDataBean.class);
+            if(projectsDataBean != null) {
+                dataBeans.clear();
+                if(projectsDataBean.getData() != null) {
+                    dataBeans.addAll(projectsDataBean.getData());
+                }
+                mProjectsAdapter.notifyDataSetChanged();
+                if (TextUtils.isEmpty(DatabaseManager.getProjectId())){
+                    DatabaseManager.updateProject(projectsDataBean.getData().get(0).getProjects().get(0).getProjectId(), projectsDataBean.getData().get(0).getProjects().get(0).getProjectName());
+                }
             }
-            mProjectsAdapter.notifyDataSetChanged();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

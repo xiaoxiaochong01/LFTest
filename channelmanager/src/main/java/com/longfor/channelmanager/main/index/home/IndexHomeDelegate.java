@@ -67,6 +67,7 @@ public class IndexHomeDelegate extends BottomItemDelegate implements IUnReadMess
         pageHandler.requestHomePageData(DatabaseManager.getProjectId());
         messageCountHandler.requestUnReadMessageCount();
         mProjectWindow = new ProjectsPopWindow(getContext(), this);
+        tvProjectList.setText(DatabaseManager.getUserProfile().getProjectName());
     }
 
 
