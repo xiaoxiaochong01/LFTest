@@ -12,6 +12,7 @@ import com.longfor.channelmanager.arrange.group.ArrangeGroupDelegate;
 import com.longfor.channelmanager.client.list.ClientListDelegate;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.view.CommonHeadView;
+import com.longfor.channelmanager.recordlist.delegate.RecordListDelegate;
 import com.longfor.channelmanager.teamcampaign.TeamCampaignDelegate;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.core.utils.toast.ToastUtils;
@@ -71,7 +72,7 @@ public class ChannelPlatformDelegate extends LongForDelegate {
                 getSupportDelegate().start(TeamCampaignDelegate.getInstance(getString(R.string.channel_platform_title)));
                 break;
             case R.id.rl_performance:
-                ToastUtils.showMessage(R.string.channel_platform_performance);
+                getSupportDelegate().start(RecordListDelegate.getInstance(getString(R.string.channel_platform_title)));
                 break;
             case R.id.rl_arrange_work:
                 getSupportDelegate().start(ArrangeGroupDelegate.getInstance(getResources().getString(R.string.channel_platform_title)));

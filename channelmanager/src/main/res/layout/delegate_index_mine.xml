@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/mine_avater_default"
+            android:src="@mipmap/ic_default_cover"
             />
         <com.longfor.ui.view.circleimageview.CircleImageView
             android:id="@+id/img_uer_head_portrait"
@@ -23,7 +23,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="bottom|center"
             android:layout_marginTop="-50dp"
-            android:src="@mipmap/mine_head_default"
+            android:src="@mipmap/ic_default_portrait"
             />
 
         <android.support.v7.widget.AppCompatTextView

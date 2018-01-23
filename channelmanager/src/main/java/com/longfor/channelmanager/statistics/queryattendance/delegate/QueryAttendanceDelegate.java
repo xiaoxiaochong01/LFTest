@@ -18,8 +18,7 @@ import com.longfor.channelmanager.common.ec.project.ProjectsDataBean;
 import com.longfor.channelmanager.common.ec.project.popupwindow.ProjectsPopWindow;
 import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.channelmanager.database.DatabaseManager;
-import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendancePagerAdapter;
-import com.longfor.channelmanager.statistics.queryattendance.constant.QueryAttendanceConstant;
+import com.longfor.channelmanager.common.ec.baseadapter.ViewPagerAdapter;
 import com.longfor.core.delegates.LongForDelegate;
 
 import java.util.ArrayList;
@@ -35,17 +34,17 @@ import butterknife.BindView;
  */
 
 public class QueryAttendanceDelegate extends LongForDelegate implements IProjectChange {
-    @BindView(R2.id.header_query_attendance)
+    @BindView(R2.id.header_tab_viewpager)
     CommonHeadView mHeaderQueryAttendance;
-    @BindView(R.id.tl_query_attendance)
+    @BindView(R2.id.tl_tab_viewpager)
     TabLayout mTlQueryAttendance;
-    @BindView(R.id.vp_query_attendance)
+    @BindView(R2.id.vp_tab_viewpager)
     ViewPager mVpQueryAttendance;
     public String mProjectId;
     private ProjectsPopWindow mProjectWindow;
     public TextView mTvTitleRight;
     public List<Fragment> mFragmentList;
-    public QueryAttendancePagerAdapter mPagerAdapter;
+    public ViewPagerAdapter mPagerAdapter;
 
     public static QueryAttendanceDelegate getInstance(String leftMsg){
         Bundle bundle=new Bundle();
@@ -57,7 +56,7 @@ public class QueryAttendanceDelegate extends LongForDelegate implements IProject
 
     @Override
     public Object setLayout() {
-        return R.layout.delegate_statistics_query_attendance;
+        return R.layout.delegate_tab_viewpager;
     }
 
     @Override
@@ -102,14 +101,14 @@ public class QueryAttendanceDelegate extends LongForDelegate implements IProject
         List<String> mTabTitles = Arrays.asList(new String[]{getString(R.string.trainee_role_show_get_num),
                 getString(R.string.trainee_role_expand_get_num), getString(R.string.trainee_role_show_and_expand_call_num),
                 getString(R.string.trainee_role_call_get_num), getString(R.string.trainee_role_call_call_num)});
-        List<String> mRoleTypes = Arrays.asList(new String[]{QueryAttendanceConstant.SHOW_GET_NUM,
-                QueryAttendanceConstant.EXPAND_GET_NUM, QueryAttendanceConstant.SHOW_AND_EXPAND_CALL_NUM,
-                QueryAttendanceConstant.CALL_GET_NUM, QueryAttendanceConstant.CALL_CALL_NUM});
+        List<String> mRoleTypes = Arrays.asList(new String[]{Constant.SHOW_GET_NUM,
+                Constant.EXPAND_GET_NUM, Constant.SHOW_AND_EXPAND_CALL_NUM,
+                Constant.CALL_GET_NUM, Constant.CALL_CALL_NUM});
         mFragmentList = new ArrayList<>();
         for (int i = 0; i < mTabTitles.size(); i++) {
             mFragmentList.add(QueryAttendanceSubDelegate.getInstance(mRoleTypes.get(i), mProjectId, this));
         }
-        mPagerAdapter = new QueryAttendancePagerAdapter(getFragmentManager(), mTabTitles, mFragmentList);
+        mPagerAdapter = new ViewPagerAdapter(getFragmentManager(), mTabTitles, mFragmentList);
         mVpQueryAttendance.setAdapter(mPagerAdapter);
         mTlQueryAttendance.setupWithViewPager(mVpQueryAttendance);
     }

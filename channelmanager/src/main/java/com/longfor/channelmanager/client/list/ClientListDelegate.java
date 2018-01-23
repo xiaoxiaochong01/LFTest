@@ -100,8 +100,8 @@ public class ClientListDelegate extends LongForDelegate implements OnRefreshSear
         mTabTitles.clear();
         intentTypes.clear();
         mTabTitles.addAll(Arrays.asList(new String[]{getString(R.string.all),
-                getString(R.string.first_floor), getString(R.string.second_floor),
-                getString(R.string.subscribe)}));
+                getString(R.string.first_level_client), getString(R.string.second_level_client),
+                getString(R.string.subscribe_client)}));
         intentTypes.addAll(Arrays.asList(new String[]{ConstantClientList.CLIENT_ALL,
                 ConstantClientList.CLIENT_FIRST,
                 ConstantClientList.CLIENT_SECOND,

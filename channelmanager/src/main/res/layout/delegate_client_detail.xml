@@ -114,7 +114,7 @@
                 android:layout_toRightOf="@+id/tv_square_meter"
                 android:background="@drawable/client_detail_green_text"
                 android:padding="3dp"
-                android:text="@string/subscribe"
+                android:text="@string/subscribe_client"
                 android:textColor="#76be66"
                 android:textSize="12sp"
                 />

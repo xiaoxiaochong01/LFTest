@@ -160,7 +160,7 @@
             android:layout_marginLeft="13dp"
             android:textColor="@color/gray_3"
             android:textSize="16sp"
-            android:text="@string/channel_platform_performance"
+            android:text="@string/channel_platform_record_list"
             />
 
         <android.support.v7.widget.AppCompatImageView
