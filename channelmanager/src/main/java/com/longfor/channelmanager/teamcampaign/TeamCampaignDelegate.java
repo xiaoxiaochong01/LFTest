@@ -66,7 +66,6 @@ import static com.longfor.channelmanager.teamcampaign.TeamCampaignConstant.REQUE
 public class TeamCampaignDelegate extends LongForDelegate implements IProjectChange {
     @BindView(R2.id.header_team_campaign)
     CommonHeadView mHeaderTeamCampaign;
-    @BindView(R2.id.map_view_team_campaign)
     MapView mTeamCampaignMapView;
     private TextView mTvTitleRight;
     private ProjectsPopWindow mProjectWindow;
@@ -105,7 +104,7 @@ public class TeamCampaignDelegate extends LongForDelegate implements IProjectCha
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         initHeader();
-        initBaiduMap();
+        initBaiduMap(rootView);
         initLocationConfig();
         checkLocationPermission();
         mTeamCampaignComparator = new TeamCampaignComparator();
@@ -155,7 +154,6 @@ public class TeamCampaignDelegate extends LongForDelegate implements IProjectCha
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mTeamCampaignMapView.onDestroy();
         if (mLocClient != null) {
             // 退出时销毁定位
             mLocClient.stop();
@@ -181,8 +179,10 @@ public class TeamCampaignDelegate extends LongForDelegate implements IProjectCha
 
     /**
      * 初始化百度地图
+     * @param rootView
      */
-    private void initBaiduMap() {
+    private void initBaiduMap(View rootView) {
+        mTeamCampaignMapView=rootView.findViewById(R.id.map_view_team_campaign);
         mBaiduMap = mTeamCampaignMapView.getMap();
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
         mBaiduMap.setCompassEnable(true);

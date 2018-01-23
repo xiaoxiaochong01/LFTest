@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v7.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:layout_marginRight="5dp"
         android:id="@+id/tv_name"
         android:layout_width="40dp"
@@ -14,11 +14,11 @@
         android:textColor="@color/white"
         android:textSize="8sp"/>
 
-    <com.longfor.commonlib.view.GroupFightProgressBar
+    <com.longfor.channelmanager.common.view.GroupFightProgressBar
         android:id="@+id/progressBar"
         android:layout_width="0dp"
         android:layout_height="8dp"
         android:layout_marginTop="6dp"
         android:layout_weight="1"
         />
-</LinearLayout>
+</android.support.v7.widget.LinearLayoutCompat>
