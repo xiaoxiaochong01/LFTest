@@ -37,7 +37,7 @@ public class RecordListDelegate extends LongForDelegate {
     ViewPager mVpTabViewpager;
     public List<Fragment> mFragmentList;
     public ViewPagerAdapter mPagerAdapter;
-    private int mClickGroupCount = 0;
+    private int mClickGroupCount = 1;
 
     public static RecordListDelegate getInstance(String leftStr) {
         Bundle bundle = new Bundle();

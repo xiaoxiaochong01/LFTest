@@ -63,6 +63,10 @@
     <color name="pink">#ffe9d9</color>
     <color name="pink_3f">#fffaf0</color>
     <color name="transparent">#00000000</color>
+    <color name="rank_first">#F15135</color>
+    <color name="rank_second">#FD8E27</color>
+    <color name="rank_third">#F2D451</color>
+    <color name="rank_normal">#676767</color>
 
 
 </resources>

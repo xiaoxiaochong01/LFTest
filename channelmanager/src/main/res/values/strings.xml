@@ -133,5 +133,6 @@
     <string name="second_ranking">第二名</string>
     <string name="third_ranking">第三名</string>
     <string name="headman_and_colon">组长：</string>
+    <string name="rank_first_text">是状元，占领了封面</string>
     <!--团队战报 end-->
 </resources>

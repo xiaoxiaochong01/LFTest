@@ -31,69 +31,13 @@
                     android:id="@+id/tv_cover"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:layout_gravity="center_horizontal"
                     android:background="@mipmap/ic_cover_text_bg"
                     android:ellipsize="middle"
                     android:textColor="@color/white"
                     android:textSize="14sp"/>
             </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_self_record"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:paddingBottom="10dp"
-                android:paddingLeft="40dp"
-                android:paddingTop="10dp">
-
-                <com.longfor.ui.view.circleimageview.CircleImageView
-                    android:id="@+id/civ_record_portrait"
-                    android:layout_width="47dp"
-                    android:layout_height="47dp"
-                    />
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tv_record_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/civ_record_portrait"
-                    android:paddingLeft="17dp"
-                    android:paddingTop="4dp"
-                    android:textColor="@color/gray_3"
-                    android:textSize="15sp"
-                    />
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tv_record_rank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_record_name"
-                    android:layout_toRightOf="@+id/civ_record_portrait"
-                    android:paddingBottom="4dp"
-                    android:paddingLeft="17dp"
-                    android:paddingTop="2dp"
-                    android:textColor="@color/gray_9"
-                    android:textSize="13sp"
-                    />
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tv_record_conversion_rate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="28dp"
-                    android:textColor="@color/gray_9"
-                    android:textSize="18sp"/>
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/gray_f8"
-                />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_record"

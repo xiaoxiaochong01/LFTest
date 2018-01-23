@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray_f8"
-    android:orientation="vertical">
+                                              android:layout_width="match_parent"
+                                              android:layout_height="match_parent"
+                                              android:background="@color/gray_f8"
+                                              android:orientation="vertical">
     <!-- 标头栏-->
     <RelativeLayout
         android:id="@+id/rl_title"
@@ -18,11 +18,11 @@
             android:layout_marginLeft="15dp"
             android:drawablePadding="5dp"
             android:drawableRight="@mipmap/ic_arrow_down_s"
+            android:ellipsize="end"
+            android:maxEms="7"
+            android:maxLines="1"
             android:textColor="@color/gray_3"
             android:textSize="15sp"
-            android:maxEms="7"
-            android:ellipsize="end"
-            android:maxLines="1"
             />
 
         <android.support.v7.widget.AppCompatTextView
@@ -31,7 +31,7 @@
             android:layout_centerInParent="true"
             android:text="首页"
             android:textColor="@color/gray_3"
-            android:textSize="18sp" />
+            android:textSize="18sp"/>
 
         <RelativeLayout
             android:id="@+id/rl_group_unread_meg"
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@mipmap/home_message_icon" />
+                android:src="@mipmap/home_message_icon"/>
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/img_message_dot"
@@ -53,91 +53,20 @@
                 android:layout_above="@+id/img_message"
                 android:layout_toRightOf="@+id/img_message"
                 android:src="@mipmap/ic_red_dot"
-                android:visibility="gone" />
+                android:visibility="gone"/>
 
         </RelativeLayout>
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/gray_e0"
             android:layout_alignParentBottom="true"
+            android:background="@color/gray_e0"
             />
     </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-        <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:id="@+id/rv_home"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent" />-->
-        <!--&lt;!&ndash;<ScrollView&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/sv_group_home"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="match_parent">&ndash;&gt;-->
-            <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
-                <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:orientation="vertical"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:paddingBottom="20dp">&ndash;&gt;-->
-
-                <!--&lt;!&ndash;&lt;!&ndash;<com.youth.banner.Banner&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;app:indicator_drawable_selected="@mipmap/icon_point_true"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;app:indicator_drawable_unselected="@mipmap/icon_point_false"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;app:indicator_width="8dp"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;app:indicator_height="8dp"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;app:indicator_margin="3dp"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;app:banner_default_image="@mipmap/default_banner"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;app:image_scale_type="center_crop"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;android:id="@+id/banner"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="170dp" />&ndash;&gt;&ndash;&gt;-->
-
-                <!--&lt;!&ndash;&lt;!&ndash;<com.longfor.channelmanager.views.ListViewForScrollView&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;android:id="@+id/lv_features"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;android:divider="@color/transparent"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;android:scrollbars="none"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;android:listSelector="@color/transparent"&ndash;&gt;&ndash;&gt;-->
-                    <!--&lt;!&ndash;&lt;!&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
-
-                <!--&lt;!&ndash;&lt;!&ndash;</com.longfor.channelmanager.views.ListViewForScrollView>&ndash;&gt;&ndash;&gt;-->
-
-            <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;</ScrollView>&ndash;&gt;-->
-        <!--<LinearLayout-->
-            <!--android:id="@+id/ll_group_project"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="vertical"-->
-            <!--android:visibility="gone"-->
-            <!--&gt;-->
-            <!--<ExpandableListView-->
-                <!--android:id="@+id/elv_project_home"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:groupIndicator="@null"-->
-                <!--android:dividerHeight="0.5dp"-->
-                <!--android:divider="@color/gray_e"-->
-                <!--android:childDivider="@color/gray_e"-->
-                <!--&gt;-->
-
-            <!--</ExpandableListView>-->
-
-            <!--<Button-->
-                <!--android:id="@+id/btn_out_project_item"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="0dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="#99000000"-->
-                <!--/>-->
-        <!--</LinearLayout>-->
-
-    <!--</RelativeLayout>-->
+        android:layout_height="match_parent"/>
 </android.support.v7.widget.LinearLayoutCompat>
