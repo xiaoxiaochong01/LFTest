@@ -14,11 +14,16 @@ import android.view.View;
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.utils.ImageLoader;
+import com.longfor.channelmanager.common.view.popupwindow.BottomPopupWindow;
 import com.longfor.channelmanager.recordlist.bean.RecordListBean;
+import com.longfor.channelmanager.recordlist.constant.RecordListConstant;
 import com.longfor.channelmanager.recordlist.converter.RecordListConverter;
 import com.longfor.channelmanager.recordlist.handler.RecordListHandler;
 import com.longfor.core.delegates.LongForDelegate;
 import com.longfor.ui.recycler.BaseDecoration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,6 +48,14 @@ public class RecordListSubDelegate extends LongForDelegate implements RecordList
     private LongForDelegate mParentDelegate;
     private String mUserRole = Constant.SHOW_GET_NUM;
     public RecordListHandler mRecordListHandler;
+    public BottomPopupWindow mPopupWindow;
+    private BottomPopupWindow.OnItemClickListener mPopupWindowItemClickListener=new BottomPopupWindow.OnItemClickListener() {
+        @Override
+        public void onItemClick(BottomPopupWindow.Data data) {
+            mUserRole=data.getId();
+            mRecordListHandler.requestRecordList(mIsGroup,mUserRole);
+        }
+    };
 
     public static RecordListSubDelegate getInstance(int isGroup, String category, LongForDelegate parentDelegate) {
         RecordListSubDelegate delegate = new RecordListSubDelegate();
@@ -59,9 +72,40 @@ public class RecordListSubDelegate extends LongForDelegate implements RecordList
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
+        initBottomPopupWindow();
         initRecyclerView();
         mRecordListHandler = RecordListHandler.create(mRvRecord, mIsGroup, mCategory, mUserRole, this);
         mRecordListHandler.requestRecordList(mIsGroup, mUserRole);
+    }
+
+    private void initBottomPopupWindow() {
+        String[] filterRoleStrs = null;
+        String[] filterRoleIds=null;
+        switch (mCategory) {
+            case RecordListConstant.FIRST_LEVEL_CLIENT:
+                filterRoleStrs = new String[]{getString(R.string.trainee_role_show_get_num),
+                        getString(R.string.trainee_role_expand_get_num),
+                        getString(R.string.trainee_role_call_get_num)};
+                filterRoleIds=new String[]{Constant.SHOW_GET_NUM,Constant.EXPAND_GET_NUM,
+                Constant.CALL_GET_NUM};
+                break;
+            case RecordListConstant.SECOND_LEVEL_CLIENT:
+            case RecordListConstant.SUBSCRIBE_CLIENT:
+            case RecordListConstant.CLIENT_CONVERSION_RATE:
+                filterRoleStrs = new String[]{getString(R.string.trainee_role_show_get_num),
+                        getString(R.string.trainee_role_expand_get_num),
+                        getString(R.string.trainee_role_show_and_expand_call_num),
+                        getString(R.string.trainee_role_call_get_num),
+                        getString(R.string.trainee_role_call_call_num)};
+                filterRoleIds=new String[]{Constant.SHOW_GET_NUM,Constant.EXPAND_GET_NUM,
+                Constant.SHOW_AND_EXPAND_CALL_NUM,Constant.CALL_GET_NUM,Constant.CALL_CALL_NUM};
+                break;
+        }
+        List<BottomPopupWindow.Data> dataList=new ArrayList<>();
+        for (int i = 0; i < filterRoleStrs.length; i++) {
+            dataList.add(new BottomPopupWindow.Data(filterRoleIds[i],filterRoleStrs[i]));
+        }
+        mPopupWindow = new BottomPopupWindow(getContext(), dataList,mPopupWindowItemClickListener);
     }
 
     private void initRecyclerView() {
@@ -76,7 +120,7 @@ public class RecordListSubDelegate extends LongForDelegate implements RecordList
 
     @OnClick(R.id.iv_filter)
     public void onViewClicked() {
-
+        mPopupWindow.showPopupWindow(mIvFilter);
     }
 
     @Override
