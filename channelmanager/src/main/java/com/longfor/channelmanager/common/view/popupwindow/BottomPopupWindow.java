@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * @author: gaomei
  * @date: 2018/1/24
- * @function:
+ * @function:底部popupwindow
  */
 
 public class BottomPopupWindow extends PopupWindow implements View.OnClickListener {

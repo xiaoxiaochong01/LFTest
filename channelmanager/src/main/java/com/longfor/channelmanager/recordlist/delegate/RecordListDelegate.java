@@ -74,11 +74,15 @@ public class RecordListDelegate extends LongForDelegate {
         mHeaderTabViewpager.setRightLayoutOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2018/1/23 change isTeam
                 mClickGroupCount++;
                 boolean isGroup = mClickGroupCount % 2 == 1;
                 mHeaderTabViewpager.setRightImageSrc(isGroup ? R.mipmap.ic_person : R.mipmap.ic_group);
-                ((RecordListSubDelegate) mFragmentList.get(mVpTabViewpager.getCurrentItem())).updateParams(mClickGroupCount % 2);
+                for (int i = 0; i < mFragmentList.size(); i++) {
+                    ((RecordListSubDelegate) mFragmentList.get(i)).mIsGroup = mClickGroupCount % 2;
+                    if (mFragmentList.get(i).isAdded()) {
+                        ((RecordListSubDelegate) mFragmentList.get(i)).updateParams();
+                    }
+                }
             }
         });
     }

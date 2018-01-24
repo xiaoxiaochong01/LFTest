@@ -49,11 +49,11 @@ public class RecordListSubDelegate extends LongForDelegate implements RecordList
     private String mUserRole = Constant.SHOW_GET_NUM;
     public RecordListHandler mRecordListHandler;
     public BottomPopupWindow mPopupWindow;
-    private BottomPopupWindow.OnItemClickListener mPopupWindowItemClickListener=new BottomPopupWindow.OnItemClickListener() {
+    private BottomPopupWindow.OnItemClickListener mPopupWindowItemClickListener = new BottomPopupWindow.OnItemClickListener() {
         @Override
         public void onItemClick(BottomPopupWindow.Data data) {
-            mUserRole=data.getId();
-            mRecordListHandler.requestRecordList(mIsGroup,mUserRole);
+            mUserRole = data.getId();
+            mRecordListHandler.requestRecordList(mIsGroup, mUserRole);
         }
     };
 
@@ -75,19 +75,24 @@ public class RecordListSubDelegate extends LongForDelegate implements RecordList
         initBottomPopupWindow();
         initRecyclerView();
         mRecordListHandler = RecordListHandler.create(mRvRecord, mIsGroup, mCategory, mUserRole, this);
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
         mRecordListHandler.requestRecordList(mIsGroup, mUserRole);
     }
 
     private void initBottomPopupWindow() {
         String[] filterRoleStrs = null;
-        String[] filterRoleIds=null;
+        String[] filterRoleIds = null;
         switch (mCategory) {
             case RecordListConstant.FIRST_LEVEL_CLIENT:
                 filterRoleStrs = new String[]{getString(R.string.trainee_role_show_get_num),
                         getString(R.string.trainee_role_expand_get_num),
                         getString(R.string.trainee_role_call_get_num)};
-                filterRoleIds=new String[]{Constant.SHOW_GET_NUM,Constant.EXPAND_GET_NUM,
-                Constant.CALL_GET_NUM};
+                filterRoleIds = new String[]{Constant.SHOW_GET_NUM, Constant.EXPAND_GET_NUM,
+                        Constant.CALL_GET_NUM};
                 break;
             case RecordListConstant.SECOND_LEVEL_CLIENT:
             case RecordListConstant.SUBSCRIBE_CLIENT:
@@ -97,15 +102,16 @@ public class RecordListSubDelegate extends LongForDelegate implements RecordList
                         getString(R.string.trainee_role_show_and_expand_call_num),
                         getString(R.string.trainee_role_call_get_num),
                         getString(R.string.trainee_role_call_call_num)};
-                filterRoleIds=new String[]{Constant.SHOW_GET_NUM,Constant.EXPAND_GET_NUM,
-                Constant.SHOW_AND_EXPAND_CALL_NUM,Constant.CALL_GET_NUM,Constant.CALL_CALL_NUM};
+                filterRoleIds = new String[]{Constant.SHOW_GET_NUM, Constant.EXPAND_GET_NUM,
+                        Constant.SHOW_AND_EXPAND_CALL_NUM, Constant.CALL_GET_NUM, Constant.CALL_CALL_NUM};
                 break;
         }
-        List<BottomPopupWindow.Data> dataList=new ArrayList<>();
+        List<BottomPopupWindow.Data> dataList = new ArrayList<>();
         for (int i = 0; i < filterRoleStrs.length; i++) {
-            dataList.add(new BottomPopupWindow.Data(filterRoleIds[i],filterRoleStrs[i]));
+            dataList.add(new BottomPopupWindow.Data(filterRoleIds[i], filterRoleStrs[i]));
         }
-        mPopupWindow = new BottomPopupWindow(getContext(), dataList,mPopupWindowItemClickListener);
+        dataList.get(0).setSelected(true);
+        mPopupWindow = new BottomPopupWindow(getContext(), dataList, mPopupWindowItemClickListener);
     }
 
     private void initRecyclerView() {
@@ -136,8 +142,7 @@ public class RecordListSubDelegate extends LongForDelegate implements RecordList
         }
     }
 
-    public void updateParams(int isGroup) {
-        mIsGroup = isGroup;
-        mRecordListHandler.requestRecordList(isGroup, mUserRole);
+    public void updateParams() {
+        mRecordListHandler.requestRecordList(mIsGroup, mUserRole);
     }
 }
