@@ -82,11 +82,18 @@ public class RecordListSubDelegate extends LongForDelegate implements RecordList
     @Override
     public void onGetNetData(@Nullable RecordListBean.DataBean dataBean) {
         if (dataBean != null) {
-            ImageLoader.display(getContext(), mIvCover, dataBean.getCover(),R.mipmap.ic_default_banner,R.mipmap.ic_default_banner);
+            mIvCover.setVisibility(View.VISIBLE);
+            mTvCover.setVisibility(View.VISIBLE);
+            ImageLoader.display(getContext(), mIvCover, dataBean.getCover(), R.mipmap.ic_default_banner, R.mipmap.ic_default_banner);
             mTvCover.setText(dataBean.getName() + getString(R.string.rank_first_text));
         } else {
             mIvCover.setVisibility(View.GONE);
             mTvCover.setVisibility(View.GONE);
         }
+    }
+
+    public void updateParams(int isGroup) {
+        mIsGroup = isGroup;
+        mRecordListHandler.requestRecordList(isGroup, mUserRole);
     }
 }

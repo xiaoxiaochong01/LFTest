@@ -37,7 +37,7 @@ public class RecordListDelegate extends LongForDelegate {
     ViewPager mVpTabViewpager;
     public List<Fragment> mFragmentList;
     public ViewPagerAdapter mPagerAdapter;
-    private int mClickGroupCount = 1;
+    private int mClickGroupCount = 0;
 
     public static RecordListDelegate getInstance(String leftStr) {
         Bundle bundle = new Bundle();
@@ -64,7 +64,7 @@ public class RecordListDelegate extends LongForDelegate {
         mHeaderTabViewpager.setTitle(getString(R.string.channel_platform_record_list));
         mHeaderTabViewpager.setBottomLineVisible(true);
         mHeaderTabViewpager.setRightImageVisible(true);
-        mHeaderTabViewpager.setRightImageSrc(R.mipmap.icon_person);
+        mHeaderTabViewpager.setRightImageSrc(R.mipmap.ic_group);
         mHeaderTabViewpager.setLeftLayoutOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +75,10 @@ public class RecordListDelegate extends LongForDelegate {
             @Override
             public void onClick(View v) {
                 // TODO: 2018/1/23 change isTeam
+                mClickGroupCount++;
+                boolean isGroup = mClickGroupCount % 2 == 1;
+                mHeaderTabViewpager.setRightImageSrc(isGroup ? R.mipmap.ic_person : R.mipmap.ic_group);
+                ((RecordListSubDelegate) mFragmentList.get(mVpTabViewpager.getCurrentItem())).updateParams(mClickGroupCount % 2);
             }
         });
     }

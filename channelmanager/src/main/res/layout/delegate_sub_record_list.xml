@@ -21,6 +21,7 @@
                 >
 
                 <android.support.v7.widget.AppCompatImageView
+                    android:src="@mipmap/ic_default_banner"
                     android:id="@+id/iv_cover"
                     android:layout_width="match_parent"
                     android:layout_height="140dp"

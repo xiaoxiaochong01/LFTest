@@ -54,12 +54,11 @@ public class RecordListHandler implements IError {
                 .success(new BaseSuccessListener() {
                     @Override
                     public void success(String response) {
-                        mRecordListConverter.setJsonData(response);
                         if (mAdapter==null){
-                            mAdapter = new RecordListRvAdapter(mRecordListConverter.convert());
+                            mAdapter = new RecordListRvAdapter(mRecordListConverter.setJsonData(response).convert());
                             mRecyclerView.setAdapter(mAdapter);
                         }else {
-                            mAdapter.refresh(mRecordListConverter.convert());
+                            mAdapter.refresh(mRecordListConverter.setJsonData(response));
                         }
                     }
                 })

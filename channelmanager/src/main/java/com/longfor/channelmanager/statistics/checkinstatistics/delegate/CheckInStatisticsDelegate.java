@@ -259,11 +259,11 @@ public class CheckInStatisticsDelegate extends LongForDelegate implements
     public void drawRight(TextView textView, int type) {
         Drawable drawable = null;
         if (type == CheckInStatisticsConstant.SORT_DEF) {
-            drawable = getResources().getDrawable(R.mipmap.icon_check_in_sort_def);
+            drawable = getResources().getDrawable(R.mipmap.ic_check_in_sort_def);
         } else if (type == CheckInStatisticsConstant.SORT_ASC) {
-            drawable = getResources().getDrawable(R.mipmap.icon_check_in_sort_asc);
+            drawable = getResources().getDrawable(R.mipmap.ic_check_in_sort_asc);
         } else if (type == CheckInStatisticsConstant.SORT_DESC) {
-            drawable = getResources().getDrawable(R.mipmap.icon_check_in_sort_desc);
+            drawable = getResources().getDrawable(R.mipmap.ic_check_in_sort_desc);
         }
         drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
         textView.setCompoundDrawables(null, null, drawable, null);
