@@ -53,12 +53,6 @@ public class ClientDetailDelegate extends LongForDelegate implements IClientDeta
     AppCompatTextView tvSquareMeter;
     @BindView(R2.id.item_tv_subscirbe)
     AppCompatTextView itemTvSubscirbe;
-    @BindView(R2.id.linear_house)
-    LinearLayoutCompat linearHouse;
-    @BindView(R2.id.real_client_info)
-    RelativeLayout realClientInfo;
-    @BindView(R2.id.view_divider)
-    AppCompatTextView viewDivider;
     @BindView(R2.id.tv_follow)
     AppCompatTextView tvFollow;
     @BindView(R2.id.view_follow)
