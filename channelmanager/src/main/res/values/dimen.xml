@@ -2,6 +2,9 @@
 <resources>
     <!--公共dimen库 begin-->
     <dimen name="title_height">45dp</dimen>
+    <dimen name="title_total_height">45.5dp</dimen>
+    <dimen name="title_content_height">45dp</dimen>
+    <dimen name="title_line_height">0.5dp</dimen>
     <!--公共dimen库 end-->
 
     <!-- 登录页面 begin -->

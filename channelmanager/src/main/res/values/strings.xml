@@ -134,5 +134,9 @@
     <string name="third_ranking">第三名</string>
     <string name="headman_and_colon">组长：</string>
     <string name="rank_first_text">是状元，占领了封面</string>
+    <string name="please_select_trainee_to_work">请选择上班人员</string>
+    <string name="alternative_list">备选名单</string>
     <!--团队战报 end-->
+
+    <string name="exceed_arrange_time_limit">已超过排班期限</string>
 </resources>

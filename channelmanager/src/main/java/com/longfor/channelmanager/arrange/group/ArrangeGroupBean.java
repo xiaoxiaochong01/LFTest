@@ -35,7 +35,7 @@ public class ArrangeGroupBean extends BaseResponse {
         private String workId;
         private String title;
         private String workAddress;
-        private int teamId;
+        private String teamId;
         private String teamName;
         private String date;
         private int readStatus;
@@ -64,11 +64,11 @@ public class ArrangeGroupBean extends BaseResponse {
             this.workAddress = workAddress;
         }
 
-        public int getTeamId() {
+        public String getTeamId() {
             return teamId;
         }
 
-        public void setTeamId(int teamId) {
+        public void setTeamId(String teamId) {
             this.teamId = teamId;
         }
 

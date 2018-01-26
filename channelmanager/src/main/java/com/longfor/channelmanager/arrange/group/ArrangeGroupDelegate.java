@@ -11,9 +11,9 @@ import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
+import com.longfor.channelmanager.arrange.week.ArrangeTeamWeekWorkDelegate;
 import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.core.delegates.LongForDelegate;
-import com.longfor.core.utils.toast.ToastUtils;
 
 import butterknife.BindView;
 
@@ -22,7 +22,7 @@ import butterknife.BindView;
  * @date: 2018/1/19
  * @function: 排班组列表
  */
-public class ArrangeGroupDelegate extends LongForDelegate implements IArrangeGroup{
+public class ArrangeGroupDelegate extends LongForDelegate implements IArrangeGroup {
     @BindView(R2.id.rv_arrange_group)
     RecyclerView rvArrangeGroup;
     @BindView(R2.id.srl_arrange_group)
@@ -52,6 +52,7 @@ public class ArrangeGroupDelegate extends LongForDelegate implements IArrangeGro
         }
         headViewArrangeGroup.setTitle(R.string.arrange_title);
         headViewArrangeGroup.setLeftBackImageVisible(true);
+        headViewArrangeGroup.setBottomLineVisible(true);
         headViewArrangeGroup.setLeftLayoutOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +66,7 @@ public class ArrangeGroupDelegate extends LongForDelegate implements IArrangeGro
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        mRefreshHandler = ArrangeGroupRefreshHandler.create(srlArrangeGroup, rvArrangeGroup,new ArrangeGroupDataConverter(),this);
+        mRefreshHandler = ArrangeGroupRefreshHandler.create(srlArrangeGroup, rvArrangeGroup, new ArrangeGroupDataConverter(), this);
         mRefreshHandler.firstPage();
     }
 
@@ -75,10 +76,6 @@ public class ArrangeGroupDelegate extends LongForDelegate implements IArrangeGro
     private void initRecyclerView() {
         GridLayoutManager manager = new GridLayoutManager(getContext(), 1);
         rvArrangeGroup.setLayoutManager(manager);
-//        Context context = getContext();
-//        if (context != null) {
-//            rvArrangeGroup.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, R.color.app_background), 5));
-//        }
     }
 
     private void initRefreshLayout() {
@@ -87,8 +84,9 @@ public class ArrangeGroupDelegate extends LongForDelegate implements IArrangeGro
                 android.R.color.holo_red_light);
         srlArrangeGroup.setProgressViewOffset(true, 120, 300);
     }
+
     @Override
     public void jumbDelegate(ArrangeGroupBean.DataBean dataBean) {
-        ToastUtils.showMessage("跳转排班");
+        getSupportDelegate().start(ArrangeTeamWeekWorkDelegate.getInstance(getString(R.string.arrange_title), dataBean.getTeamName(), dataBean.getTeamId()));
     }
 }

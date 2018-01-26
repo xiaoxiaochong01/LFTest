@@ -4,7 +4,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 
 import com.longfor.channelmanager.R;
-import com.longfor.channelmanager.arrange.ConstantArrange;
+import com.longfor.channelmanager.arrange.ArrangeConstant;
 import com.longfor.ui.recycler.BaseRecyclerAdapter;
 import com.longfor.ui.recycler.DataConverter;
 import com.longfor.ui.recycler.MultipleFields;
@@ -38,7 +38,7 @@ public class ArrangeGroupRecyclerAdapter extends BaseRecyclerAdapter {
                 helper.setText(R.id.tv_team_name, dataBean.getTeamName());
                 helper.setText(R.id.tv_title, dataBean.getTitle());
                 helper.setText(R.id.tv_address, dataBean.getWorkAddress());
-                helper.getView(R.id.iv_read_status).setVisibility(dataBean.getReadStatus() == ConstantArrange.ARRANGE_UNREAD_STATUS ? View.VISIBLE : View.GONE);
+                helper.getView(R.id.iv_read_status).setVisibility(dataBean.getReadStatus() == ArrangeConstant.ARRANGE_UNREAD_STATUS ? View.VISIBLE : View.GONE);
                 helper.getView(R.id.rl_group).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

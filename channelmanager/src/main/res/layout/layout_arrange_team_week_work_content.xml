@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gray_f8"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.longfor.channelmanager.common.view.CommonHeadView
+        android:id="@+id/header_arrange_team_week_work"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_total_height">
+
+    </com.longfor.channelmanager.common.view.CommonHeadView>
+
+    <android.support.design.widget.TabLayout
+        android:layout_marginBottom="10dp"
+        android:id="@+id/tl_arrange_team_week_work"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:tabIndicatorColor="@color/orange"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextAppearance="@style/text_14sp_black"
+        app:tabTextColor="@color/gray_9">
+
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_arrange_team_week_work"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_arrange_team_week_week_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</android.support.v7.widget.LinearLayoutCompat>

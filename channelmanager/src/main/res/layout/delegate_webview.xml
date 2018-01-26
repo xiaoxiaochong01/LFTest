@@ -7,7 +7,7 @@
     <com.longfor.channelmanager.common.view.CommonHeadView
         android:id="@+id/webview_head"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height"/>
+        android:layout_height="@dimen/title_total_height"/>
     <android.support.v7.widget.ContentFrameLayout
         android:id="@+id/web_discovery_container"
         android:layout_width="match_parent"

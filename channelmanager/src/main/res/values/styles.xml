@@ -6,6 +6,7 @@
         <!-- Customize your theme here. -->
         <item name="toolbarStyle">@style/common_tool_bar</item>
     </style>
+
     <style name="common_tool_bar" parent="Widget.AppCompat.Toolbar">
         <item name="contentInsetStart">0dp</item><!-- 设置该属性解决空白部分-->
     </style>
@@ -24,6 +25,11 @@
         <item name="android:textColor">@color/gray_9</item>
     </style>
 
+    <style name="text_14sp_black">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="style_translucent" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@color/alpha_0.8_black</item>
@@ -36,6 +42,7 @@
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/gray_6</item>
     </style>
+
     <style name="real_info_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">45dp</item>
@@ -43,6 +50,7 @@
         <item name="android:paddingLeft">15dp</item>
         <item name="android:paddingRight">16dp</item>
     </style>
+
     <style name="tv_right_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

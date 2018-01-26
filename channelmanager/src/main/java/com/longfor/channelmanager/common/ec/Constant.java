@@ -9,7 +9,8 @@ public interface Constant {
     /**
      * 返回界面名
      */
-    String TITLE_LEFT_TEXT = "title_left_text";
+    String TITLE_LEFT_TEXT = "title_left_text";//标题栏左侧文字
+    String TITLE_CENTER_TEXT = "titleCenterText";//标题栏中间文字
     String WEB_URL = "web_view_url";
     String WEB_TITLE = "web_view_title";
 

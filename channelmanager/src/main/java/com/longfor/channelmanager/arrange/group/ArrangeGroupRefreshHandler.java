@@ -3,7 +3,7 @@ package com.longfor.channelmanager.arrange.group;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
-import com.longfor.channelmanager.arrange.ConstantArrange;
+import com.longfor.channelmanager.arrange.ArrangeConstant;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.ec.baseadapter.BaseRefreshHandler;
 import com.longfor.channelmanager.database.DatabaseManager;
@@ -31,7 +31,7 @@ public class ArrangeGroupRefreshHandler extends BaseRefreshHandler {
     }
     @Override
     public String getUrl() {
-        return ConstantArrange.URL_GET_ARRANGE_GROUP;
+        return ArrangeConstant.URL_GET_ARRANGE_GROUP;
     }
 
     @Override
