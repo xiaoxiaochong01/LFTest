@@ -14,6 +14,7 @@ import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.arrange.week.ArrangeTeamWeekWorkDelegate;
 import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.core.delegates.LongForDelegate;
+import com.longfor.core.utils.log.LogUtils;
 
 import butterknife.BindView;
 
@@ -61,13 +62,18 @@ public class ArrangeGroupDelegate extends LongForDelegate implements IArrangeGro
         });
         initRecyclerView();
         initRefreshLayout();
+        mRefreshHandler = ArrangeGroupRefreshHandler.create(srlArrangeGroup, rvArrangeGroup, new ArrangeGroupDataConverter(), this);
+        mRefreshHandler.firstPage();
     }
 
     @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
-        mRefreshHandler = ArrangeGroupRefreshHandler.create(srlArrangeGroup, rvArrangeGroup, new ArrangeGroupDataConverter(), this);
-        mRefreshHandler.firstPage();
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        LogUtils.e("ArrangeGroupDelegate", "onHiddenChanged-" + hidden);
+//        太浪费流量了，注释掉
+//        if (!hidden) {
+//            mRefreshHandler.firstPage();
+//        }
     }
 
     /**

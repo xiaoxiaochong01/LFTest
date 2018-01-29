@@ -31,7 +31,7 @@ public class ArrangeGroupRecyclerAdapter extends BaseRecyclerAdapter {
     }
 
     @Override
-    protected void convert(MultipleViewHolder helper, MultipleItemEntity item) {
+    protected void convert(final MultipleViewHolder helper, final MultipleItemEntity item) {
         final ArrangeGroupBean.DataBean dataBean = item.getField(MultipleFields.OBJECT);
         switch (item.getItemType()) {
             case ItemTypeArrangeGroup.ARRANGE_ITEM:
@@ -42,8 +42,10 @@ public class ArrangeGroupRecyclerAdapter extends BaseRecyclerAdapter {
                 helper.getView(R.id.rl_group).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(iArrangeGroup != null) {
+                        if (iArrangeGroup != null) {
                             iArrangeGroup.jumbDelegate(dataBean);
+                            dataBean.setReadStatus(ArrangeConstant.ARRANGE_READ_STATUS);
+                            notifyItemChanged(helper.getAdapterPosition());
                         }
                     }
                 });
