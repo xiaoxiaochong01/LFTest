@@ -1,5 +1,6 @@
 package com.longfor.channelmanager.arrange.week;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -18,6 +19,8 @@ import com.longfor.core.net.RestClient;
 import com.longfor.core.net.callback.IError;
 import com.longfor.core.utils.toast.ToastUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -76,7 +79,7 @@ public class ArrangeTeamWeekWorkHandler {
         @Override
         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
             if (!mSectionWeekDatas.get(mTlArrangeTeamWeekWork.getSelectedTabPosition()).get(position).isHeader) {
-                if (mTlArrangeTeamWeekWork.getSelectedTabPosition()>mCurrentDayOfWeek) {
+                if (ifAfterToday(mWeekDatas.get(mTlArrangeTeamWeekWork.getSelectedTabPosition()).getDate())) {
                     mDlArrangeTeamWeekWork.openDrawer(Gravity.END);
                 }else {
                     ToastUtils.showMessage(mDlArrangeTeamWeekWork.getContext().getString(R.string.exceed_arrange_time_limit));
@@ -85,6 +88,9 @@ public class ArrangeTeamWeekWorkHandler {
         }
     };
     public int mCurrentDayOfWeek;
+    public Calendar mTodayLastMinuteCalendar;
+    public SimpleDateFormat mYearMonthDaySDF;
+
     public ArrangeTeamWeekWorkHandler(DrawerLayout dlArrangeTeamWeekWork, TabLayout tlArrangeTeamWeekWork,
                                       SwipeRefreshLayout srlArrangeTeamWeekWork,
                                       RecyclerView rvArrangeTeamWeekWeekContent,
@@ -98,9 +104,27 @@ public class ArrangeTeamWeekWorkHandler {
         mTlArrangeTeamWeekWork.addOnTabSelectedListener(mOnTabSelectedListener);
         mSrlArrangeTeamWeekWork.setOnRefreshListener(mOnSwipeRefreshListener);
         mDlArrangeTeamWeekWork.addDrawerListener(mDrawerListener);
-        Calendar calendar=Calendar.getInstance();
-//        int i = calendar.get(Calendar.DAY_OF_WEEK);
-//        mCurrentDayOfWeek = (i +6)%7;
+        getTodayCalendar();
+    }
+
+    @NonNull
+    private Calendar getTodayCalendar() {
+        mYearMonthDaySDF = new SimpleDateFormat("yyyy-MM-dd");
+        mTodayLastMinuteCalendar = Calendar.getInstance();
+        mTodayLastMinuteCalendar.set(Calendar.HOUR_OF_DAY, 23);
+        mTodayLastMinuteCalendar.set(Calendar.MINUTE, 59);
+        mTodayLastMinuteCalendar.set(Calendar.SECOND, 59);
+        return mTodayLastMinuteCalendar;
+    }
+
+    private boolean ifAfterToday(String str) {
+        Calendar calendar = Calendar.getInstance();
+        try {
+            calendar.setTime(mYearMonthDaySDF.parse(str));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return calendar.after(mTodayLastMinuteCalendar);
     }
 
     public static ArrangeTeamWeekWorkHandler create(DrawerLayout dlArrangeTeamWeekWork,

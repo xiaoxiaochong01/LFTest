@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,14 +20,18 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void parseStr2Date(){
-//        2018-01-29
+    public void parseStr2Date() {
         try {
-//            String string = "2016-10-24 21:59:06";
-            // TODO: 2018/1/29 test
-            String string = "2018-01-29";
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            System.out.println(sdf.parse(string));
+            Calendar testCalendar = Calendar.getInstance();
+            String testStr = "2018-01-01";
+            SimpleDateFormat testSDF = new SimpleDateFormat("yyyy-MM-dd");
+            testCalendar.setTime(testSDF.parse(testStr));
+
+            Calendar todayLastMinute = Calendar.getInstance();
+            todayLastMinute.set(Calendar.HOUR_OF_DAY, 23);
+            todayLastMinute.set(Calendar.MINUTE, 59);
+            todayLastMinute.set(Calendar.SECOND, 59);
+            System.out.println(String.valueOf(testCalendar.before(todayLastMinute)));
         } catch (ParseException e) {
             e.printStackTrace();
         }
