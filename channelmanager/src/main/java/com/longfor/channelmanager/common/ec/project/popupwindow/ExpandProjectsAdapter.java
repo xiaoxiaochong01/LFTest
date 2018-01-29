@@ -80,7 +80,7 @@ public class ExpandProjectsAdapter extends BaseExpandableListAdapter {
             viewHolder = (MultipleViewHolder) convertView.getTag();
         }
         viewHolder.setText(R.id.tv_city_name, dataBeans.get(groupPosition).getAreaName());
-        viewHolder.setImageResource(R.id.img_arrow_right, isExpanded ? R.mipmap.elv_arrow_item_down : R.mipmap.mine_more_icon);
+        viewHolder.setImageResource(R.id.iv_right, isExpanded ? R.mipmap.elv_arrow_item_down : R.mipmap.mine_more_icon);
 
         return convertView;
     }

@@ -154,13 +154,9 @@ public class ArrangeTeamWeekWorkBean extends BaseResponse{
                     private String employeeName;
                     private String freetimes;
                     private String scheduleId;
-                    private boolean empty;
+                    private String shiftId;
 
                     public ArrangedBean() {
-                    }
-
-                    public ArrangedBean(boolean empty) {
-                        this.empty = empty;
                     }
 
                     public String getAvgWorks() {
@@ -203,12 +199,12 @@ public class ArrangeTeamWeekWorkBean extends BaseResponse{
                         this.scheduleId = scheduleId;
                     }
 
-                    public boolean isEmpty() {
-                        return empty;
+                    public String getShiftId() {
+                        return shiftId;
                     }
 
-                    public void setEmpty(boolean empty) {
-                        this.empty = empty;
+                    public void setShiftId(String shiftId) {
+                        this.shiftId = shiftId;
                     }
                 }
             }

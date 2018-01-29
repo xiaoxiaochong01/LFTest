@@ -1,5 +1,6 @@
 package com.longfor.channelmanager.arrange.week;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
@@ -34,9 +35,9 @@ public class ArrangeTeamWeekWorkContentRvAdapter extends BaseSectionQuickAdapter
 
     @Override
     protected void convert(ViewHolder helper, SectionArrangeWeek item) {
-        helper.setText(R.id.tv_name, item.t.isEmpty()?"":item.t.getEmployeeName());
-        helper.setText(R.id.tv_avg_work,item.t.isEmpty()?"":item.t.getAvgWorks());
-        if (item.t.isEmpty()){
+        helper.setText(R.id.tv_name, TextUtils.isEmpty(item.t.getEmployeeName())?"":item.t.getEmployeeName());
+        helper.setText(R.id.tv_avg_work,TextUtils.isEmpty(item.t.getEmployeeName())?"":item.t.getAvgWorks());
+        if (TextUtils.isEmpty(item.t.getEmployeeName())){
             helper.setText(R.id.tv_free_times,helper.itemView.getContext().getString(R.string.please_select_trainee_to_work));
         }else {
             helper.setText(R.id.tv_free_times,item.t.getFreetimes());

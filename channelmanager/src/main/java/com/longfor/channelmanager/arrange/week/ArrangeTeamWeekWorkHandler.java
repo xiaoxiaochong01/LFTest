@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 
@@ -34,16 +35,8 @@ import java.util.Map;
  */
 
 public class ArrangeTeamWeekWorkHandler {
-    private final DrawerLayout.DrawerListener mDrawerListener = new DrawerLayout.SimpleDrawerListener() {
-        @Override
-        public void onDrawerOpened(View drawerView) {
-            super.onDrawerOpened(drawerView);
-            requestAlternativeTrainee();
-        }
-    };
 
     private DrawerLayout mDlArrangeTeamWeekWork;
-
     private TabLayout mTlArrangeTeamWeekWork;
     private SwipeRefreshLayout mSrlArrangeTeamWeekWork;
     private RecyclerView mRvArrangeTeamWeekWeekContent;
@@ -53,7 +46,7 @@ public class ArrangeTeamWeekWorkHandler {
     private final TabLayout.OnTabSelectedListener mOnTabSelectedListener = new TabLayout.OnTabSelectedListener() {
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
-            showContent(mTlArrangeTeamWeekWork.getSelectedTabPosition());
+            showWeekArrangeWorkContent(mTlArrangeTeamWeekWork.getSelectedTabPosition());
         }
 
         @Override
@@ -74,22 +67,33 @@ public class ArrangeTeamWeekWorkHandler {
     };
     public List<ArrangeTeamWeekWorkBean.DataBean.WeekDatasBean> mWeekDatas = new ArrayList<>();
     public List<List<SectionArrangeWeek>> mSectionWeekDatas = new ArrayList<>();
-    public ArrangeTeamWeekWorkContentRvAdapter mContentRvAdapter;
-    private BaseQuickAdapter.OnItemClickListener mOnContentItemClickListener = new BaseQuickAdapter.OnItemClickListener() {
+    public ArrangeTeamWeekWorkContentRvAdapter mArrangeWorkWeekContentRvAdapter;
+    private BaseQuickAdapter.OnItemClickListener mOnArrangeWorkWeekContentItemClickListener = new BaseQuickAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
             if (!mSectionWeekDatas.get(mTlArrangeTeamWeekWork.getSelectedTabPosition()).get(position).isHeader) {
                 if (ifAfterToday(mWeekDatas.get(mTlArrangeTeamWeekWork.getSelectedTabPosition()).getDate())) {
-                    mDlArrangeTeamWeekWork.openDrawer(Gravity.END);
-                }else {
+                    mCurrentDaySelectedItem = position;
+                    requestAlternativeTrainee();
+                } else {
                     ToastUtils.showMessage(mDlArrangeTeamWeekWork.getContext().getString(R.string.exceed_arrange_time_limit));
                 }
             }
         }
     };
-    public int mCurrentDayOfWeek;
     public Calendar mTodayLastMinuteCalendar;
     public SimpleDateFormat mYearMonthDaySDF;
+    private int mCurrentDaySelectedItem;
+    private List<SectionArrangeWorkBackUp> mSectionArrangeWorkBackUpList = new ArrayList<>();
+    public ArrangeWorkBackUpRvAdapter mArrangeWorkBackUpRvAdapter;
+    private BaseQuickAdapter.OnItemClickListener mOnArrangeWorkBackUpItemClickListener = new BaseQuickAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            if (!mSectionArrangeWorkBackUpList.get(position).isHeader) {
+                requestArrangeWork(mSectionArrangeWorkBackUpList.get(position).t);
+            }
+        }
+    };
 
     public ArrangeTeamWeekWorkHandler(DrawerLayout dlArrangeTeamWeekWork, TabLayout tlArrangeTeamWeekWork,
                                       SwipeRefreshLayout srlArrangeTeamWeekWork,
@@ -103,7 +107,6 @@ public class ArrangeTeamWeekWorkHandler {
         mTeamId = teamId;
         mTlArrangeTeamWeekWork.addOnTabSelectedListener(mOnTabSelectedListener);
         mSrlArrangeTeamWeekWork.setOnRefreshListener(mOnSwipeRefreshListener);
-        mDlArrangeTeamWeekWork.addDrawerListener(mDrawerListener);
         getTodayCalendar();
     }
 
@@ -149,7 +152,7 @@ public class ArrangeTeamWeekWorkHandler {
                         if (arrangeTeamWeekWorkBean != null) {
                             generateWholeWeekData(arrangeTeamWeekWorkBean);
                             showTab();
-                            showContent(mTlArrangeTeamWeekWork.getSelectedTabPosition());
+                            showWeekArrangeWorkContent(mTlArrangeTeamWeekWork.getSelectedTabPosition());
                         }
                         if (mSrlArrangeTeamWeekWork.isRefreshing()) {
                             mSrlArrangeTeamWeekWork.setRefreshing(false);
@@ -192,12 +195,16 @@ public class ArrangeTeamWeekWorkHandler {
                 if (shiftsBean.getArranged() != null && shiftsBean.getArranged().size() <= shiftsBean.getPersonAmount()) {
 //                    add arranged data
                     for (int j = 0; j < shiftsBean.getArranged().size(); j++) {
-                        sectionArrangeWholeDayList.add(new SectionArrangeWeek(shiftsBean.getArranged().get(j)));
+                        ArrangeTeamWeekWorkBean.DataBean.WeekDatasBean.ShiftsBean.ArrangedBean arrangedBean = shiftsBean.getArranged().get(j);
+                        arrangedBean.setShiftId(shifts.get(i).getShiftId());
+                        sectionArrangeWholeDayList.add(new SectionArrangeWeek(arrangedBean));
                     }
 //                    add empty data
                     int leftSize = shiftsBean.getPersonAmount() - shiftsBean.getArranged().size();
                     for (int j = 0; j < leftSize; j++) {
-                        sectionArrangeWholeDayList.add(new SectionArrangeWeek(new ArrangeTeamWeekWorkBean.DataBean.WeekDatasBean.ShiftsBean.ArrangedBean(true)));
+                        ArrangeTeamWeekWorkBean.DataBean.WeekDatasBean.ShiftsBean.ArrangedBean arrangedBean = new ArrangeTeamWeekWorkBean.DataBean.WeekDatasBean.ShiftsBean.ArrangedBean();
+                        arrangedBean.setShiftId(shifts.get(i).getShiftId());
+                        sectionArrangeWholeDayList.add(new SectionArrangeWeek(arrangedBean));
                     }
                 }
             }
@@ -205,14 +212,15 @@ public class ArrangeTeamWeekWorkHandler {
         }
     }
 
-    private void showContent(int selectedTabPosition) {
-        if (mContentRvAdapter == null) {
-            mContentRvAdapter = new ArrangeTeamWeekWorkContentRvAdapter(
+    private void showWeekArrangeWorkContent(int selectedTabPosition) {
+        mRvArrangeTeamWeekWeekContent.smoothScrollToPosition(0);
+        if (mArrangeWorkWeekContentRvAdapter == null) {
+            mArrangeWorkWeekContentRvAdapter = new ArrangeTeamWeekWorkContentRvAdapter(
                     R.layout.item_sticky_child, R.layout.item_sticky_header, mSectionWeekDatas.get(selectedTabPosition));
-            mRvArrangeTeamWeekWeekContent.setAdapter(mContentRvAdapter);
-            mContentRvAdapter.setOnItemClickListener(mOnContentItemClickListener);
+            mRvArrangeTeamWeekWeekContent.setAdapter(mArrangeWorkWeekContentRvAdapter);
+            mArrangeWorkWeekContentRvAdapter.setOnItemClickListener(mOnArrangeWorkWeekContentItemClickListener);
         } else {
-            mContentRvAdapter.setNewData(mSectionWeekDatas.get(selectedTabPosition));
+            mArrangeWorkWeekContentRvAdapter.setNewData(mSectionWeekDatas.get(selectedTabPosition));
         }
     }
 
@@ -238,6 +246,127 @@ public class ArrangeTeamWeekWorkHandler {
     }
 
     private void requestAlternativeTrainee() {
+        RestClient.builder()
+                .raw(getArrangeWorkBackUpsParams())
+                .url(getArrangeWorkBackUpsUrl())
+                .success(new BaseSuccessListener() {
+                    @Override
+                    public void success(String response) {
+                        ArrangeWorkBackUpBean arrangeWorkBackUpBean = JSON.parseObject(response, ArrangeWorkBackUpBean.class);
+                        if (arrangeWorkBackUpBean != null) {
+                            generateArrangeWorkBackupData(arrangeWorkBackUpBean);
+                            showBackUpContent();
+                            mDlArrangeTeamWeekWork.openDrawer(Gravity.END);
+                        }
+                    }
+                })
+                .error(new IError() {
+                    @Override
+                    public void onError(int code, String msg) {
+                        ToastUtils.showMessage(msg);
+                    }
+                })
+                .loader(mDlArrangeTeamWeekWork.getContext())
+                .build()
+                .post();
+    }
+
+    private Map<String, String> getArrangeWorkBackUpsParams() {
+        mEmployeeId = DatabaseManager.getEmployeeId();
+        Map<String, String> params = new HashMap<>();
+        params.put(Constant.EMPLOYEE_ID, mEmployeeId);
+        params.put(ArrangeConstant.TEAM_ID, mTeamId);
+        params.put(ArrangeConstant.SHIFT_ID,
+                mSectionWeekDatas.get(mTlArrangeTeamWeekWork.getSelectedTabPosition()).get(mCurrentDaySelectedItem).t.getShiftId());
+        params.put(ArrangeConstant.WORK_DATE, mWeekDatas.get(mTlArrangeTeamWeekWork.getSelectedTabPosition()).getDate());
+        return params;
+    }
+
+    private String getArrangeWorkBackUpsUrl() {
+        return ArrangeConstant.URL_GET_ARRANGE_WORK_BACK_UPS;
+    }
+
+    private void generateArrangeWorkBackupData(ArrangeWorkBackUpBean arrangeWorkBackUpBean) {
+        mSectionArrangeWorkBackUpList.clear();
+        List<ArrangeWorkBackUpBean.DataBean> dataBeanList = arrangeWorkBackUpBean.getData();
+        for (int i = 0; i < dataBeanList.size(); i++) {
+//            add header
+            mSectionArrangeWorkBackUpList.add(new SectionArrangeWorkBackUp(true, dataBeanList.get(i).getTitle()));
+//            add content
+            for (int j = 0; j < dataBeanList.get(i).getMembers().size(); j++) {
+                mSectionArrangeWorkBackUpList.add(new SectionArrangeWorkBackUp(dataBeanList.get(i).getMembers().get(j)));
+            }
+        }
+    }
+
+    private void showBackUpContent() {
+        if (mArrangeWorkBackUpRvAdapter == null) {
+            mArrangeWorkBackUpRvAdapter = new ArrangeWorkBackUpRvAdapter(
+                    R.layout.item_sticky_child, R.layout.item_sticky_header, mSectionArrangeWorkBackUpList);
+            mRvArrangeTeamWeekWeekMenu.setAdapter(mArrangeWorkBackUpRvAdapter);
+            mArrangeWorkBackUpRvAdapter.setOnItemClickListener(mOnArrangeWorkBackUpItemClickListener);
+        } else {
+            mArrangeWorkBackUpRvAdapter.setNewData(mSectionArrangeWorkBackUpList);
+        }
+    }
+
+    private void requestArrangeWork(final ArrangeWorkBackUpBean.DataBean.MembersBean t) {
+        RestClient.builder()
+                .raw(getArrangeWorkParams(t))
+                .url(getArrangeWorkUrl())
+                .success(new BaseSuccessListener() {
+                    @Override
+                    public void success(String response) {
+                        ArrangeWorkBean arrangeWorkBean = JSON.parseObject(response, ArrangeWorkBean.class);
+                        if (arrangeWorkBean!=null){
+                            ArrangeTeamWeekWorkBean.DataBean.WeekDatasBean.ShiftsBean.ArrangedBean arrangedBean
+                                    =new ArrangeTeamWeekWorkBean.DataBean.WeekDatasBean.ShiftsBean.ArrangedBean();
+                            if (!TextUtils.equals(arrangeWorkBean.getData().getEmployeeId(),"-1")){
+                                arrangedBean.setEmployeeId(arrangeWorkBean.getData().getEmployeeId());
+                                arrangedBean.setEmployeeName(arrangeWorkBean.getData().getEmployeeName());
+                                arrangedBean.setAvgWorks(arrangeWorkBean.getData().getAvgWorks());
+                                arrangedBean.setFreetimes(arrangeWorkBean.getData().getFreetimes());
+                                arrangedBean.setScheduleId(arrangeWorkBean.getData().getScheduleId());
+                                arrangedBean.setShiftId(mSectionWeekDatas.get(mTlArrangeTeamWeekWork.getSelectedTabPosition()
+                                ).get(mCurrentDaySelectedItem).t.getShiftId());
+                            }
+                            mSectionWeekDatas.get(mTlArrangeTeamWeekWork.getSelectedTabPosition()).get(mCurrentDaySelectedItem).t=arrangedBean;
+                            mArrangeWorkWeekContentRvAdapter.notifyDataSetChanged();
+                        }
+                        mDlArrangeTeamWeekWork.closeDrawer(Gravity.END);
+                    }
+                })
+                .error(new IError() {
+                    @Override
+                    public void onError(int code, String msg) {
+                        ToastUtils.showMessage(msg);
+                        mDlArrangeTeamWeekWork.closeDrawer(Gravity.END);
+                    }
+                })
+                .loader(mDlArrangeTeamWeekWork.getContext())
+                .build()
+                .post();
+    }
+
+    private Map<String, String> getArrangeWorkParams(ArrangeWorkBackUpBean.DataBean.MembersBean t) {
+        mEmployeeId = DatabaseManager.getEmployeeId();
+        Map<String, String> params = new HashMap<>();
+        params.put(Constant.EMPLOYEE_ID, mEmployeeId);
+        params.put(ArrangeConstant.TEAM_ID, mTeamId);
+        params.put(ArrangeConstant.SHIFT_ID,
+                mSectionWeekDatas.get(mTlArrangeTeamWeekWork.getSelectedTabPosition()).get(mCurrentDaySelectedItem).t.getShiftId());
+        params.put(ArrangeConstant.WORK_DATE, mWeekDatas.get(mTlArrangeTeamWeekWork.getSelectedTabPosition()).getDate());
+        params.put(ArrangeConstant.ORIGIN_USER_ID, mSectionWeekDatas.get(mTlArrangeTeamWeekWork.getSelectedTabPosition()).get(mCurrentDaySelectedItem).t.getEmployeeId());
+        params.put(ArrangeConstant.NEW_USER_ID, t.getEmployeeId());
+        params.put(ArrangeConstant.AVG_WORKS, t.getAvgWorks());
+        return params;
+    }
+
+    private String getArrangeWorkUrl() {
+        return ArrangeConstant.URL_ARRANGE_WORK;
+    }
+
+    private void notifyArrangeWorkWeekContent() {
 
     }
 }
