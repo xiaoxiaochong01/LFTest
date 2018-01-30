@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
     <android.support.v7.widget.ContentFrameLayout
         android:id="@+id/bottom_bar_delegate_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_bar" />
+        android:layout_above="@+id/bottom_bar"/>
 
     <RadioGroup
+        android:background="@color/layout_bg_gray_f4"
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="63dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:paddingTop="5dp"
-
         />
 </RelativeLayout>

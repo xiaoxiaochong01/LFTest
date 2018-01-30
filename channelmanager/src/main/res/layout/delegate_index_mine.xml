@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_f8"
     android:orientation="vertical"
     >
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="260dp">
@@ -15,6 +18,7 @@
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_default_cover"
             />
+
         <com.longfor.ui.view.circleimageview.CircleImageView
             android:id="@+id/img_uer_head_portrait"
             android:layout_width="100dp"
@@ -171,10 +175,10 @@
         </RelativeLayout>
 
         <android.support.v7.widget.AppCompatTextView
-            android:layout_marginLeft="@dimen/mine_margin_left_right"
-            android:layout_marginRight="@dimen/mine_margin_left_right"
             android:layout_width="match_parent"
             android:layout_height="@dimen/mine_dividing_line_height"
+            android:layout_marginLeft="@dimen/mine_margin_left_right"
+            android:layout_marginRight="@dimen/mine_margin_left_right"
             android:background="@color/common_dividing_line"/>
 
         <RelativeLayout

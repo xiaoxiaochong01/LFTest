@@ -1,14 +1,15 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/gray_f4"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     >
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/layout_bg_gray_f4">
 
         <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -21,21 +22,21 @@
                 >
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:src="@mipmap/ic_default_banner"
                     android:id="@+id/iv_cover"
                     android:layout_width="match_parent"
                     android:layout_height="140dp"
                     android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_default_banner"
                     />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_cover"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_gravity="center_horizontal"
                     android:background="@mipmap/ic_cover_text_bg"
                     android:ellipsize="middle"
+                    android:gravity="center"
                     android:textColor="@color/white"
                     android:textSize="14sp"/>
             </RelativeLayout>
@@ -44,7 +45,6 @@
                 android:id="@+id/rv_record"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
                 />
         </android.support.v7.widget.LinearLayoutCompat>
     </ScrollView>

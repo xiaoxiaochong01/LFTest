@@ -5,6 +5,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="toolbarStyle">@style/common_tool_bar</item>
+        <item name="android:windowBackground">@null</item>
     </style>
 
     <style name="common_tool_bar" parent="Widget.AppCompat.Toolbar">

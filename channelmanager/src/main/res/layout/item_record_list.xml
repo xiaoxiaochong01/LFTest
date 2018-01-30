@@ -6,64 +6,64 @@
     android:background="@color/white"
     >
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_marginLeft="15dp"
-            android:id="@+id/tv_record_rank"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/gray_6"
-            android:textSize="15sp"/>
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_record_rank"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/gray_6"
+        android:textSize="15sp"/>
 
-        <RelativeLayout
-            android:id="@+id/rl_portrait"
+    <RelativeLayout
+        android:id="@+id/rl_portrait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tv_record_rank">
+
+        <com.longfor.ui.view.circleimageview.CircleImageView
+            android:id="@+id/civ_record_portrait"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            android:padding="2dp"
+            android:src="@mipmap/ic_default_portrait"
+            />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_record_rank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/tv_record_rank">
+            android:layout_alignRight="@+id/civ_record_portrait"
+            android:layout_alignTop="@+id/civ_record_portrait"
+            />
+    </RelativeLayout>
 
-            <com.longfor.ui.view.circleimageview.CircleImageView
-                android:id="@+id/civ_record_portrait"
-                android:layout_width="46dp"
-                android:layout_height="46dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="18dp"
-                android:padding="2dp"
-                android:src="@mipmap/ic_default_portrait"
-                />
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_record_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/tv_record_result"
+        android:layout_toRightOf="@+id/rl_portrait"
+        android:ellipsize="end"
+        android:lines="1"
+        android:paddingLeft="20dp"
+        android:textColor="@color/gray_3"
+        android:textSize="17sp"/>
 
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/iv_record_rank"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/civ_record_portrait"
-                android:layout_alignTop="@+id/civ_record_portrait"
-                />
-        </RelativeLayout>
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_record_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/tv_record_result"
-            android:layout_toRightOf="@+id/rl_portrait"
-            android:ellipsize="end"
-            android:lines="1"
-            android:paddingLeft="20dp"
-            android:textColor="@color/gray_3"
-            android:textSize="17sp"/>
-
-        <TextView
-            android:id="@+id/tv_record_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:paddingRight="28dp"
-            android:textColor="#676767"
-            android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/tv_record_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="28dp"
+        android:textColor="#676767"
+        android:textSize="18sp"/>
 
 </RelativeLayout>

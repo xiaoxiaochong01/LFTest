@@ -14,6 +14,7 @@
     </com.longfor.channelmanager.common.view.CommonHeadView>
 
     <android.support.design.widget.TabLayout
+        android:background="@color/common_head_view_bg"
         android:id="@+id/tl_tab_viewpager"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"

@@ -2,6 +2,7 @@ package com.longfor.channelmanager.recordlist.handler;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.net.BaseSuccessListener;
 import com.longfor.channelmanager.database.DatabaseManager;
@@ -57,6 +58,7 @@ public class RecordListHandler implements IError {
                         if (mAdapter==null){
                             mAdapter = new RecordListRvAdapter(mRecordListConverter.setJsonData(response).convert());
                             mRecyclerView.setAdapter(mAdapter);
+                            mAdapter.setEmptyView(R.layout.layout_empty_view);
                         }else {
                             mAdapter.refresh(mRecordListConverter.setJsonData(response));
                         }

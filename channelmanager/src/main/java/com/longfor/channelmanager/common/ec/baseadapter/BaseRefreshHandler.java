@@ -4,6 +4,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.net.BaseSuccessListener;
 import com.longfor.core.net.RestClient;
@@ -124,7 +125,7 @@ public abstract class BaseRefreshHandler implements
                         mAdapter = getAdapter(CONVERTER.setJsonData(response));
                         mAdapter.setOnLoadMoreListener(BaseRefreshHandler.this, RECYCLERVIEW);
                         RECYCLERVIEW.setAdapter(mAdapter);
-//                        mAdapter.refresh(CONVERTER.setJsonData(response));
+                        mAdapter.setEmptyView(R.layout.layout_empty_view);
                         BEAN.setCurrentCount(BEAN.getPageSize());
                     }
                 })

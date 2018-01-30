@@ -4,15 +4,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.net.BaseSuccessListener;
 import com.longfor.channelmanager.database.DatabaseManager;
-import com.longfor.core.app.LongFor;
 import com.longfor.core.net.RestClient;
 import com.longfor.core.net.callback.IError;
-import com.longfor.core.net.callback.ISuccess;
 import com.longfor.core.utils.toast.ToastUtils;
 import com.longfor.ui.recycler.DataConverter;
 import com.longfor.ui.refresh.PagingBean;
@@ -99,6 +97,7 @@ public class ClientListRefreshHandler implements
                         mAdapter = ClientListRecyclerAdapter.create(CONVERTER.setJsonData(response),null);
                         mAdapter.setOnLoadMoreListener(ClientListRefreshHandler.this, RECYCLERVIEW);
                         RECYCLERVIEW.setAdapter(mAdapter);
+                        mAdapter.setEmptyView(R.layout.layout_empty_view);
                     }
                 })
                 .error(this)

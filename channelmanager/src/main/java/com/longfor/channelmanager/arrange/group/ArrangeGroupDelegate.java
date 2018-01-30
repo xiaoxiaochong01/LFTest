@@ -70,10 +70,6 @@ public class ArrangeGroupDelegate extends LongForDelegate implements IArrangeGro
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         LogUtils.e("ArrangeGroupDelegate", "onHiddenChanged-" + hidden);
-//        太浪费流量了，注释掉
-//        if (!hidden) {
-//            mRefreshHandler.firstPage();
-//        }
     }
 
     /**

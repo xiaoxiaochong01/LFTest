@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+
     <com.longfor.channelmanager.common.view.CommonHeadView
         android:id="@+id/head_view_arrange_group"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"/>
+
     <android.support.v4.widget.SwipeRefreshLayout
+        android:background="@color/layout_bg_gray_f4"
         android:id="@+id/srl_arrange_group"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_arrange_group"
             android:layout_width="match_parent"
