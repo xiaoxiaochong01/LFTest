@@ -46,6 +46,7 @@ public class ChannelPlatformDelegate extends LongForDelegate {
             }
             channelPlatformHead.setTitle(R.string.channel_platform_title);
             channelPlatformHead.setLeftBackImageVisible(true);
+            channelPlatformHead.setBottomLineVisible(true);
             channelPlatformHead.setLeftLayoutOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

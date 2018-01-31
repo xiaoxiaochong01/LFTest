@@ -8,7 +8,8 @@
         android:id="@+id/srl_client_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/layout_bg_gray_f4">
+        android:background="@color/layout_bg_gray_f4"
+        >
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_client_sub"

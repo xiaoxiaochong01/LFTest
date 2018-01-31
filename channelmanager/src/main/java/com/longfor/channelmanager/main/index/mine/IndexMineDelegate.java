@@ -54,7 +54,7 @@ import butterknife.OnClick;
  * @function: 我的界面
  */
 public class IndexMineDelegate extends BottomItemDelegate {
-    
+
     @BindView(R2.id.img_title_background)
     AppCompatImageView imgTopBg;
     @BindView(R2.id.img_uer_head_portrait)
@@ -78,22 +78,27 @@ public class IndexMineDelegate extends BottomItemDelegate {
     void onTopBackgroundClick() {
         checkPermission(true);
     }
+
     @OnClick(R2.id.img_uer_head_portrait)
     void onUserHeadClick() {
         checkPermission(false);
     }
+
     @OnClick(R2.id.rl_about_us)
     void onAboutUsClick() {
-       jumToDelegateFromParent(new AboutUsDelegate(), ConstantMine.JUMB_TO.ABOUT_US);
+        jumToDelegateFromParent(new AboutUsDelegate(), ConstantMine.JUMB_TO.ABOUT_US);
     }
+
     @OnClick(R2.id.rl_recommend_code)
     void onRecommendClick() {
         jumToDelegateFromParent(new RecommendDelegate(), ConstantMine.JUMB_TO.RECOMMEND);
     }
+
     @OnClick(R2.id.rl_feed_back)
     void onFeedBackClick() {
         jumToDelegateFromParent(new WebviewDelegate(), ConstantMine.JUMB_TO.FEED_BACK);
     }
+
     @OnClick(R2.id.rl_setting)
     void onSettingClick() {
         jumToDelegateFromParent(new SettingDelegate(), ConstantMine.JUMB_TO.SETTING);
@@ -104,7 +109,7 @@ public class IndexMineDelegate extends BottomItemDelegate {
         bundle.putString(Constant.TITLE_LEFT_TEXT, getResources().getString(R.string.mine_title));
         switch (type) {
             case FEED_BACK:
-                bundle.putString(Constant.WEB_URL,"http://www.longfor.com");
+                bundle.putString(Constant.WEB_URL, "http://www.longfor.com");
                 bundle.putString(Constant.WEB_TITLE, getResources().getString(R.string.feed_back_title));
                 break;
             case RECOMMEND:
@@ -123,6 +128,7 @@ public class IndexMineDelegate extends BottomItemDelegate {
             uploadPicture();
         }
     }
+
     private void requestWritePermissions() {
         requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constant.REQUEST_WRITE_CODE);
     }
@@ -134,6 +140,7 @@ public class IndexMineDelegate extends BottomItemDelegate {
             showPopUpWindow(ConstantMine.TAKE_PORTRAIT_REQUEST_CODE, ConstantMine.SELECT_PORTRAIT_REQUEST_CODE);
         }
     }
+
     //弹窗选择拍照、相册选择
     public void showPopUpWindow(final int takePhoto, final int selectPhoto) {
         chooseImgPopWindow = new ChooseImgPopWindow(getActivity());
@@ -154,6 +161,7 @@ public class IndexMineDelegate extends BottomItemDelegate {
 
         });
     }
+
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         mEmployeeId = DatabaseManager.getEmployeeId();
@@ -184,10 +192,10 @@ public class IndexMineDelegate extends BottomItemDelegate {
                 .success(new BaseSuccessListener() {
                     @Override
                     public void success(String response) {
-                        if(isAdded()) {
+                        if (isAdded()) {
                             UserInfoBean userInfoBean = JSON.parseObject(response, UserInfoBean.class);
                             UserInfoBean.DataBean dataBean = userInfoBean.getData();
-                            if(dataBean != null) {
+                            if (dataBean != null) {
                                 tvUserName.setText(userInfoBean.getData().getEmployeeName());
                                 ImageLoader.display(getContext(), imgHead, dataBean.getHeadPortraitUrl());
                                 ImageLoader.display(getContext(), imgTopBg, dataBean.getCoverUrl());
@@ -240,7 +248,7 @@ public class IndexMineDelegate extends BottomItemDelegate {
                     ToastUtils.showMessage(getString(R.string.picture_illegal));
                     return;
                 }
-                requstUploadPhoto(requestUrl,mUploadFile,isCover);
+                requstUploadPhoto(requestUrl, mUploadFile, isCover);
             }
         });
     }
@@ -249,10 +257,9 @@ public class IndexMineDelegate extends BottomItemDelegate {
         RequestParams params = new RequestParams();
         params.put(ConstantMine.EMPLOYEE_ID, mEmployeeId);
         try {
-            if(isCover) {
+            if (isCover) {
                 params.put(ConstantMine.COVER, file);
-            }
-            else {
+            } else {
                 params.put(ConstantMine.HEAD_PORTRAIT, file);
             }
         } catch (FileNotFoundException e) {
@@ -265,18 +272,17 @@ public class IndexMineDelegate extends BottomItemDelegate {
                 .success(new BaseSuccessListener() {
                     @Override
                     public void success(String response) {
-                        if(isCover) {
+                        if (isCover) {
                             CoverUploadBean coverUploadBean = JSON.parseObject(response, CoverUploadBean.class);
                             CoverUploadBean.DataBean dataBean = coverUploadBean.getData();
-                            if(dataBean != null) {
+                            if (dataBean != null) {
                                 ImageLoader.display(getContext(), imgTopBg, dataBean.getImageUrl());
                             }
                             ToastUtils.showMessage(coverUploadBean.getMessage());
-                        }
-                        else {
+                        } else {
                             AvatarUploadBean avatarUploadBean = JSON.parseObject(response, AvatarUploadBean.class);
                             AvatarUploadBean.DataBean dataBean = avatarUploadBean.getData();
-                            if(dataBean != null) {
+                            if (dataBean != null) {
                                 ImageLoader.display(getContext(), imgHead, dataBean.getAvatarUrl());
                             }
                             ToastUtils.showMessage(avatarUploadBean.getMessage());

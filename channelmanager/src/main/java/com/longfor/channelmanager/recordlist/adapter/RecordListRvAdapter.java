@@ -27,6 +27,10 @@ public class RecordListRvAdapter extends BaseRecyclerAdapter {
         super(data);
     }
 
+    public static RecordListRvAdapter create(List<MultipleItemEntity> data){
+        return new RecordListRvAdapter(data);
+    }
+
     @Override
     protected void convert(MultipleViewHolder helper, MultipleItemEntity item) {
         helper.setText(R.id.tv_record_rank, String.valueOf(item.getField(RecordListConstant.RANK_POSITION)));
