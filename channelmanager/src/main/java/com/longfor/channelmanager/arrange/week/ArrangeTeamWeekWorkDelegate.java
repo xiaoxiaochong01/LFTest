@@ -16,6 +16,7 @@ import com.longfor.channelmanager.arrange.ArrangeConstant;
 import com.longfor.channelmanager.common.ec.Constant;
 import com.longfor.channelmanager.common.view.CommonHeadView;
 import com.longfor.core.delegates.LongForDelegate;
+import com.longfor.core.utils.UI.ScreenUtil;
 import com.longfor.ui.recycler.BaseDecoration;
 
 import butterknife.BindView;
@@ -100,8 +101,8 @@ public class ArrangeTeamWeekWorkDelegate extends LongForDelegate {
         mRvArrangeTeamWeekWeekContent.setLayoutManager(contentManager);
         mRvArrangeTeamWeekWeekMenu.setLayoutManager(menuManager);
         if (getContext() != null) {
-            mRvArrangeTeamWeekWeekContent.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(getContext(), com.longfor.ec.R.color.app_background), 1));
-            mRvArrangeTeamWeekWeekMenu.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(getContext(), com.longfor.ec.R.color.app_background), 1));
+            mRvArrangeTeamWeekWeekContent.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(getContext(), R.color.layout_bg_gray_f4), ScreenUtil.dip2px(getContext(), (float) 0.5)));
+            mRvArrangeTeamWeekWeekMenu.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(getContext(), R.color.layout_bg_gray_f4), ScreenUtil.dip2px(getContext(), (float) 0.5)));
         }
     }
 }

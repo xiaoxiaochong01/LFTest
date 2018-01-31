@@ -15,6 +15,7 @@ import com.longfor.channelmanager.R2;
 import com.longfor.channelmanager.statistics.queryattendance.adapter.QueryAttendanceRvAdapter;
 import com.longfor.channelmanager.statistics.queryattendance.handler.QueryAttendanceRefreshHandler;
 import com.longfor.core.delegates.LongForDelegate;
+import com.longfor.core.utils.UI.ScreenUtil;
 import com.longfor.core.utils.log.LogUtils;
 import com.longfor.ui.recycler.BaseDecoration;
 
@@ -76,7 +77,7 @@ public class QueryAttendanceSubDelegate extends LongForDelegate implements Query
         final Context context = getContext();
         mRvQueryAttendance.setLayoutManager(manager);
         if (context != null) {
-            mRvQueryAttendance.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, com.longfor.ec.R.color.app_background), 5));
+            mRvQueryAttendance.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, R.color.layout_bg_gray_f4), ScreenUtil.dip2px(getContext(), (float) 0.5)));
         }
     }
 

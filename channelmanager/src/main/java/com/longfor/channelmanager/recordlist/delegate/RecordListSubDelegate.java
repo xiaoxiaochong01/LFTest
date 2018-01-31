@@ -20,6 +20,7 @@ import com.longfor.channelmanager.recordlist.constant.RecordListConstant;
 import com.longfor.channelmanager.recordlist.converter.RecordListConverter;
 import com.longfor.channelmanager.recordlist.handler.RecordListHandler;
 import com.longfor.core.delegates.LongForDelegate;
+import com.longfor.core.utils.UI.ScreenUtil;
 import com.longfor.ui.recycler.BaseDecoration;
 
 import java.util.ArrayList;
@@ -119,7 +120,7 @@ public class RecordListSubDelegate extends LongForDelegate implements RecordList
         final Context context = getContext();
         mRvRecord.setLayoutManager(manager);
         if (context != null) {
-            mRvRecord.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, com.longfor.ec.R.color.app_background), 1));
+            mRvRecord.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, R.color.layout_bg_gray_f4), ScreenUtil.dip2px(getContext(), (float) 0.5)));
         }
         mRvRecord.setNestedScrollingEnabled(false);
     }

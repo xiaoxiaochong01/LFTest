@@ -5,15 +5,17 @@
     android:layout_height="match_parent">
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:background="@color/gray_f8"
         android:id="@+id/srl_client_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/layout_bg_gray_f4">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_client_sub"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@color/transparent">
 
         </android.support.v7.widget.RecyclerView>
 

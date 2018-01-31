@@ -76,7 +76,7 @@ public class IndexHomeDelegate extends BottomItemDelegate implements IUnReadMess
         final Context context = getContext();
         rvHome.setLayoutManager(manager);
         if (context != null) {
-            rvHome.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, R.color.app_background), 5));
+            rvHome.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, R.color.layout_bg_gray_f4), 5));
         }
     }
 

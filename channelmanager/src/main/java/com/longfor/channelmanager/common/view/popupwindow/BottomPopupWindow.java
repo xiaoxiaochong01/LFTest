@@ -12,6 +12,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.longfor.channelmanager.R;
+import com.longfor.core.utils.UI.ScreenUtil;
 import com.longfor.ui.recycler.BaseDecoration;
 
 import java.util.List;
@@ -45,7 +46,7 @@ public class BottomPopupWindow extends PopupWindow implements View.OnClickListen
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), 1);
         rvPopupWindow.setLayoutManager(layoutManager);
         if (view.getContext() != null) {
-            rvPopupWindow.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(view.getContext(), com.longfor.ec.R.color.app_background), 1));
+            rvPopupWindow.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(view.getContext(), R.color.layout_bg_gray_f4), ScreenUtil.dip2px(view.getContext(), (float) 0.5)));
         }
         BottomPopupWindowRvAdapter adapter = new BottomPopupWindowRvAdapter();
         rvPopupWindow.setAdapter(adapter);

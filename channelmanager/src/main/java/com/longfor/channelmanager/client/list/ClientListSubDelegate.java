@@ -12,11 +12,9 @@ import android.view.View;
 
 import com.longfor.channelmanager.R;
 import com.longfor.channelmanager.R2;
-import com.longfor.channelmanager.client.detail.ClientDetailDelegate;
 import com.longfor.channelmanager.client.search.ConstantClientSearch;
 import com.longfor.core.delegates.LongForDelegate;
-import com.longfor.core.utils.log.LogUtils;
-import com.longfor.core.utils.toast.ToastUtils;
+import com.longfor.core.utils.UI.ScreenUtil;
 import com.longfor.ui.recycler.BaseDecoration;
 
 import butterknife.BindView;
@@ -26,7 +24,7 @@ import butterknife.BindView;
  * @date: 2018/1/9
  * @function: 客户列表子界面
  */
-public class ClientListSubDelegate extends LongForDelegate implements OnSearchConditionListener{
+public class ClientListSubDelegate extends LongForDelegate implements OnSearchConditionListener {
     @BindView(R2.id.rv_client_sub)
     RecyclerView rvClientSub;
     @BindView(R2.id.srl_client_list)
@@ -47,6 +45,7 @@ public class ClientListSubDelegate extends LongForDelegate implements OnSearchCo
         delegate.clientList = clientList;
         return delegate;
     }
+
     @Override
     public Object setLayout() {
         return R.layout.delegate_client_list_sub;
@@ -56,7 +55,7 @@ public class ClientListSubDelegate extends LongForDelegate implements OnSearchCo
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser && isNeedLazyLoad) {
+        if (isVisibleToUser && isNeedLazyLoad) {
             isNeedLazyLoad = false;
             isNeedLazyLoading = true;
             mRefreshHandler.updateParams(ClientListDelegate.mRoleType, ClientListDelegate.mSearchContent);
@@ -68,14 +67,13 @@ public class ClientListSubDelegate extends LongForDelegate implements OnSearchCo
     public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
         super.onFragmentResult(requestCode, resultCode, data);
 
-        if(requestCode == ConstantClientSearch.DELEGATE_RESULT_CODE_CLIENT_SEARCH&&resultCode == RESULT_OK&&data != null) {
+        if (requestCode == ConstantClientSearch.DELEGATE_RESULT_CODE_CLIENT_SEARCH && resultCode == RESULT_OK && data != null) {
             String mRoleType = data.getString(ConstantClientList.ROLE_TYPE, ConstantClientList.ROLE_TYPE_DEFAULT);
             String mSearchContent = data.getString(ConstantClientList.SEARCH_CONTENT, ConstantClientList.SEARCH_CONTENT_DEFAULT);
             if (searchContentListener != null) {
                 searchContentListener.onRefresh(mRoleType, mSearchContent);
             }
-        }
-        else {
+        } else {
 //            ToastUtils.showMessage("requestCode="+requestCode);
         }
     }
@@ -91,10 +89,9 @@ public class ClientListSubDelegate extends LongForDelegate implements OnSearchCo
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        if(isNeedLazyLoading) {
+        if (isNeedLazyLoading) {
             isNeedLazyLoading = false;
-        }
-        else {
+        } else {
             mRefreshHandler.updateParams(ClientListDelegate.mRoleType, ClientListDelegate.mSearchContent);
             mRefreshHandler.firstPage();
         }
@@ -110,7 +107,7 @@ public class ClientListSubDelegate extends LongForDelegate implements OnSearchCo
         final Context context = getContext();
         rvClientSub.setLayoutManager(manager);
         if (context != null) {
-            rvClientSub.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, R.color.app_background), 5));
+            rvClientSub.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, R.color.layout_bg_gray_f4), ScreenUtil.dip2px(getContext(), 10)));
         }
     }
 
@@ -123,12 +120,11 @@ public class ClientListSubDelegate extends LongForDelegate implements OnSearchCo
 
     @Override
     public void update(String roleId, String searchContent) {
-        if(getUserVisibleHint()&&isAdded()) {
+        if (getUserVisibleHint() && isAdded()) {
             mRefreshHandler.updateParams(ClientListDelegate.mRoleType, ClientListDelegate.mSearchContent);
             mRefreshHandler.firstPage();
-        }
-        else if(!getUserVisibleHint()) {
-            if(isAdded()) {
+        } else if (!getUserVisibleHint()) {
+            if (isAdded()) {
                 isNeedLazyLoad = true;
             }
         }

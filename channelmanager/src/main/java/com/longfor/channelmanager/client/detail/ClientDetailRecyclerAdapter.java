@@ -145,7 +145,7 @@ public class ClientDetailRecyclerAdapter extends BaseRecyclerAdapter {
         final GridLayoutManager manager = new GridLayoutManager(context, 1);
         recyclerView.setLayoutManager(manager);
         if (context != null) {
-            recyclerView.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, R.color.app_background), 5));
+            recyclerView.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, R.color.layout_bg_gray_f4), 5));
         }
         ClientDetailFollowRecyclerAdapter adapter = ClientDetailFollowRecyclerAdapter.create(getFollowDetailBeans(followsBean));
         recyclerView.setAdapter(adapter);

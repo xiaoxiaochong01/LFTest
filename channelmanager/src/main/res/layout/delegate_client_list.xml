@@ -7,20 +7,20 @@
     android:orientation="vertical">
 
     <include
-        android:layout_height="@dimen/title_height"
+        layout="@layout/client_list_header_layout"
         android:layout_width="match_parent"
-        layout="@layout/client_list_header_layout"/>
+        android:layout_height="@dimen/title_height"/>
 
     <View
-        android:background="@color/gray_f8"
         android:layout_width="match_parent"
-        android:layout_height="7dp"/>
+        android:layout_height="7dp"
+        android:background="@color/layout_bg_gray_f4"/>
 
     <android.support.design.widget.TabLayout
-        android:background="@color/white"
         android:id="@+id/tl_client_list"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
+        android:background="@color/title_bg_gray_fa"
         app:tabIndicatorColor="@color/orange"
         app:tabIndicatorHeight="2dp"
         app:tabMode="fixed"

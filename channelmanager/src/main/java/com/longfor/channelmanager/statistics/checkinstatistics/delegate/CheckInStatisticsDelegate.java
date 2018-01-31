@@ -185,7 +185,7 @@ public class CheckInStatisticsDelegate extends LongForDelegate implements
         final Context context = getContext();
         mRvCheckIn.setLayoutManager(manager);
         if (context != null) {
-            mRvCheckIn.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, com.longfor.ec.R.color.app_background), 1));
+            mRvCheckIn.addItemDecoration(BaseDecoration.creat(ContextCompat.getColor(context, R.color.layout_bg_gray_f4), ScreenUtil.dip2px(getContext(), (float) 0.5)));
         }
         mRvCheckIn.setNestedScrollingEnabled(false);
     }
