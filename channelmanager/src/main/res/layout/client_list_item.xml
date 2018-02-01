@@ -1,115 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:background="@color/white"
     >
 
-    <android.support.v7.widget.LinearLayoutCompat
-        android:id="@+id/ll_client_list_item"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
         >
 
-        <android.support.v7.widget.LinearLayoutCompat
-            android:id="@+id/ll_group_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            >
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_intent"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/tag_view_bg"
-                android:gravity="center"
-                android:textColor="@color/orange"
-                android:textSize="13sp"
-                />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_customer_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/gray_3"
-                android:textSize="20sp"
-                />
-        </android.support.v7.widget.LinearLayoutCompat>
-
-        <com.longfor.channelmanager.common.view.taglayout.TagFlowLayout
-            android:id="@+id/flow_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_group_one"
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_intent"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="11dp"
+            android:background="@drawable/tag_view_bg"
+            android:gravity="center"
+            android:textColor="@color/orange"
+            android:textSize="13sp"
             />
 
         <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height"
-            android:background="@color/gray_e"/>
-
-        <RelativeLayout
-            android:id="@+id/rl_linear_info"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_customer_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            >
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/tv_intent"
+            android:textColor="@color/gray_3"
+            android:textSize="20sp"
+            />
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_job_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:textColor="@color/gray_9"
-                android:textSize="14sp"
-                android:text="@string/string_trainee"
-                />
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_job_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/tv_job_title"
-                android:textColor="@color/gray_6"
-                android:textSize="14sp"/>
+    <com.longfor.channelmanager.common.view.taglayout.TagFlowLayout
+        android:id="@+id/flow_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_top"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="11dp"
+        />
 
-            <TextView
-                android:id="@+id/tv_counselor_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/tv_counselor_name"
-                android:textColor="@color/gray_9"
-                android:textSize="14sp"
-                android:text="@string/string_consultant"
-                />
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:layout_below="@+id/flow_layout"
+        android:background="@color/gray_e"/>
 
-            <TextView
-                android:id="@+id/tv_counselor_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:paddingRight="10dp"
-                android:textColor="@color/gray_6"
-                android:textSize="14sp"/>
-        </RelativeLayout>
-    </android.support.v7.widget.LinearLayoutCompat>
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_job_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_line"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/string_trainee"
+        android:textColor="@color/gray_9"
+        android:textSize="14sp"
+        />
 
-</android.support.v7.widget.LinearLayoutCompat>
+    <TextView
+        android:id="@+id/tv_job_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_job_title"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/tv_job_title"
+        android:textColor="@color/gray_6"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv_counselor_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_job_title"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/tv_counselor_name"
+        android:text="@string/string_consultant"
+        android:textColor="@color/gray_9"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_counselor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/tv_job_title"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/gray_6"
+        android:textSize="14sp"/>
+
+</RelativeLayout>

@@ -1,6 +1,7 @@
 package com.longfor.channelmanager.client.detail;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -33,7 +34,7 @@ import butterknife.OnClick;
  * @date: 2018/1/16
  * @function:
  */
-public class ClientDetailDelegate extends LongForDelegate implements IClientDetail{
+public class ClientDetailDelegate extends LongForDelegate implements IClientDetail {
     @BindView(R2.id.channel_platform_head)
     CommonHeadView channelPlatformHead;
     @BindView(R2.id.tv_grade_info)
@@ -46,24 +47,10 @@ public class ClientDetailDelegate extends LongForDelegate implements IClientDeta
     TagFlowLayout flowLayout;
     @BindView(R2.id.tv_follow_name)
     AppCompatTextView tvFollowName;
-    @BindView(R2.id.tv_bungalows)
-    AppCompatTextView tvBungalows;
-    @BindView(R2.id.tv_square_meter)
-    AppCompatTextView tvSquareMeter;
-    @BindView(R2.id.item_tv_subscirbe)
-    AppCompatTextView itemTvSubscirbe;
     @BindView(R2.id.tv_follow)
     AppCompatTextView tvFollow;
-    @BindView(R2.id.view_follow)
-    AppCompatTextView viewFollow;
-    @BindView(R2.id.linear_follow)
-    LinearLayoutCompat linearFollow;
     @BindView(R2.id.tv_data)
     AppCompatTextView tvData;
-    @BindView(R2.id.view_data)
-    AppCompatTextView viewData;
-    @BindView(R2.id.linear_data)
-    LinearLayoutCompat linearData;
     @BindView(R2.id.linear_client_list_info)
     LinearLayoutCompat linearClientListInfo;
     @BindView(R2.id.recycler_client_follow)
@@ -105,7 +92,7 @@ public class ClientDetailDelegate extends LongForDelegate implements IClientDeta
         });
 
         initRecyclerView();
-        mHandler = ClientDetailHandlerHandler.create(recyclerClientFollow,recyclerClientData,new ClientDetailDataConverter(this));
+        mHandler = ClientDetailHandlerHandler.create(recyclerClientFollow, recyclerClientData, new ClientDetailDataConverter(this));
         mHandler.requestClientDetailData(mCustomerId);
     }
 
@@ -123,14 +110,14 @@ public class ClientDetailDelegate extends LongForDelegate implements IClientDeta
         }
     }
 
-    @OnClick({R2.id.linear_data, R2.id.linear_client_list_info})
+    @OnClick({R2.id.tv_follow, R2.id.tv_data})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.linear_data:
-                resetTabView(true);
-                break;
-            case R.id.linear_client_list_info:
+            case R.id.tv_follow:
                 resetTabView(false);
+                break;
+            case R.id.tv_data:
+                resetTabView(true);
                 break;
         }
     }
@@ -139,27 +126,30 @@ public class ClientDetailDelegate extends LongForDelegate implements IClientDeta
      * @param isData 是否是客户资料页
      */
     private void resetTabView(boolean isData) {
-        tvFollow.setTextColor(getResources().getColor(isData?R.color.gray_9 : R.color.gray_3));
-        viewFollow.setBackgroundColor(getResources().getColor(isData ? R.color.white : R.color.orange));
+        Drawable orgLine = getResources().getDrawable(R.drawable.org_line_w_30_h_2);
+        Drawable whiteLine = getResources().getDrawable(R.drawable.white_line_w_30_h_2);
+        orgLine.setBounds(0, 0, orgLine.getIntrinsicWidth(), orgLine.getIntrinsicHeight());
+        whiteLine.setBounds(0, 0, whiteLine.getIntrinsicWidth(), whiteLine.getIntrinsicHeight());
+        tvFollow.setTextColor(getResources().getColor(isData ? R.color.gray_9 : R.color.gray_3));
+        tvFollow.setCompoundDrawables(null, null, null, isData?whiteLine:orgLine);
         tvData.setTextColor(getResources().getColor(isData ? R.color.gray_3 : R.color.gray_9));
-        viewData.setBackgroundColor(getResources().getColor(isData ? R.color.orange : R.color.white));
-
-        recyclerClientData.setVisibility(isData ? View.VISIBLE : View.GONE);
+        tvData.setCompoundDrawables(null, null, null, isData?orgLine:whiteLine);
         recyclerClientFollow.setVisibility(!isData ? View.VISIBLE : View.GONE);
+        recyclerClientData.setVisibility(isData ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void fillLayout(ClientDetailBean.DataBean dataBean) {
-        if(dataBean != null) {
-            ClientDetailBean.DataBean.CustomerBean customerBean =dataBean.getCustomer();
-            if(customerBean != null) {
+        if (dataBean != null) {
+            ClientDetailBean.DataBean.CustomerBean customerBean = dataBean.getCustomer();
+            if (customerBean != null) {
                 imgAssociate.setVisibility(customerBean.getHasRelated() == ConstantClientDetail.HAS_RELATED ? View.VISIBLE : View.GONE);
                 tvGradeInfo.setText(customerBean.getIntent());
                 tvFollowName.setText(customerBean.getFollowName());
                 tvCustomerName.setText(customerBean.getCustomerName());
 
                 List<String> tags = customerBean.getTags();
-                if(tags != null ) {
+                if (tags != null) {
                     flowLayout.setVisibility(View.VISIBLE);
                     mTagAdapter = new TagAdapter<String>(tags) {
                         @Override
@@ -171,8 +161,7 @@ public class ClientDetailDelegate extends LongForDelegate implements IClientDeta
                     };
                     flowLayout.setAdapter(mTagAdapter);
 
-                }
-                else {
+                } else {
                     flowLayout.setVisibility(View.GONE);
                 }
             }

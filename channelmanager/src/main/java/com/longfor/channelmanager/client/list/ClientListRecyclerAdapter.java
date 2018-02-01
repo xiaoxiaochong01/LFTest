@@ -2,7 +2,6 @@ package com.longfor.channelmanager.client.list;
 
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,8 +90,7 @@ public class ClientListRecyclerAdapter extends BaseRecyclerAdapter {
                     tvCounselorName.setText(nameConsultant);
                 }
 
-                LinearLayoutCompat llItem = helper.getView(R.id.ll_client_list_item);
-                llItem.setOnClickListener(new View.OnClickListener() {
+                helper.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if(clientList != null){

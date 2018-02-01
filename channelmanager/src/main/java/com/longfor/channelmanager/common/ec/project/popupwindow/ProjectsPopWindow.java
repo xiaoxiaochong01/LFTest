@@ -47,7 +47,6 @@ public class ProjectsPopWindow extends PopupWindow implements ISuccess{
         return new ProjectsPopWindow(context, iProjectChange);
     }
     public void showPopWindow(View view) {
-//        showAsDropDown(view);
         showAtLocation(view, Gravity.TOP, 0, 0);
     }
 
