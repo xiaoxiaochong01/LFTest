@@ -1,63 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:paddingLeft="15dp"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/title_height"
-    android:background="@color/gray_fa"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/title_height"
+                android:background="@color/gray_fa"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
     >
 
     <android.support.v7.widget.AppCompatTextView
-        android:drawablePadding="4dp"
-        android:drawableLeft="@mipmap/icon_back"
         android:id="@+id/tv_back"
-        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
+        android:layout_centerVertical="true"
+        android:drawableLeft="@mipmap/icon_back"
+        android:drawablePadding="4dp"
         android:textColor="@color/gray_3"
+        android:textSize="15sp"
         />
+
+
 
     <android.support.v7.widget.ContentFrameLayout
         android:id="@+id/fl_search"
-        android:layout_toRightOf="@+id/tv_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_centerVertical="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_toRightOf="@+id/tv_back">
+
         <android.support.v7.widget.AppCompatEditText
-            android:layout_gravity="center"
-            android:imeOptions="actionSearch"
-            android:singleLine="true"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/img_back"
-            android:layout_toLeftOf="@+id/tv_search"
-            android:background="@drawable/client_list_edit_search_bg"
-            android:cursorVisible="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:id="@+id/et_search"
-            android:drawablePadding="10dp"
-            android:drawableLeft="@mipmap/client_search_icon"
-            android:textSize="15sp"
-            android:padding="4dp"
-            android:textColor="@color/gray_3"
             android:layout_width="match_parent"
             android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_toLeftOf="@+id/tv_search"
+            android:layout_toRightOf="@+id/img_back"
+            android:background="@drawable/client_list_edit_search_bg"
+            android:cursorVisible="true"
+            android:drawableLeft="@mipmap/client_search_icon"
+            android:drawablePadding="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:hint="@string/input_search_content"
-            android:textColorHint="@color/gray_d8"/>
+            android:imeOptions="actionSearch"
+            android:padding="4dp"
+            android:singleLine="true"
+            android:textColor="@color/gray_3"
+            android:textColorHint="@color/gray_d8"
+            android:textSize="15sp"/>
 
         <android.support.v7.widget.AppCompatImageView
-            android:visibility="gone"
+            android:id="@+id/iv_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="right|center"
             android:layout_toLeftOf="@+id/tv_search"
-            android:id="@+id/iv_clear"
-            android:src="@mipmap/clear_icon"
             android:paddingLeft="20dp"
             android:paddingRight="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+            android:src="@mipmap/clear_icon"
+            android:visibility="gone"/>
 
     </android.support.v7.widget.ContentFrameLayout>
 
